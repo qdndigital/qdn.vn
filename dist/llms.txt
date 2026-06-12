@@ -15,7 +15,7 @@
 - [Work](https://qdn.vn/work): selected projects and outcomes.
 - [About](https://qdn.vn/about): the studio, beliefs and team.
 - [Journal](https://qdn.vn/journal): notes on AI, speed, craft and shipping.
-- [Contact](https://qdn.vn/contact): start a project. Email: quang.dinh@scentiment.com
+- [Contact](https://qdn.vn/contact): start a project. Email: quang.dinh@qdn.vn
 
 ## Tech
 - Stack: React, Next.js, Node, NestJS, Laravel, PostgreSQL, AWS, OpenAI.
