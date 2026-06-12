@@ -1,9 +1,7 @@
-# QDN — Netlify deploy config
+# QDN — Astro on Netlify
 [build]
-  # Tailwind is compiled on each deploy, so editing HTML + pushing is enough.
-  command = "npx tailwindcss@3.4.17 -c tailwind.config.js -i src/input.css -o assets/qdn.css --minify"
-  publish = "."
+  command = "npm run build"
+  publish = "dist"
 
-# Clean URLs: serve /services from services.html and redirect the .html form.
-[build.processing.html]
-  pretty_urls = true
+[build.environment]
+  NODE_VERSION = "20"

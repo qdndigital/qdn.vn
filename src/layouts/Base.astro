@@ -1,0 +1,69 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+const { title, description, noindex = false } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const ogImage = new URL('/assets/og.png', Astro.site).href;
+
+const jsonld = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': 'https://qdn.vn/#org',
+      name: 'QDN',
+      url: 'https://qdn.vn/',
+      email: 'quang.dinh@scentiment.com',
+      description:
+        'A product & AI studio building premium web, mobile and SaaS products. We use AI to turn an idea into a clickable mockup fast, then ship to market quickly.',
+      logo: 'https://qdn.vn/favicon.svg',
+      areaServed: 'Worldwide',
+      knowsAbout: ['Web development', 'Mobile apps', 'AI solutions', 'SaaS', 'Automation', 'E-commerce'],
+    },
+    {
+      '@type': 'WebSite',
+      '@id': 'https://qdn.vn/#website',
+      url: 'https://qdn.vn/',
+      name: 'QDN',
+      publisher: { '@id': 'https://qdn.vn/#org' },
+    },
+  ],
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex,follow" />}
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="theme-color" content="#e9e7e2" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="QDN" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <link rel="sitemap" href="/sitemap.xml" />
+    <script type="application/ld+json" set:html={JSON.stringify(jsonld)} />
+  </head>
+  <body>
+    <Header />
+    <slot />
+    <Footer />
+    <script src="/assets/app.js" is:inline></script>
+  </body>
+</html>

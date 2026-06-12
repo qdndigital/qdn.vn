@@ -1,0 +1,21 @@
+# QDN
+
+> QDN is a product & AI studio based in Vietnam (qdn.vn). We build premium web, mobile and SaaS products for clients — and our own products. We use AI to turn an idea into a clickable mockup fast, deploy early to test, and ship to market quickly, finishing by hand to a premium standard.
+
+## How we work
+- Idea -> AI mockup: an idea becomes a clickable mockup fast, with AI.
+- Build & test: deploy early and put it in front of real users.
+- Iterate: validate and refine quickly with feedback.
+- Launch to market: ship fast, then scale.
+
+## Pages
+- [Home](https://qdn.vn/): positioning, what we build, how we work.
+- [Services](https://qdn.vn/services): web & SaaS, mobile, AI solutions, e-commerce, automation, product strategy.
+- [Products](https://qdn.vn/products): QOne (project/HR/expense platform), SAT AI (AI-native learning platform), PropManage (property management platform).
+- [Work](https://qdn.vn/work): selected projects and outcomes.
+- [About](https://qdn.vn/about): the studio, beliefs and team.
+- [Journal](https://qdn.vn/journal): notes on AI, speed, craft and shipping.
+- [Contact](https://qdn.vn/contact): start a project. Email: quang.dinh@scentiment.com
+
+## Tech
+- Stack: React, Next.js, Node, NestJS, Laravel, PostgreSQL, AWS, OpenAI.
