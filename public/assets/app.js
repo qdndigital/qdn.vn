@@ -53,4 +53,31 @@
   }
   /* ai console reveal */
   document.querySelectorAll('.ailog').forEach(function(el){var o=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');o.unobserve(e.target);}});},{threshold:.3});o.observe(el);});
+
+  /* contact form — AJAX submit to Netlify (no page reload). Native POST to
+     action="/thank-you" remains the no-JS fallback. */
+  var cf=document.getElementById('brief-form');
+  if(cf){
+    var st=document.getElementById('form-status');
+    var say=function(msg,cls){if(st){st.textContent=msg;st.className='form-status'+(cls?' '+cls:'');}};
+    cf.addEventListener('submit',function(e){
+      e.preventDefault();
+      var data=new FormData(cf);
+      if(cf.hasAttribute('data-netlify-recaptcha')&&!data.get('g-recaptcha-response')){
+        say('Please complete the reCAPTCHA below.','err');return;
+      }
+      var btn=cf.querySelector('button[type=submit]');
+      if(btn)btn.disabled=true;
+      say('Sending…');
+      fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(data).toString()})
+        .then(function(r){
+          if(!r.ok)throw new Error(r.status);
+          cf.reset();
+          if(window.grecaptcha&&typeof grecaptcha.reset==='function')try{grecaptcha.reset();}catch(_){}
+          say('Thanks — your brief is in. We reply within one business day.','ok');
+        })
+        .catch(function(){say('Could not send right now — email quang.dinh@qdn.vn and we’ll jump on it.','err');})
+        .finally(function(){if(btn)btn.disabled=false;});
+    });
+  }
 })();

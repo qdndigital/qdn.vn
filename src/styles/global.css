@@ -221,7 +221,11 @@
   .cform label { @apply block font-mono text-label text-muted mb-2; }
   .cform input, .cform textarea, .cform select { @apply w-full font-sans text-base px-3.5 py-3 rounded-lg border border-line-2 bg-paper text-ink; }
   .cform textarea { @apply resize-y; min-height:7rem; }
+  .cform .recaptcha { @apply mb-4 empty:hidden; }
   .cform .note { @apply font-mono text-xs text-muted mt-3; }
+  .cform .form-status { @apply font-mono text-sm mt-3 empty:hidden; color:var(--ink-2); }
+  .cform .form-status.ok { color:#15803d; }
+  .cform .form-status.err { color:#b91c1c; }
 
   /* ---- reveal ---- */
   .rv { opacity:0; transform:translateY(22px); transition:.8s var(--ease); }
