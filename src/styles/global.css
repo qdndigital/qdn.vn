@@ -32,7 +32,7 @@
 @layer components {
   /* ---- layout ---- */
   .wrap { @apply mx-auto max-w-wrap px-4; }
-  .sec { @apply py-16 md:py-28; }
+  .sec { @apply py-12 md:py-28; }
   .shead { @apply max-w-2xl mb-10 md:mb-16; }
   .shead.ctr { @apply mx-auto text-center; }
   .shead h2 { @apply text-h2 mt-3; }
@@ -65,7 +65,7 @@
   .menu-btn svg { @apply w-5 h-5 fill-none; stroke:var(--ink); stroke-width:2; }
 
   /* ---- hero ---- */
-  .hero { @apply pt-20 pb-16; }
+  .hero { @apply pt-10 pb-12 md:pt-20 md:pb-16; }
   .hero-grid { @apply grid grid-cols-1 lg:grid-cols-2 gap-14 items-center; }
   .hero .spec-lab { @apply mb-6; }
   .hero h1 { @apply text-display; }
@@ -129,14 +129,14 @@
   .faq .ans { @apply px-6 pb-5 text-base text-ink-2; }
 
   /* ---- cta ---- */
-  .cta { @apply relative overflow-hidden text-center bg-ink text-paper rounded-3xl px-10 py-20; }
+  .cta { @apply relative overflow-hidden text-center bg-ink text-paper rounded-3xl px-6 py-12 md:px-10 md:py-20; }
   .cta > * { @apply relative z-10; }
   .cta .spec-lab { @apply justify-center mb-5; }
   .cta h2 { @apply text-h2; }
   .cta p { @apply text-lg mx-auto mt-4 mb-8 max-w-md; }
 
   /* ---- footer ---- */
-  footer.site { @apply pt-16 pb-9 border-t border-line; }
+  footer.site { @apply pt-12 pb-8 md:pt-16 md:pb-9 border-t border-line; }
   .foot { @apply grid grid-cols-2 md:grid-cols-4 gap-9; }
   .foot h2 { @apply font-mono text-label uppercase text-muted mb-4; }
   .foot a:not(.logo) { @apply block text-sm text-ink-2 mb-2.5 hover:text-accent; }
@@ -144,7 +144,7 @@
   .fbar { @apply flex flex-wrap justify-between gap-3 mt-12 pt-6 border-t border-line font-mono text-xs text-muted; }
 
   /* ---- page hero (subpages) ---- */
-  .phero { @apply pt-20 pb-14 border-b border-line; }
+  .phero { @apply pt-10 pb-10 md:pt-20 md:pb-14 border-b border-line; }
   .phero .crumb { @apply font-mono text-xs text-muted mb-5; }
   .phero .crumb a:hover { @apply text-accent; }
   .phero h1 { @apply text-h1; }
@@ -384,7 +384,7 @@
 @media (max-width:860px) {
   .pd, .pd-feat { grid-template-columns:1fr; }
   .pd-spec { border-right:0; border-bottom:1px solid var(--line); }
-  .pd.rev .pd-spec { order:0; border-left:0; border-bottom:1px solid var(--line); }
+  .pd.rev .pd-spec { order:-1; border-left:0; border-bottom:1px solid var(--line); }
   .arow { grid-template-columns:1fr; }
   .arow .tags { text-align:left; }
 }
