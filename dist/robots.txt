@@ -16,4 +16,4 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 
-Sitemap: https://qdn.vn/sitemap-index.xml
+Sitemap: https://qdn.vn/sitemap.xml

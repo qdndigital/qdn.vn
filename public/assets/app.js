@@ -5,7 +5,13 @@
   document.querySelectorAll('.rv').forEach(function(el,i){el.style.transitionDelay=((i%3)*70)+'ms';io.observe(el);});
 
   var hdr=document.querySelector('header.site');
-  if(hdr){var onS=function(){hdr.classList.toggle('scrolled',scrollY>20)};onS();addEventListener('scroll',onS,{passive:true});}
+  if(hdr){
+    var scrolled=false,ticking=false;
+    var apply=function(){ticking=false;var s=window.scrollY>20;if(s!==scrolled){scrolled=s;hdr.classList.toggle('scrolled',s);}};
+    var onS=function(){if(!ticking){ticking=true;requestAnimationFrame(apply);}};
+    apply();
+    addEventListener('scroll',onS,{passive:true});
+  }
 
   /* mobile menu */
   var mb=document.querySelector('.menu-btn'),links=document.querySelector('.nav-links');

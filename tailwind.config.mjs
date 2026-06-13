@@ -12,11 +12,11 @@ export default {
         surface: '#f5f4f0',
         ink: '#1c1b18',
         'ink-2': '#585550',
-        muted: '#8c887f',
+        muted: '#6b675e',
         faint: '#aeaaa0',
         line: '#d3cfc6',
         'line-2': '#bdb8ac',
-        accent: { DEFAULT: '#e2622a', soft: '#f7e4d8', ink: '#b8470f' },
+        accent: { DEFAULT: '#e2622a', soft: '#f7e4d8', ink: '#ab4715' },
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
