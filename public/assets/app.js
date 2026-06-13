@@ -9,7 +9,7 @@
     var scrolled=false,ticking=false;
     var apply=function(){ticking=false;var s=window.scrollY>20;if(s!==scrolled){scrolled=s;hdr.classList.toggle('scrolled',s);}};
     var onS=function(){if(!ticking){ticking=true;requestAnimationFrame(apply);}};
-    apply();
+    requestAnimationFrame(apply); /* defer initial scrollY read so it batches with layout, not a forced reflow */
     addEventListener('scroll',onS,{passive:true});
   }
 
