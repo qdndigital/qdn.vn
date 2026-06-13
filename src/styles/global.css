@@ -226,6 +226,11 @@
   .cform label { @apply block font-mono text-label text-muted mb-2; }
   .cform input, .cform textarea, .cform select { @apply w-full font-sans text-base px-3.5 py-3 rounded-lg border border-line-2 bg-paper text-ink; }
   .cform textarea { @apply resize-y; min-height:7rem; }
+  .cform select {
+    @apply pr-10 cursor-pointer; appearance:none; -webkit-appearance:none; -moz-appearance:none;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%231c1b18' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat:no-repeat; background-position:right 0.875rem center; background-size:1rem;
+  }
   .cform .note { @apply font-mono text-xs text-muted mt-3; }
   .cform .form-status { @apply font-mono text-sm mt-3 empty:hidden; color:var(--ink-2); }
   .cform .form-status.ok { color:#15803d; }
