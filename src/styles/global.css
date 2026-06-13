@@ -54,7 +54,7 @@
   /* ---- header / nav ---- */
   header.site { @apply sticky top-0 z-50 bg-paper/80 backdrop-blur border-b border-transparent transition-colors; }
   header.site.scrolled { @apply border-line; }
-  .nav { @apply flex items-center justify-between h-20; }
+  .nav { @apply flex items-center justify-between h-16 md:h-20; }
   .logo { @apply flex items-center gap-2.5 font-bold text-lg text-ink tracking-tight2; }
   .logomark { @apply w-8 h-8 shrink-0; }
   .nav-links { @apply hidden lg:flex gap-7 text-sm font-medium text-ink-2; }
