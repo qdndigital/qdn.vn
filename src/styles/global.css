@@ -32,8 +32,8 @@
 @layer components {
   /* ---- layout ---- */
   .wrap { @apply mx-auto max-w-wrap px-4; }
-  .sec { @apply py-28; }
-  .shead { @apply max-w-2xl mb-16; }
+  .sec { @apply py-16 md:py-28; }
+  .shead { @apply max-w-2xl mb-10 md:mb-16; }
   .shead.ctr { @apply mx-auto text-center; }
   .shead h2 { @apply text-h2 mt-3; }
   .shead p { @apply text-lg text-ink-2 mt-4; }
