@@ -1,19 +1,39 @@
 ---
+import { getLangFromUrl, useTranslations, localizePath } from '../i18n/utils';
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const L = (p: string) => localizePath(p, lang);
 ---
 <footer class="site">
   <div class="wrap">
     <div class="foot">
       <div>
-        <a href="/" class="logo">
+        <a href={L('/')} class="logo">
           <svg class="logomark" viewBox="0 0 32 32" aria-hidden="true"><rect x="2.5" y="2.5" width="27" height="27" rx="7" fill="none" stroke="#1c1b18" stroke-width="2"/><rect x="11" y="11" width="10" height="10" rx="2.5" fill="#e2622a"/></svg>
           <span>QDN</span>
         </a>
-        <p class="fd">A product &amp; AI studio — premium apps and SaaS, mocked up in a day and shipped fast. qdn.vn · Vietnam.</p>
+        <p class="fd">{t.footer.tagline}</p>
       </div>
-      <div><h2>build</h2><a href="/services">web &amp; saas</a><a href="/services">mobile</a><a href="/services">ai</a><a href="/services">e-commerce</a></div>
-      <div><h2>products</h2><a href="/products">qone</a><a href="/products">sat-ai</a><a href="/products">propmanage</a></div>
-      <div><h2>studio</h2><a href="/about">about</a><a href="/journal">journal</a><a href="/contact">commission</a></div>
+      <div>
+        <h2>{t.footer.colBuild}</h2>
+        <a href={L('/services')}>{t.footer.lBuild[0]}</a>
+        <a href={L('/services')}>{t.footer.lBuild[1]}</a>
+        <a href={L('/services')}>{t.footer.lBuild[2]}</a>
+        <a href={L('/services')}>{t.footer.lBuild[3]}</a>
+      </div>
+      <div>
+        <h2>{t.footer.colProducts}</h2>
+        <a href={L('/products')}>{t.footer.lProducts[0]}</a>
+        <a href={L('/products')}>{t.footer.lProducts[1]}</a>
+        <a href={L('/products')}>{t.footer.lProducts[2]}</a>
+      </div>
+      <div>
+        <h2>{t.footer.colStudio}</h2>
+        <a href={L('/about')}>{t.footer.lStudioAbout}</a>
+        <a href={L('/journal')}>{t.footer.lStudioJournal}</a>
+        <a href={L('/contact')}>{t.footer.lStudioContact}</a>
+      </div>
     </div>
-    <div class="fbar"><span>© 2026 QDN · qdn.vn</span><span>Mockup in a day · shipped fast</span></div>
+    <div class="fbar"><span>{t.footer.copyright}</span><span>{t.footer.fbarRight}</span></div>
   </div>
 </footer>

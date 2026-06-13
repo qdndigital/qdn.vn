@@ -1,0 +1,18 @@
+---
+import Base from '../../layouts/Base.astro';
+import Cta from '../Cta.astro';
+import { getLangFromUrl, useTranslations, localizePath } from '../../i18n/utils';
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const j = t.journal;
+const L = (p: string) => localizePath(p, lang);
+---
+<Base title={j.metaTitle} description={j.metaDesc}>
+<section class="phero"><div class="wrap"><div class="crumb"><a href={L('/')}>~</a> / {j.crumb}</div><h1 set:html={j.pheroH1}></h1><p>{j.pheroP}</p></div></section>
+<section class="sec"><div class="wrap"><div class="posts">
+{j.posts.map((p) => (
+<article class="post rv"><div class="meta"><span class="cat">{p.cat}</span><span>{p.date}</span></div><h3>{p.title}</h3><p>{p.p}</p><span class="more">{j.readMore}</span></article>
+))}
+</div></div></section>
+<Cta h2={j.ctaH2} p={j.ctaP} sectionClass="sec" />
+</Base>

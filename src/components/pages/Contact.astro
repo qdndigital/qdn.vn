@@ -1,0 +1,31 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getLangFromUrl, useTranslations, localizePath } from '../../i18n/utils';
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const c = t.contact;
+const L = (p: string) => localizePath(p, lang);
+---
+<Base title={c.metaTitle} description={c.metaDesc}>
+<section class="phero"><div class="wrap"><div class="crumb"><a href={L('/')}>~</a> / {c.crumb}</div><h1 set:html={c.pheroH1}></h1><p>{c.pheroP}</p></div></section>
+<section class="sec"><div class="wrap"><div class="contact-grid">
+  <div class="cinfo rv">
+    <div class="r"><div class="k">{c.infoEmail}</div><div class="v"><a href="mailto:quang.dinh@qdn.vn">quang.dinh@qdn.vn</a></div></div>
+    <div class="r"><div class="k">{c.infoStudio}</div><div class="v">{c.studioVal}</div></div>
+    <div class="r"><div class="k">{c.infoResponse}</div><div class="v">{c.responseVal}</div></div>
+    <div class="r"><div class="k">{c.infoDisciplines}</div><div class="v font-mono text-sm">{c.disciplinesVal}</div></div>
+  </div>
+  <form id="brief-form" name="brief" method="POST" data-netlify="true" netlify-honeypot="bot-field" action={L('/thank-you')} class="cform rv"
+        data-msg-sending={c.msgSending} data-msg-ok={c.msgOk} data-msg-err={c.msgErr}>
+    <input type="hidden" name="form-name" value="brief">
+    <p class="hidden"><label>Leave this empty: <input name="bot-field"></label></p>
+    <div class="fr"><label>{c.lblName}</label><input type="text" name="name" placeholder={c.phName} required></div>
+    <div class="fr"><label>{c.lblEmail}</label><input type="email" name="email" placeholder={c.phEmail} required></div>
+    <div class="fr"><label>{c.lblDiscipline}</label><select name="discipline">{c.options.map((o) => <option>{o}</option>)}</select></div>
+    <div class="fr"><label>{c.lblMessage}</label><textarea name="message" placeholder={c.phMessage}></textarea></div>
+    <button type="submit" class="btn btn-ink w-full justify-center">{c.submit} <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+    <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+    <p class="note">{c.note}</p>
+  </form>
+</div></div></section>
+</Base>

@@ -1,0 +1,28 @@
+---
+import Base from '../../layouts/Base.astro';
+import Cta from '../Cta.astro';
+import { getLangFromUrl, useTranslations, localizePath } from '../../i18n/utils';
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const pr = t.products;
+const L = (p: string) => localizePath(p, lang);
+---
+<Base title={pr.metaTitle} description={pr.metaDesc}>
+<section class="phero"><div class="wrap"><div class="crumb"><a href={L('/')}>~</a> / {pr.crumb}</div><h1 set:html={pr.pheroH1}></h1><p>{pr.pheroP}</p></div></section>
+<section class="sec"><div class="wrap">
+{pr.items.map((it, i) => (
+  i === 1 ? (
+    <div class="pd rev rv">
+      <div class="pd-feat">{it.features.map((f) => <span class="f">{f}</span>)}</div>
+      <div class="pd-spec"><div class="id">{it.id}</div><h3>{it.name}</h3><div class="pt">{it.pt}</div><p>{it.desc}</p></div>
+    </div>
+  ) : (
+    <div class="pd rv">
+      <div class="pd-spec"><div class="id">{it.id}</div><h3>{it.name}</h3><div class="pt">{it.pt}</div><p>{it.desc}</p></div>
+      <div class="pd-feat">{it.features.map((f) => <span class="f">{f}</span>)}</div>
+    </div>
+  )
+))}
+</div></section>
+<Cta h2={pr.ctaH2} p={pr.ctaP} sectionClass="sec" />
+</Base>

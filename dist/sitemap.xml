@@ -1,10 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://qdn.vn/</loc><lastmod>2026-06-13</lastmod><priority>1.0</priority></url>
-  <url><loc>https://qdn.vn/services</loc><lastmod>2026-06-13</lastmod><priority>0.9</priority></url>
-  <url><loc>https://qdn.vn/products</loc><lastmod>2026-06-13</lastmod><priority>0.9</priority></url>
-  <url><loc>https://qdn.vn/work</loc><lastmod>2026-06-13</lastmod><priority>0.7</priority></url>
-  <url><loc>https://qdn.vn/about</loc><lastmod>2026-06-13</lastmod><priority>0.7</priority></url>
-  <url><loc>https://qdn.vn/journal</loc><lastmod>2026-06-13</lastmod><priority>0.6</priority></url>
-  <url><loc>https://qdn.vn/contact</loc><lastmod>2026-06-13</lastmod><priority>0.8</priority></url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url><loc>https://qdn.vn/</loc><xhtml:link rel="alternate" hreflang="en" href="https://qdn.vn/"/><xhtml:link rel="alternate" hreflang="vi" href="https://qdn.vn/vi"/><xhtml:link rel="alternate" hreflang="x-default" href="https://qdn.vn/"/><lastmod>2026-06-13</lastmod><priority>1.0</priority></url>
+  <url><loc>https://qdn.vn/vi</loc><xhtml:link rel="alternate" hreflang="en" href="https://qdn.vn/"/><xhtml:link rel="alternate" hreflang="vi" href="https://qdn.vn/vi"/><xhtml:link rel="alternate" hreflang="x-default" href="https://qdn.vn/"/><lastmod>2026-06-13</lastmod><priority>1.0</priority></url>
+
+  <url><loc>https://qdn.vn/services</loc><xhtml:link rel="alternate" hreflang="en" href="https://qdn.vn/services"/><xhtml:link rel="alternate" hreflang="vi" href="https://qdn.vn/vi/services"/><xhtml:link rel="alternate" hreflang="x-default" href="https://qdn.vn/services"/><lastmod>2026-06-13</lastmod><priority>0.9</priority></url>
+  <url><loc>https://qdn.vn/vi/services</loc><xhtml:link rel="alternate" hreflang="en" href="https://qdn.vn/services"/><xhtml:link rel="alternate" hreflang="vi" href="https://qdn.vn/vi/services"/><xhtml:link rel="alternate" hreflang="x-default" href="https://qdn.vn/services"/><lastmod>2026-06-13</lastmod><priority>0.9</priority></url>
+
+  <url><loc>https://qdn.vn/products</loc><xhtml:link rel="alternate" hreflang="en" href="https://qdn.vn/products"/><xhtml:link rel="alternate" hreflang="vi" href="https://qdn.vn/vi/products"/><xhtml:link rel="alternate" hreflang="x-default" href="https://qdn.vn/products"/><lastmod>2026-06-13</lastmod><priority>0.9</priority></url>
+  <url><loc>https://qdn.vn/vi/products</loc><xhtml:link rel="alternate" hreflang="en" href="https://qdn.vn/products"/><xhtml:link rel="alternate" hreflang="vi" href="https://qdn.vn/vi/products"/><xhtml:link rel="alternate" hreflang="x-default" href="https://qdn.vn/products"/><lastmod>2026-06-13</lastmod><priority>0.9</priority></url>
+
+  <url><loc>https://qdn.vn/work</loc><xhtml:link rel="alternate" hreflang="en" href="https://qdn.vn/work"/><xhtml:link rel="alternate" hreflang="vi" href="https://qdn.vn/vi/work"/><xhtml:link rel="alternate" hreflang="x-default" href="https://qdn.vn/work"/><lastmod>2026-06-13</lastmod><priority>0.7</priority></url>
+  <url><loc>https://qdn.vn/vi/work</loc><xhtml:link rel="alternate" hreflang="en" href="https://qdn.vn/work"/><xhtml:link rel="alternate" hreflang="vi" href="https://qdn.vn/vi/work"/><xhtml:link rel="alternate" hreflang="x-default" href="https://qdn.vn/work"/><lastmod>2026-06-13</lastmod><priority>0.7</priority></url>
+
+  <url><loc>https://qdn.vn/about</loc><xhtml:link rel="alternate" hreflang="en" href="https://qdn.vn/about"/><xhtml:link rel="alternate" hreflang="vi" href="https://qdn.vn/vi/about"/><xhtml:link rel="alternate" hreflang="x-default" href="https://qdn.vn/about"/><lastmod>2026-06-13</lastmod><priority>0.7</priority></url>
+  <url><loc>https://qdn.vn/vi/about</loc><xhtml:link rel="alternate" hreflang="en" href="https://qdn.vn/about"/><xhtml:link rel="alternate" hreflang="vi" href="https://qdn.vn/vi/about"/><xhtml:link rel="alternate" hreflang="x-default" href="https://qdn.vn/about"/><lastmod>2026-06-13</lastmod><priority>0.7</priority></url>
+
+  <url><loc>https://qdn.vn/journal</loc><xhtml:link rel="alternate" hreflang="en" href="https://qdn.vn/journal"/><xhtml:link rel="alternate" hreflang="vi" href="https://qdn.vn/vi/journal"/><xhtml:link rel="alternate" hreflang="x-default" href="https://qdn.vn/journal"/><lastmod>2026-06-13</lastmod><priority>0.6</priority></url>
+  <url><loc>https://qdn.vn/vi/journal</loc><xhtml:link rel="alternate" hreflang="en" href="https://qdn.vn/journal"/><xhtml:link rel="alternate" hreflang="vi" href="https://qdn.vn/vi/journal"/><xhtml:link rel="alternate" hreflang="x-default" href="https://qdn.vn/journal"/><lastmod>2026-06-13</lastmod><priority>0.6</priority></url>
+
+  <url><loc>https://qdn.vn/contact</loc><xhtml:link rel="alternate" hreflang="en" href="https://qdn.vn/contact"/><xhtml:link rel="alternate" hreflang="vi" href="https://qdn.vn/vi/contact"/><xhtml:link rel="alternate" hreflang="x-default" href="https://qdn.vn/contact"/><lastmod>2026-06-13</lastmod><priority>0.8</priority></url>
+  <url><loc>https://qdn.vn/vi/contact</loc><xhtml:link rel="alternate" hreflang="en" href="https://qdn.vn/contact"/><xhtml:link rel="alternate" hreflang="vi" href="https://qdn.vn/vi/contact"/><xhtml:link rel="alternate" hreflang="x-default" href="https://qdn.vn/contact"/><lastmod>2026-06-13</lastmod><priority>0.8</priority></url>
 </urlset>

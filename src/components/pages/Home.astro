@@ -1,0 +1,64 @@
+---
+import Base from '../../layouts/Base.astro';
+import HowWeWork from '../HowWeWork.astro';
+import Cta from '../Cta.astro';
+import { getLangFromUrl, useTranslations, localizePath } from '../../i18n/utils';
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const h = t.home;
+const L = (p: string) => localizePath(p, lang);
+---
+<Base title={h.metaTitle} description={h.metaDesc}>
+<!-- HERO -->
+<section class="hero"><div class="wrap hero-grid"><div>
+<div class="spec-lab"><span class="b">QDN</span> · {h.heroLab} · qdn.vn</div>
+<h1 set:html={h.heroH1}></h1>
+<p class="lead">{h.heroLead}</p>
+<div class="hero-cta"><a href={L('/contact')} class="btn btn-ink">{t.common.startProject} <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a href="#how" class="btn btn-line">{t.common.howWeWork}</a></div>
+<div class="hero-meta"><div><div class="mono">{h.metaMockup}</div><div class="n">{h.metaMockupN}</div></div><div><div class="mono">{h.metaFaster}</div><div class="n">{h.metaFasterN}</div></div><div><div class="mono">{h.metaShipped}</div><div class="n">{h.metaShippedN}</div></div></div>
+</div>
+<div class="specimen" id="specimen"><div class="flow"><span class="stp s-idea"><i class="d"></i>{h.flowIdea}</span><span class="seg"><i></i></span><span class="stp s-mockup"><i class="d"></i>{h.flowMockup}</span><span class="seg"><i></i></span><span class="stp s-live"><i class="d"></i>{h.flowLive}</span><span class="flow-day">{h.flowDay}</span></div><div class="card"><span class="sheen"></span><div class="bar"><i></i><i></i><i></i><span class="u">app.qdn.vn / <b class="u-state">mockup</b></span><span class="live-dot"></span><div class="spec-toggle"><button class="on" data-m="mockup">{h.flowMockup}</button><button data-m="live">{h.flowLive}</button></div></div><div class="prompt"><span class="pc">&rsaquo;</span> <span class="pt">{h.prompt}</span><span class="caret"></span></div><div class="app"><aside class="side"><span class="brandmk"></span><span class="nav on"></span><span class="nav"></span><span class="nav"></span><span class="nav"></span></aside><div class="main"><div class="apptop"><span class="ln"></span><span class="cta-btn">{h.newTrip}</span></div><div class="chat"><div class="msg in"><span class="ava"></span><span class="bub"><span class="ln l"></span><span class="ln s"></span></span></div><div class="msg out"><span class="bub bot"><span class="ln l"></span></span><span class="ava bot"></span></div><div class="typing"><span></span><span></span><span></span></div></div><div class="rows"><div class="rw"><span class="av"></span><span class="ln l"></span><span class="pill"></span></div><div class="rw"><span class="av"></span><span class="ln l"></span><span class="pill"></span></div><div class="rw"><span class="av"></span><span class="ln l"></span><span class="pill"></span></div></div></div></div></div></div></div></section>
+
+<!-- PROMISE -->
+<section class="sec pb-0"><div class="wrap"><div class="shead ctr rv"><div class="spec-lab justify-center"><span class="b">—</span> {h.promiseLab}</div><h2 class="max-w-2xl mx-auto mt-3.5" set:html={h.promiseH2}></h2></div></div></section>
+
+<!-- WHAT WE BUILD -->
+<section class="sec"><div class="wrap"><div class="shead rv"><div class="spec-lab"><span class="b">—</span> {h.buildLab}</div><h2 set:html={h.buildH2}></h2><p>{h.buildP}</p></div>
+<div class="proc">
+{h.buildCards.map((c) => (
+<div class="pc rv"><div class="num">{c.num}</div><h3>{c.h3}</h3><p>{c.p}</p></div>
+))}
+</div>
+<div class="rv mt-9"><a href={L('/services')} class="btn btn-line">{t.common.allServices} <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div></div></section>
+
+<!-- TECH STRIP -->
+<section class="sec pt-0"><div class="wrap"><div class="rv border-y border-line py-8 text-center"><div class="spec-lab justify-center mb-4"><span class="b">//</span> {h.techLab}</div><div class="flex flex-wrap justify-center gap-x-6 gap-y-3 font-mono text-sm text-ink-2"><span>React</span><span>Next.js</span><span>Node</span><span>NestJS</span><span>Laravel</span><span>PostgreSQL</span><span>AWS</span><span>OpenAI</span></div></div></div></section>
+
+<!-- HOW WE WORK -->
+<HowWeWork howP={h.howP} id="how" sectionClass="sec" />
+
+<!-- PRODUCTS -->
+<section class="sec pt-0"><div class="wrap"><div class="shead rv"><div class="spec-lab"><span class="b">—</span> {h.prodLab}</div><h2 set:html={h.prodH2}></h2><p>{h.prodP}</p></div>
+<div class="specs">
+{h.prodCards.map((c) => (
+<div class="sp rv"><div class="top"><span class="id">{c.id}</span><span>{c.status}</span></div><div class="in"><div class="pn">{c.pn}</div><div class="pt">{c.pt}</div><ul>{c.items.map((i) => <li>{i}</li>)}</ul></div></div>
+))}
+</div><div class="rv mt-8"><a href={L('/products')} class="btn btn-line">{t.common.allProducts} <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div></div></section>
+
+<!-- TESTIMONIALS -->
+<section class="sec pt-0"><div class="wrap"><div class="shead ctr rv"><div class="spec-lab justify-center"><span class="b">—</span> {h.tstLab}</div><h2 set:html={h.tstH2}></h2></div><div class="tst">
+{h.tst.map((c) => (
+<div class="tcard rv"><div class="stars">★★★★★</div><p class="q">{c.q}</p><div class="who"><span class="av">{c.av}</span><div><h3>{c.name}</h3><span>{c.role}</span></div></div></div>
+))}
+</div></div></section>
+
+<!-- FAQ -->
+<section class="sec pt-0"><div class="wrap"><div class="shead ctr rv"><div class="spec-lab justify-center"><span class="b">—</span> {h.faqLab}</div><h2 set:html={h.faqH2}></h2></div><div class="faq rv">
+{h.faq.map((f, i) => (
+<details open={i === 0}><summary>{f.q}<span class="pm"></span></summary><div class="ans">{f.a}</div></details>
+))}
+</div></div></section>
+
+<!-- CTA -->
+<Cta h2={h.ctaH2} p={h.ctaP} secondaryHref="#how" sectionClass="sec" />
+</Base>

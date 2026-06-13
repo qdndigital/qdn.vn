@@ -1,0 +1,31 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const { howP, id, sectionClass = 'sec' } = Astro.props;
+const icons = [
+  'M12 3l2.2 5.5L20 10l-4.5 3.4L17 19l-5-3-5 3 1.5-5.6L4 10l5.8-1.5z',
+  'M8 7l-4 5 4 5M16 7l4 5-4 5',
+  'M20 11a8 8 0 10-2.3 6.3 M20 4v6h-6',
+  'M7 17L17 7M9 7h8v8',
+];
+const a = t.common.ailog;
+---
+<section id={id} class={sectionClass}><div class="wrap">
+  <div class="shead rv"><div class="spec-lab"><span class="b">—</span> {t.common.howLab}</div><h2 set:html={t.common.howH2}></h2><p>{howP}</p></div>
+  <div class="aiwrap">
+    <ul class="ailist rv">
+      {t.common.steps.map((s, i) => (
+        <li><span class="ic"><svg viewBox="0 0 24 24"><path d={icons[i]} /></svg></span><div><h3>{s.h3}</h3><p>{s.p}</p></div></li>
+      ))}
+    </ul>
+    <div class="ailog rv"><div class="bar"><i></i><i></i><i></i></div>
+      <div class="ln"><span class="pr">$</span> {a.cmd}</div>
+      <div class="ln"><span class="mut">→ {a.l1}</span> <span class="ok">✓</span></div>
+      <div class="ln"><span class="mut">→ {a.l2}</span> <span class="ok">✓</span></div>
+      <div class="ln"><span class="mut">→ {a.l3}</span> <span class="ok">✓</span></div>
+      <div class="ln"><span class="mut">→ {a.l4}</span> <span class="text-accent">!</span></div>
+      <div class="res" set:html={a.res}></div>
+    </div>
+  </div>
+</div></section>

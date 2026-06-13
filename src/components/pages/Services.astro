@@ -1,0 +1,20 @@
+---
+import Base from '../../layouts/Base.astro';
+import HowWeWork from '../HowWeWork.astro';
+import Cta from '../Cta.astro';
+import { getLangFromUrl, useTranslations, localizePath } from '../../i18n/utils';
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const s = t.services;
+const L = (p: string) => localizePath(p, lang);
+---
+<Base title={s.metaTitle} description={s.metaDesc}>
+<section class="phero"><div class="wrap"><div class="crumb"><a href={L('/')}>~</a> / {s.crumb}</div><h1 set:html={s.pheroH1}></h1><p>{s.pheroP}</p></div></section>
+<section class="sec"><div class="wrap"><div class="steps">
+{s.rows.map((r) => (
+<div class="srow rv"><span class="sn">{r.n}</span><h3>{r.title}</h3><span class="sd">{r.desc}</span><span class="ar"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg></span></div>
+))}
+</div></div></section>
+<HowWeWork howP={s.howP} sectionClass="sec pt-0" />
+<Cta h2={s.ctaH2} p={s.ctaP} sectionClass="sec" />
+</Base>

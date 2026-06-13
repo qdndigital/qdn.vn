@@ -70,20 +70,25 @@
   var cf=document.getElementById('brief-form');
   if(cf){
     var st=document.getElementById('form-status');
-    var say=function(msg,cls){if(st){st.textContent=msg;st.className='form-status'+(cls?' '+cls:'');}};
+    var msg={
+      sending:cf.getAttribute('data-msg-sending')||'Sending…',
+      ok:cf.getAttribute('data-msg-ok')||'Thanks — your brief is in.',
+      err:cf.getAttribute('data-msg-err')||'Could not send right now — email quang.dinh@qdn.vn.'
+    };
+    var say=function(m,cls){if(st){st.textContent=m;st.className='form-status'+(cls?' '+cls:'');}};
     cf.addEventListener('submit',function(e){
       e.preventDefault();
       var data=new FormData(cf);
       var btn=cf.querySelector('button[type=submit]');
       if(btn)btn.disabled=true;
-      say('Sending…');
+      say(msg.sending);
       fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(data).toString()})
         .then(function(r){
           if(!r.ok)throw new Error(r.status);
           cf.reset();
-          say('Thanks — your brief is in. We reply within one business day.','ok');
+          say(msg.ok,'ok');
         })
-        .catch(function(){say('Could not send right now — email quang.dinh@qdn.vn and we’ll jump on it.','err');})
+        .catch(function(){say(msg.err,'err');})
         .finally(function(){if(btn)btn.disabled=false;});
     });
   }

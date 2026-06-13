@@ -1,0 +1,18 @@
+---
+import { getLangFromUrl, useTranslations, localizePath } from '../i18n/utils';
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const L = (p: string) => localizePath(p, lang);
+const { h2, p, sectionClass = 'sec', secondaryHref, secondaryText } = Astro.props;
+const secHref = secondaryHref ?? L('/services');
+const secText = secondaryText ?? t.common.seeHow;
+---
+<section class={sectionClass}><div class="wrap"><div class="cta rv">
+  <div class="spec-lab"><span class="b">→</span> {t.common.makeYourMove}</div>
+  <h2 set:html={h2}></h2>
+  <p set:html={p}></p>
+  <div class="flex gap-3 justify-center flex-wrap">
+    <a href={L('/contact')} class="btn btn-paper">{t.common.startProject} <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    <a href={secHref} class="btn btn-ghost">{secText}</a>
+  </div>
+</div></div></section>

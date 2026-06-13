@@ -1,0 +1,26 @@
+---
+import Base from '../../layouts/Base.astro';
+import Cta from '../Cta.astro';
+import { getLangFromUrl, useTranslations, localizePath } from '../../i18n/utils';
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const ab = t.about;
+const L = (p: string) => localizePath(p, lang);
+---
+<Base title={ab.metaTitle} description={ab.metaDesc}>
+<section class="phero"><div class="wrap"><div class="crumb"><a href={L('/')}>~</a> / {ab.crumb}</div><h1 set:html={ab.pheroH1}></h1><p>{ab.pheroP}</p></div></section>
+<section class="sec"><div class="wrap"><div class="shead rv"><div class="spec-lab"><span class="b">—</span> {ab.believeLab}</div><h2 class="max-w-md" set:html={ab.believeH2}></h2><p>{ab.believeP}</p></div><div class="princ">
+{ab.princ.map((c) => (
+<div class="pr rv"><div class="num">{c.num}</div><h3>{c.title}</h3><p>{c.p}</p></div>
+))}
+</div></div></section>
+<section class="sec pt-0"><div class="wrap"><div class="shead rv"><div class="spec-lab"><span class="b">—</span> {ab.teamLab}</div><h2 set:html={ab.teamH2}></h2><p>{ab.teamP}</p></div><div class="team">
+{ab.team.map((m) => (
+<div class="tm rv"><div class="av">{m.av}</div><h3>{ab.teamMember}</h3><span>{m.role}</span></div>
+))}
+</div></div></section>
+<section class="sec pt-0"><div class="wrap"><div class="shead rv"><div class="spec-lab"><span class="b">—</span> {ab.fieldsLab}</div><h2 set:html={ab.fieldsH2}></h2></div><div class="ind">
+{ab.industries.map((i) => <span>{i}</span>)}
+</div></div></section>
+<Cta h2={ab.ctaH2} p={ab.ctaP} sectionClass="sec" />
+</Base>

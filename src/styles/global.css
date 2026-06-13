@@ -63,6 +63,11 @@
   .nav-cta { @apply flex items-center gap-3; }
   .menu-btn { @apply inline-flex lg:hidden items-center justify-center w-10 h-10 rounded-md border border-line-2 bg-surface cursor-pointer; }
   .menu-btn svg { @apply w-5 h-5 fill-none; stroke:var(--ink); stroke-width:2; }
+  .lang-sw { @apply flex items-center gap-0.5; }
+  .lang-sw a { @apply font-mono text-xs px-2 py-1 rounded-md text-muted transition; }
+  .lang-sw a:hover { @apply text-ink; }
+  .lang-sw a.on { @apply text-ink bg-surface; }
+  .lang-sw-m { @apply mt-3 pt-3 border-t border-line; }
 
   /* ---- hero ---- */
   .hero { @apply pt-10 pb-12 md:pt-20 md:pb-16; }

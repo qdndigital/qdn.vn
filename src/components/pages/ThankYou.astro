@@ -1,0 +1,11 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getLangFromUrl, useTranslations, localizePath } from '../../i18n/utils';
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const ty = t.thankyou;
+const L = (p: string) => localizePath(p, lang);
+---
+<Base title={ty.metaTitle} description={ty.metaDesc} noindex>
+<section class="sec"><div class="wrap"><div class="cta rv"><div class="spec-lab"><span class="b">&#10003;</span> {ty.lab}</div><h2 set:html={ty.h2}></h2><p>{ty.p}</p><div class="flex gap-3 justify-center flex-wrap"><a href={L('/')} class="btn btn-paper">{ty.backHome} <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a href={L('/work')} class="btn btn-ghost">{ty.seeWork}</a></div></div></div></section>
+</Base>

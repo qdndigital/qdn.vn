@@ -1,27 +1,41 @@
 ---
-const path = (Astro.url.pathname.replace(/\/+$/, '') || '/');
-const items = [
-  ['/', 'home'],
-  ['/services', 'services'],
-  ['/products', 'products'],
-  ['/work', 'work'],
-  ['/about', 'studio'],
-  ['/journal', 'journal'],
-  ['/contact', 'contact'],
+import { getLangFromUrl, useTranslations, localizePath, stripLang, alternates } from '../i18n/utils';
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const base = stripLang(Astro.url.pathname);
+const alt = alternates(Astro.url.pathname);
+const L = (p: string) => localizePath(p, lang);
+
+const items: [string, string][] = [
+  ['/', t.nav.home],
+  ['/services', t.nav.services],
+  ['/products', t.nav.products],
+  ['/work', t.nav.work],
+  ['/about', t.nav.studio],
+  ['/journal', t.nav.journal],
+  ['/contact', t.nav.contact],
 ];
 ---
 <header class="site">
   <div class="wrap nav">
-    <a href="/" class="logo">
+    <a href={L('/')} class="logo">
       <svg class="logomark" viewBox="0 0 32 32" aria-hidden="true"><rect x="2.5" y="2.5" width="27" height="27" rx="7" fill="none" stroke="#1c1b18" stroke-width="2"/><rect x="11" y="11" width="10" height="10" rx="2.5" fill="#e2622a"/></svg>
       <span>QDN</span>
     </a>
     <nav class="nav-links" id="nav-links">
-      {items.map(([href, label]) => <a href={href} class={path === href ? 'active' : ''}>{label}</a>)}
+      {items.map(([href, label]) => <a href={L(href)} class={base === href ? 'active' : ''}>{label}</a>)}
+      <div class="lang-sw lang-sw-m lg:hidden" aria-label={t.nav.language}>
+        <a href={alt.en} hreflang="en" class={lang === 'en' ? 'on' : ''}>EN</a>
+        <a href={alt.vi} hreflang="vi" class={lang === 'vi' ? 'on' : ''}>VI</a>
+      </div>
     </nav>
     <div class="nav-cta">
-      <a href="/contact" class="btn btn-ink">Start a project</a>
-      <button class="menu-btn" aria-label="Open menu" aria-controls="nav-links" aria-expanded="false"><svg class="ic-open" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg><svg class="ic-close" viewBox="0 0 24 24"><path d="M6 6l12 12M6 18L18 6"/></svg></button>
+      <div class="lang-sw hidden lg:flex" aria-label={t.nav.language}>
+        <a href={alt.en} hreflang="en" class={lang === 'en' ? 'on' : ''}>EN</a>
+        <a href={alt.vi} hreflang="vi" class={lang === 'vi' ? 'on' : ''}>VI</a>
+      </div>
+      <a href={L('/contact')} class="btn btn-ink">{t.nav.cta}</a>
+      <button class="menu-btn" aria-label={t.nav.openMenu} aria-controls="nav-links" aria-expanded="false"><svg class="ic-open" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg><svg class="ic-close" viewBox="0 0 24 24"><path d="M6 6l12 12M6 18L18 6"/></svg></button>
     </div>
   </div>
 </header>
