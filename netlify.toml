@@ -16,3 +16,9 @@
   for = "/_astro/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
+
+[[redirects]]
+  from = "https://qdnvn.netlify.app/*"
+  to   = "https://qdn.vn/:splat"
+  status = 301
+  force = true
