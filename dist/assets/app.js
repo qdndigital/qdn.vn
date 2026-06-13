@@ -63,9 +63,6 @@
     cf.addEventListener('submit',function(e){
       e.preventDefault();
       var data=new FormData(cf);
-      if(cf.hasAttribute('data-netlify-recaptcha')&&!data.get('g-recaptcha-response')){
-        say('Please complete the reCAPTCHA below.','err');return;
-      }
       var btn=cf.querySelector('button[type=submit]');
       if(btn)btn.disabled=true;
       say('Sending…');
@@ -73,7 +70,6 @@
         .then(function(r){
           if(!r.ok)throw new Error(r.status);
           cf.reset();
-          if(window.grecaptcha&&typeof grecaptcha.reset==='function')try{grecaptcha.reset();}catch(_){}
           say('Thanks — your brief is in. We reply within one business day.','ok');
         })
         .catch(function(){say('Could not send right now — email quang.dinh@qdn.vn and we’ll jump on it.','err');})
