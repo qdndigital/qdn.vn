@@ -13,13 +13,24 @@
     addEventListener('scroll',onS,{passive:true});
   }
 
-  /* mobile menu */
-  var mb=document.querySelector('.menu-btn'),links=document.querySelector('.nav-links');
-  if(mb&&links)mb.addEventListener('click',function(){
-    var open=links.style.display==='flex';
-    if(open){links.style.display='';}
-    else{links.style.display='flex';links.style.position='absolute';links.style.top='70px';links.style.left='0';links.style.right='0';links.style.flexDirection='column';links.style.background='var(--paper)';links.style.borderBottom='1px solid var(--line)';links.style.padding='14px 28px';links.style.gap='6px';links.style.zIndex='60';}
-  });
+  /* mobile menu — class toggle only (no inline styles), with overlay + a11y */
+  var mb=document.querySelector('.menu-btn');
+  var ov=document.querySelector('.nav-overlay');
+  var links=document.querySelector('.nav-links');
+  if(mb&&links){
+    var setMenu=function(open){
+      document.body.classList.toggle('nav-open',open);
+      mb.setAttribute('aria-expanded',open?'true':'false');
+      mb.setAttribute('aria-label',open?'Close menu':'Open menu');
+    };
+    mb.addEventListener('click',function(){setMenu(!document.body.classList.contains('nav-open'));});
+    if(ov)ov.addEventListener('click',function(){setMenu(false);});
+    links.addEventListener('click',function(e){if(e.target.closest('a'))setMenu(false);});
+    document.addEventListener('keydown',function(e){if(e.key==='Escape')setMenu(false);});
+    /* close + reset when crossing into desktop, so inline/open state never leaks across breakpoints */
+    var mq=window.matchMedia('(min-width:1024px)');
+    (mq.addEventListener?mq.addEventListener.bind(mq,'change'):mq.addListener.bind(mq))(function(e){if(e.matches)setMenu(false);});
+  }
 
   /* specimen — Idea -> AI mockup -> Live pipeline, auto-looping (home) */
   var sp=document.getElementById('specimen');

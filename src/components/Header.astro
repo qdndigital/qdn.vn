@@ -16,13 +16,13 @@ const items = [
       <svg class="logomark" viewBox="0 0 32 32" aria-hidden="true"><rect x="2.5" y="2.5" width="27" height="27" rx="7" fill="none" stroke="#1c1b18" stroke-width="2"/><rect x="11" y="11" width="10" height="10" rx="2.5" fill="#e2622a"/></svg>
       <span>QDN</span>
     </a>
-    <nav class="nav-links">
+    <nav class="nav-links" id="nav-links">
       {items.map(([href, label]) => <a href={href} class={path === href ? 'active' : ''}>{label}</a>)}
     </nav>
     <div class="nav-cta">
-      <a href="/contact" class="btn btn-line hidden lg:inline-flex">Sign in</a>
       <a href="/contact" class="btn btn-ink">Start a project</a>
-      <button class="menu-btn" aria-label="Menu"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+      <button class="menu-btn" aria-label="Open menu" aria-controls="nav-links" aria-expanded="false"><svg class="ic-open" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg><svg class="ic-close" viewBox="0 0 24 24"><path d="M6 6l12 12M6 18L18 6"/></svg></button>
     </div>
   </div>
 </header>
+<div class="nav-overlay"></div>

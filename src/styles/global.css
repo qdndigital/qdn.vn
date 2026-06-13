@@ -31,7 +31,7 @@
 
 @layer components {
   /* ---- layout ---- */
-  .wrap { @apply mx-auto max-w-wrap px-7; }
+  .wrap { @apply mx-auto max-w-wrap px-4; }
   .sec { @apply py-28; }
   .shead { @apply max-w-2xl mb-16; }
   .shead.ctr { @apply mx-auto text-center; }
@@ -139,7 +139,7 @@
   footer.site { @apply pt-16 pb-9 border-t border-line; }
   .foot { @apply grid grid-cols-2 md:grid-cols-4 gap-9; }
   .foot h2 { @apply font-mono text-label uppercase text-muted mb-4; }
-  .foot a { @apply block text-sm text-ink-2 mb-2.5 hover:text-accent; }
+  .foot a:not(.logo) { @apply block text-sm text-ink-2 mb-2.5 hover:text-accent; }
   .foot .fd { @apply text-sm text-ink-2 mt-3.5 max-w-xs; }
   .fbar { @apply flex flex-wrap justify-between gap-3 mt-12 pt-6 border-t border-line font-mono text-xs text-muted; }
 
@@ -273,6 +273,7 @@
 /* hero specimen — a product window that morphs Mockup <-> Live */
 .specimen { position:relative; padding:24px 28px; opacity:0; transform:translateY(8px); transition:.6s var(--ease); }
 .specimen.in { opacity:1; transform:none; }
+@media (max-width:767px) { .specimen { padding-inline:14px; } }
 .dim { position:absolute; font-family:var(--mono); font-size:10px; color:var(--accent-ink); letter-spacing:.04em; }
 .dim.top { top:6px; left:50%; transform:translateX(-50%); }
 .dimline { position:absolute; background:var(--accent); opacity:.5; }
@@ -389,6 +390,31 @@
 }
 @media (max-width:820px) { .princ { grid-template-columns:1fr 1fr; } }
 @media (max-width:767px) { .srow { grid-template-columns:2.5rem 1fr; } }
+
+/* ---- mobile nav (plain CSS so the JS-toggled .nav-open class isn't purged) ---- */
+.nav-overlay {
+  position:fixed; inset:0; z-index:40; background:rgba(28,27,24,.45);
+  opacity:0; visibility:hidden; transition:opacity .25s var(--ease), visibility .25s;
+}
+body.nav-open .nav-overlay { opacity:1; visibility:visible; }
+@media (min-width:1024px) { .nav-overlay { display:none; } }
+@media (max-width:1023px) {
+  header.site .nav-links {
+    position:absolute; top:100%; left:0; right:0;
+    flex-direction:column; gap:0;
+    background:var(--paper); border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+    padding:6px 16px 18px; z-index:60;
+    box-shadow:0 30px 50px -30px rgba(28,27,24,.4);
+  }
+  body.nav-open header.site .nav-links { display:flex; }
+  header.site .nav-links a { padding:14px 4px; font-size:1.0625rem; border-bottom:1px solid var(--line); }
+  header.site .nav-links a:last-child { border-bottom:0; }
+  body.nav-open { overflow:hidden; }
+}
+/* hamburger ⇄ close icon swap */
+.menu-btn .ic-close { display:none; }
+body.nav-open .menu-btn .ic-open { display:none; }
+body.nav-open .menu-btn .ic-close { display:block; }
 
 /* accessibility */
 a:focus-visible, .btn:focus-visible { outline:2px solid var(--accent); outline-offset:3px; }
