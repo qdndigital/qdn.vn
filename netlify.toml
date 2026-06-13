@@ -5,3 +5,14 @@
 
 [build.environment]
   NODE_VERSION = "20"
+
+# Long-lived caching for immutable assets (fonts + content-hashed _astro files).
+[[headers]]
+  for = "/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/_astro/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
