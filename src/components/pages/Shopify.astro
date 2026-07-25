@@ -1,0 +1,24 @@
+---
+import Base from '../../layouts/Base.astro';
+import Cta from '../Cta.astro';
+import { getLangFromUrl, useTranslations, localizePath } from '../../i18n/utils';
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const s = t.shopify;
+const L = (p: string) => localizePath(p, lang);
+---
+<Base title={s.metaTitle} description={s.metaDesc}>
+<section class="phero"><div class="wrap"><div class="crumb"><a href={L('/')}>~</a> / {s.crumb}</div><h1 set:html={s.pheroH1}></h1><p>{s.pheroP}</p></div></section>
+<section class="sec"><div class="wrap"><div class="steps">
+{s.rows.map((r) => (
+<div class="srow rv"><span class="sn">{r.n}</span><h3>{r.title}</h3><span class="sd">{r.desc}</span><span class="ar"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg></span></div>
+))}
+</div></div></section>
+<section class="sec pt-0"><div class="wrap"><div class="shead rv">
+<div class="spec-lab"><span class="b">—</span> {s.proofLab}</div>
+<h2 set:html={s.proofH2}></h2>
+<p>{s.proofP}</p>
+<span class="inline-flex items-center gap-2 mt-5 font-mono text-label uppercase text-accent-ink bg-accent-soft rounded-full px-3.5 py-1.5"><span class="w-1.5 h-1.5 rounded-full bg-accent-ink"></span>{s.proofChip}</span>
+</div></div></section>
+<Cta h2={s.ctaH2} p={s.ctaP} sectionClass="sec" />
+</Base>

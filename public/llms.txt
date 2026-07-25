@@ -11,7 +11,8 @@
 ## Pages
 - [Home](https://qdn.vn/): positioning, what we build, how we work.
 - [Services](https://qdn.vn/services): web & SaaS, mobile, AI solutions, e-commerce, automation, product strategy.
-- [Products](https://qdn.vn/products): QOne (project/HR/expense platform), SAT AI (AI-native learning platform), PropManage (property management platform).
+- [Shopify](https://qdn.vn/shopify): Shopify agency — custom themes, app development, App Store publishing, checkout & Functions, headless/Hydrogen, integrations and migrations. We ship our own Shopify app, QSortby.
+- [Products](https://qdn.vn/products): QOne (https://qone.work — the command center for service companies: one morning verdict plus money-ranked decisions, See → Understand → Act → Learn), QSortby (our Shopify merchandising app), NA ERP, SALT ERP and VPP POS.
 - [Work](https://qdn.vn/work): selected projects and outcomes.
 - [About](https://qdn.vn/about): the studio, beliefs and team.
 - [Journal](https://qdn.vn/journal): notes on AI, speed, craft and shipping.

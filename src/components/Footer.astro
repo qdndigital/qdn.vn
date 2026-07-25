@@ -16,16 +16,13 @@ const L = (p: string) => localizePath(p, lang);
       </div>
       <div>
         <h2>{t.footer.colBuild}</h2>
-        <a href={L('/services')}>{t.footer.lBuild[0]}</a>
-        <a href={L('/services')}>{t.footer.lBuild[1]}</a>
-        <a href={L('/services')}>{t.footer.lBuild[2]}</a>
-        <a href={L('/services')}>{t.footer.lBuild[3]}</a>
+        {t.footer.lBuild.map((label) => (
+          <a href={L(label === 'shopify' ? '/shopify' : '/services')}>{label}</a>
+        ))}
       </div>
       <div>
         <h2>{t.footer.colProducts}</h2>
-        <a href={L('/products')}>{t.footer.lProducts[0]}</a>
-        <a href={L('/products')}>{t.footer.lProducts[1]}</a>
-        <a href={L('/products')}>{t.footer.lProducts[2]}</a>
+        {t.footer.lProducts.map((label) => <a href={L('/products')}>{label}</a>)}
       </div>
       <div>
         <h2>{t.footer.colStudio}</h2>

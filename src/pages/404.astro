@@ -1,0 +1,34 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base title="404 — Page not found | QDN" description="This page doesn’t exist or has moved." noindex>
+<section class="sec"><div class="wrap">
+  <div class="e404">
+    <div class="spec-lab justify-center"><span class="b">404</span> · page not found</div>
+    <h1>Took a <span class="it">wrong turn</span>.</h1>
+    <p>The page you’re looking for moved or never existed.<br><span class="vi">Trang bạn tìm không tồn tại hoặc đã được chuyển.</span></p>
+    <div class="e404-cta">
+      <a href="/" class="btn btn-ink">Back to home <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a href="/contact" class="btn btn-line">Contact us</a>
+    </div>
+    <div class="e404-links">
+      <a href="/services">services</a><span>·</span>
+      <a href="/shopify">shopify</a><span>·</span>
+      <a href="/products">products</a><span>·</span>
+      <a href="/work">work</a>
+    </div>
+  </div>
+</div></section>
+</Base>
+
+<style>
+  .e404 { max-width:38rem; margin:0 auto; text-align:center; padding:clamp(28px,6vw,72px) 0; }
+  .e404 .spec-lab { justify-content:center; }
+  .e404 h1 { font-size:clamp(2.25rem,6vw,4rem); line-height:1.02; letter-spacing:-.045em; font-weight:800; margin:1.25rem 0 0; }
+  .e404 > p { font-size:1.125rem; line-height:1.6; color:var(--ink-2); margin:1.25rem 0 0; }
+  .e404 .vi { color:var(--muted); }
+  .e404-cta { display:flex; gap:.75rem; justify-content:center; flex-wrap:wrap; margin-top:2rem; }
+  .e404-links { display:flex; gap:.6rem; justify-content:center; flex-wrap:wrap; align-items:center; margin-top:2.25rem; font-family:var(--mono); font-size:.75rem; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); }
+  .e404-links a { color:var(--muted); }
+  .e404-links a:hover { color:var(--accent-ink); }
+</style>

@@ -11,14 +11,14 @@ const L = (p: string) => localizePath(p, lang);
 <section class="phero"><div class="wrap"><div class="crumb"><a href={L('/')}>~</a> / {pr.crumb}</div><h1 set:html={pr.pheroH1}></h1><p>{pr.pheroP}</p></div></section>
 <section class="sec"><div class="wrap">
 {pr.items.map((it, i) => (
-  i === 1 ? (
+  i % 2 === 1 ? (
     <div class="pd rev rv">
       <div class="pd-feat">{it.features.map((f) => <span class="f">{f}</span>)}</div>
-      <div class="pd-spec"><div class="id">{it.id}</div><h3>{it.name}</h3><div class="pt">{it.pt}</div><p>{it.desc}</p></div>
+      <div class="pd-spec"><div class="id">{it.id}</div><h3>{it.name}</h3><div class="pt">{it.pt}</div><p>{it.desc}</p>{it.link && <a href={it.link} target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 mt-4 font-mono text-label uppercase text-accent-ink hover:underline">{t.common.visit} {it.link.replace(/^https?:\/\//, '')} <svg viewBox="0 0 24 24" class="w-3.5 h-3.5 fill-none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>}</div>
     </div>
   ) : (
     <div class="pd rv">
-      <div class="pd-spec"><div class="id">{it.id}</div><h3>{it.name}</h3><div class="pt">{it.pt}</div><p>{it.desc}</p></div>
+      <div class="pd-spec"><div class="id">{it.id}</div><h3>{it.name}</h3><div class="pt">{it.pt}</div><p>{it.desc}</p>{it.link && <a href={it.link} target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 mt-4 font-mono text-label uppercase text-accent-ink hover:underline">{t.common.visit} {it.link.replace(/^https?:\/\//, '')} <svg viewBox="0 0 24 24" class="w-3.5 h-3.5 fill-none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>}</div>
       <div class="pd-feat">{it.features.map((f) => <span class="f">{f}</span>)}</div>
     </div>
   )
