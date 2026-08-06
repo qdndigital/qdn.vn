@@ -29,7 +29,7 @@ const chips = platforms
   .filter((c) => c.n > 0);
 ---
 
-<section class="sec">
+<section class="sec pt-9 md:pt-12">
   <div class="wrap">
     <div class="afilter rv">
       <div class="spec-lab"><span class="b">//</span> {w.filterLab}</div>
@@ -54,10 +54,14 @@ const chips = platforms
             data-shot={d.shot ?? ''}
             data-host={host(d.url) || w.internalLabel}
           >
-            <span class="id">{d.rec}</span>
-            <span class="ttl">{d.brand}<em>{d.role}</em></span>
+            <span class="athumb">
+              {d.shot
+                ? <img src={d.shot} alt="" width="1280" height="800" loading="lazy" decoding="async" />
+                : <span class="athumb-none">{d.platformLabel}</span>}
+            </span>
+            <span class="ttl"><i class="id">{d.rec}</i>{d.brand}<em>{d.role}</em></span>
             <span class="body">{d.summary}</span>
-            <span class="tags">{d.platformLabel} · {d.country} · {d.year}</span>
+            <span class="tags">{d.platformLabel}<br />{d.country} · {d.year}</span>
           </a>
         );
       })}

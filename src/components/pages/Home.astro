@@ -4,13 +4,23 @@ import Base from '../../layouts/Base.astro';
 import HowWeWork from '../HowWeWork.astro';
 import Cta from '../Cta.astro';
 import { getLangFromUrl, useTranslations, localizePath } from '../../i18n/utils';
-import { workEntries, workSlug } from '../../i18n/work';
+import WorkCards from '../WorkCards.astro';
+import BrandWall from '../BrandWall.astro';
+import StatBand from '../StatBand.astro';
+import { workStats } from '../../i18n/work';
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const h = t.home;
+const w = t.work;
 const L = (p: string) => localizePath(p, lang);
 
-const featured = workEntries(await getCollection('work'), lang).filter((e) => e.data.featured).slice(0, 4);
+const st = workStats(await getCollection('work'));
+const stats = [
+  { n: String(st.records), k: w.statRecords },
+  { n: String(st.countries), k: w.statCountries },
+  { n: h.metaMockupN, k: h.metaMockup },
+  { n: `${st.from}–${st.to}`, k: w.statYears },
+];
 ---
 <Base title={h.metaTitle} description={h.metaDesc}>
 <!-- HERO -->
@@ -22,6 +32,9 @@ const featured = workEntries(await getCollection('work'), lang).filter((e) => e.
 <div class="hero-meta"><div><div class="mono">{h.metaMockup}</div><div class="n">{h.metaMockupN}</div></div><div><div class="mono">{h.metaFaster}</div><div class="n">{h.metaFasterN}</div></div><div><div class="mono">{h.metaShipped}</div><div class="n">{h.metaShippedN}</div></div></div>
 </div>
 <div class="specimen" id="specimen"><div class="flow"><span class="stp s-idea"><i class="d"></i>{h.flowIdea}</span><span class="seg"><i></i></span><span class="stp s-mockup"><i class="d"></i>{h.flowMockup}</span><span class="seg"><i></i></span><span class="stp s-live"><i class="d"></i>{h.flowLive}</span><span class="flow-day">{h.flowDay}</span></div><div class="card"><span class="sheen"></span><div class="bar"><i></i><i></i><i></i><span class="u">app.qdn.vn / <b class="u-state">mockup</b></span><span class="live-dot"></span><div class="spec-toggle"><button class="on" data-m="mockup">{h.flowMockup}</button><button data-m="live">{h.flowLive}</button></div></div><div class="prompt"><span class="pc">&rsaquo;</span> <span class="pt">{h.prompt}</span><span class="caret"></span></div><div class="app"><aside class="side"><span class="brandmk"></span><span class="nav on"></span><span class="nav"></span><span class="nav"></span><span class="nav"></span></aside><div class="main"><div class="apptop"><span class="ln"></span><span class="cta-btn">{h.newTrip}</span></div><div class="chat"><div class="msg in"><span class="ava"></span><span class="bub"><span class="ln l"></span><span class="ln s"></span></span></div><div class="msg out"><span class="bub bot"><span class="ln l"></span></span><span class="ava bot"></span></div><div class="typing"><span></span><span></span><span></span></div></div><div class="rows"><div class="rw"><span class="av"></span><span class="ln l"></span><span class="pill"></span></div><div class="rw"><span class="av"></span><span class="ln l"></span><span class="pill"></span></div><div class="rw"><span class="av"></span><span class="ln l"></span><span class="pill"></span></div></div></div></div></div></div></div></section>
+
+<!-- CLIENT WALL -->
+<BrandWall label={h.trustedLab} sectionClass="sec pt-0 pb-0" />
 
 <!-- PROMISE -->
 <section class="sec pb-0"><div class="wrap"><div class="shead ctr rv"><div class="spec-lab justify-center"><span class="b">—</span> {h.promiseLab}</div><h2 class="max-w-2xl mx-auto mt-3.5" set:html={h.promiseH2}></h2></div></div></section>
@@ -51,14 +64,11 @@ const featured = workEntries(await getCollection('work'), lang).filter((e) => e.
 
 <!-- SELECTED WORK -->
 <section class="sec pt-0"><div class="wrap"><div class="shead rv"><div class="spec-lab"><span class="b">—</span> {h.workLab}</div><h2 set:html={h.workH2}></h2><p>{h.workP}</p></div>
-<div class="wstrip">
-{featured.map((e) => (
-<a class="wcard rv" href={L(`/work/${workSlug(e)}`)}>
-  {e.data.shot && <img class="ws" src={e.data.shot} alt={e.data.brand} width="1280" height="800" loading="lazy" decoding="async" />}
-  <div class="wi"><div class="wm"><span class="id">{e.data.rec}</span><span>{e.data.year}</span></div><h3>{e.data.brand}</h3><p>{e.data.platformLabel} · {e.data.country}</p></div>
-</a>
-))}
-</div><div class="rv mt-8"><a href={L('/work')} class="btn btn-line">{h.workAll} <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div></div></section>
+<WorkCards featuredOnly={true} limit={4} />
+<div class="rv mt-8"><a href={L('/work')} class="btn btn-line">{h.workAll} <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div></div></section>
+
+<!-- PROOF IN NUMBERS -->
+<StatBand items={stats} sectionClass="sec pt-0" />
 
 <!-- TESTIMONIALS -->
 <section class="sec pt-0"><div class="wrap"><div class="shead ctr rv"><div class="spec-lab justify-center"><span class="b">—</span> {h.tstLab}</div><h2 set:html={h.tstH2}></h2></div><div class="tst">

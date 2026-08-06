@@ -10,6 +10,24 @@ export function workEntries(all: CollectionEntry<'work'>[], lang: Lang) {
 }
 
 /**
+ * Archive totals, computed from the records so the numbers on the site can never
+ * drift from the work. Counted off the EN entries — these are counts, not copy.
+ * 'Global' (the App Store app) is not a country.
+ */
+export function workStats(all: CollectionEntry<'work'>[]) {
+  const en = workEntries(all, 'en');
+  const years = en.map((e) => Number(e.data.year)).filter(Boolean);
+  return {
+    records: en.length,
+    countries: new Set(en.map((e) => e.data.country).filter((c) => c !== 'Global')).size,
+    platforms: new Set(en.map((e) => e.data.platform)).size,
+    live: en.filter((e) => e.data.live).length,
+    from: Math.min(...years),
+    to: Math.max(...years),
+  };
+}
+
+/**
  * getStaticPaths for a locale's case pages — each record carries its neighbours
  * so the page can offer prev/next without re-reading the collection.
  */

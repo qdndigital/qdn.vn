@@ -1,24 +1,87 @@
 ---
+import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Cta from '../Cta.astro';
+import WorkCards from '../WorkCards.astro';
+import StatBand from '../StatBand.astro';
 import { getLangFromUrl, useTranslations, localizePath } from '../../i18n/utils';
+import { workEntries, workSlug } from '../../i18n/work';
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const s = t.shopify;
 const L = (p: string) => localizePath(p, lang);
+
+// Everything below is counted off the archive, so the page can't outrun the work.
+const all = workEntries(await getCollection('work'), lang);
+const shopify = all.filter((e) => e.data.platform === 'shopify');
+const qsortby = all.find((e) => workSlug(e) === 'qsortby');
+const countries = new Set(shopify.map((e) => e.data.country));
+const stats = [
+  { n: String(shopify.length), k: s.statStores },
+  { n: String(countries.size), k: s.statCountries },
+  { n: '3', k: s.statMigrations },
+  { n: '1', k: s.statApp },
+];
+
+// The three replatforms, each pointing at the record that proves it.
+const migrations = [
+  { from: 'Magento', slug: 'online-carpets' },
+  { from: 'PrestaShop', slug: 'mai-anh-home' },
+  { from: s.migLegacy, slug: 'meaningful-mantras' },
+].map((m) => ({ ...m, entry: all.find((e) => workSlug(e) === m.slug)! }));
 ---
 <Base title={s.metaTitle} description={s.metaDesc}>
 <section class="phero"><div class="wrap"><div class="crumb"><a href={L('/')}>~</a> / {s.crumb}</div><h1 set:html={s.pheroH1}></h1><p>{s.pheroP}</p></div></section>
+
+<StatBand items={stats} sectionClass="sec pb-0 pt-9 md:pt-12" />
+
 <section class="sec"><div class="wrap"><div class="steps">
 {s.rows.map((r) => (
 <div class="srow rv"><span class="sn">{r.n}</span><h3>{r.title}</h3><span class="sd">{r.desc}</span><span class="ar"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg></span></div>
 ))}
 </div></div></section>
-<section class="sec pt-0"><div class="wrap"><div class="shead rv">
-<div class="spec-lab"><span class="b">—</span> {s.proofLab}</div>
-<h2 set:html={s.proofH2}></h2>
-<p>{s.proofP}</p>
-<span class="inline-flex items-center gap-2 mt-5 font-mono text-label uppercase text-accent-ink bg-accent-soft rounded-full px-3.5 py-1.5"><span class="w-1.5 h-1.5 rounded-full bg-accent-ink"></span>{s.proofChip}</span>
+
+<!-- SHOPIFY WORK -->
+<section class="sec pt-0"><div class="wrap"><div class="shead rv"><div class="spec-lab"><span class="b">—</span> {s.workLab}</div><h2 set:html={s.workH2}></h2><p>{s.workP}</p></div>
+<WorkCards platform="shopify" limit={4} />
+<div class="rv mt-8"><a href={L('/work')} class="btn btn-line">{s.workAll} <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+</div></section>
+
+<!-- MIGRATIONS -->
+<section class="sec pt-0"><div class="wrap"><div class="shead rv"><div class="spec-lab"><span class="b">—</span> {s.migLab}</div><h2 set:html={s.migH2}></h2><p>{s.migP}</p></div>
+<div class="migs">
+{migrations.map((m) => (
+<a class="mig rv" href={L(`/work/${m.slug}`)}>
+  <span class="from">{m.from}</span>
+  <span class="to"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>Shopify</span>
+  <p>{m.entry.data.summary}</p>
+  <span class="who">{m.entry.data.brand} · {m.entry.data.country}</span>
+</a>
+))}
 </div></div></section>
-<Cta h2={s.ctaH2} p={s.ctaP} sectionClass="sec" />
+
+<!-- OUR OWN APP -->
+<section class="sec pt-0"><div class="wrap"><div class="case-grid">
+<div class="rv">
+  <div class="spec-lab"><span class="b">—</span> {s.proofLab}</div>
+  <h2 class="text-h2 mt-3" set:html={s.proofH2}></h2>
+  <p class="text-lg text-ink-2 mt-4">{s.proofP}</p>
+  <span class="inline-flex items-center gap-2 mt-5 font-mono text-label uppercase text-accent-ink bg-accent-soft rounded-full px-3.5 py-1.5"><span class="w-1.5 h-1.5 rounded-full bg-accent-ink"></span>{s.proofChip}</span>
+  <ul class="case-did mt-6">
+    {s.proofItems.map((i) => <li>{i}</li>)}
+  </ul>
+  <div class="mt-7 flex flex-wrap gap-3">
+    <a href="https://apps.shopify.com/qsortby" class="btn btn-ink" target="_blank" rel="noopener noreferrer">{s.proofCta} <svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+    {qsortby && <a href={L('/work/qsortby')} class="btn btn-line">{s.proofCase}</a>}
+  </div>
+</div>
+{qsortby?.data.shot && (
+<figure class="apwin static rv">
+  <div class="apbar"><i></i><i></i><i></i><b class="apurl">apps.shopify.com/qsortby</b></div>
+  <img src={qsortby.data.shot} alt="QSortBy on the Shopify App Store" width="1280" height="800" loading="lazy" decoding="async" />
+</figure>
+)}
+</div></div></section>
+
+<Cta h2={s.ctaH2} p={s.ctaP} sectionClass="sec pt-0" />
 </Base>
