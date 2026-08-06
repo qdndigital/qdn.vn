@@ -1,12 +1,16 @@
 ---
+import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import HowWeWork from '../HowWeWork.astro';
 import Cta from '../Cta.astro';
 import { getLangFromUrl, useTranslations, localizePath } from '../../i18n/utils';
+import { workEntries, workSlug } from '../../i18n/work';
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const h = t.home;
 const L = (p: string) => localizePath(p, lang);
+
+const featured = workEntries(await getCollection('work'), lang).filter((e) => e.data.featured).slice(0, 4);
 ---
 <Base title={h.metaTitle} description={h.metaDesc}>
 <!-- HERO -->
@@ -44,6 +48,17 @@ const L = (p: string) => localizePath(p, lang);
 <div class="sp rv"><div class="top"><span class="id">{c.id}</span><span>{c.status}</span></div><div class="in"><div class="pn">{c.pn}</div><div class="pt">{c.pt}</div><ul>{c.items.map((i) => <li>{i}</li>)}</ul></div></div>
 ))}
 </div><div class="rv mt-8"><a href={L('/products')} class="btn btn-line">{t.common.allProducts} <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div></div></section>
+
+<!-- SELECTED WORK -->
+<section class="sec pt-0"><div class="wrap"><div class="shead rv"><div class="spec-lab"><span class="b">—</span> {h.workLab}</div><h2 set:html={h.workH2}></h2><p>{h.workP}</p></div>
+<div class="wstrip">
+{featured.map((e) => (
+<a class="wcard rv" href={L(`/work/${workSlug(e)}`)}>
+  {e.data.shot && <img class="ws" src={e.data.shot} alt={e.data.brand} width="1280" height="800" loading="lazy" decoding="async" />}
+  <div class="wi"><div class="wm"><span class="id">{e.data.rec}</span><span>{e.data.year}</span></div><h3>{e.data.brand}</h3><p>{e.data.platformLabel} · {e.data.country}</p></div>
+</a>
+))}
+</div><div class="rv mt-8"><a href={L('/work')} class="btn btn-line">{h.workAll} <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div></div></section>
 
 <!-- TESTIMONIALS -->
 <section class="sec pt-0"><div class="wrap"><div class="shead ctr rv"><div class="spec-lab justify-center"><span class="b">—</span> {h.tstLab}</div><h2 set:html={h.tstH2}></h2></div><div class="tst">

@@ -1,0 +1,128 @@
+---
+/**
+ * The work archive — a filterable record list where hovering a row raises a real
+ * screenshot of that project, framed like the browser window in the home hero.
+ * Reads the `work` content collection; rows link to the case page.
+ */
+import { getCollection } from 'astro:content';
+import { getLangFromUrl, useTranslations, localizePath } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const w = t.work;
+const L = (p: string) => localizePath(p, lang);
+
+const entries = (await getCollection('work', (e) => e.id.startsWith(`${lang}/`))).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+
+const host = (u: string | null) => (u ? u.replace(/^https?:\/\//, '').replace(/\/$/, '') : '');
+
+// Platform chips, in archive order, each carrying its own count.
+const platforms = ['shopify', 'wordpress', 'webapp', 'shopify-app'] as const;
+const chips = platforms
+  .map((p) => ({
+    key: p,
+    label: entries.find((e) => e.data.platform === p)?.data.platformLabel ?? p,
+    n: entries.filter((e) => e.data.platform === p).length,
+  }))
+  .filter((c) => c.n > 0);
+---
+
+<section class="sec">
+  <div class="wrap">
+    <div class="afilter rv">
+      <div class="spec-lab"><span class="b">//</span> {w.filterLab}</div>
+      <div class="achips">
+        <button class="achip on" data-f="all" data-label={w.filterAll}>{w.filterAll} <i>{entries.length}</i></button>
+        {chips.map((c) => (
+          <button class="achip" data-f={c.key} data-label={c.label}>{c.label} <i>{c.n}</i></button>
+        ))}
+      </div>
+      <span class="acount" id="acount" data-noun={w.records}>{entries.length} / {entries.length} {w.records}</span>
+    </div>
+
+    <div class="archive" id="archive">
+      {entries.map((e) => {
+        const slug = e.slug.replace(/^[a-z]{2}\//, '');
+        const d = e.data;
+        return (
+          <a
+            class="arow rv"
+            href={L(`/work/${slug}`)}
+            data-platform={d.platform}
+            data-shot={d.shot ?? ''}
+            data-host={host(d.url) || w.internalLabel}
+          >
+            <span class="id">{d.rec}</span>
+            <span class="ttl">{d.brand}<em>{d.role}</em></span>
+            <span class="body">{d.summary}</span>
+            <span class="tags">{d.platformLabel} · {d.country} · {d.year}</span>
+          </a>
+        );
+      })}
+    </div>
+
+    <p class="ahint">{w.hoverHint}</p>
+  </div>
+</section>
+
+{/* the floating specimen — follows the cursor, only on precise pointers */}
+<div class="apreview" id="apreview" aria-hidden="true">
+  <div class="apwin">
+    <div class="apbar"><i></i><i></i><i></i><b class="apurl"></b></div>
+    <img alt="" loading="lazy" decoding="async" width="1280" height="800" />
+  </div>
+</div>
+
+<script>
+  const wrap = document.getElementById('archive');
+  const pv = document.getElementById('apreview');
+  if (wrap && pv) {
+    const rows = Array.from(wrap.querySelectorAll('.arow')) as HTMLElement[];
+    const chips = Array.from(document.querySelectorAll('.achip')) as HTMLElement[];
+    const countEl = document.getElementById('acount');
+    const noun = countEl?.dataset.noun ?? '';
+
+    const paint = (shown: number, label: string, all: boolean) => {
+      if (countEl) countEl.textContent = `${shown} / ${rows.length} ${noun}${all ? '' : ` · ${label}`}`;
+    };
+
+    chips.forEach((chip) => {
+      chip.addEventListener('click', () => {
+        const f = chip.dataset.f ?? 'all';
+        chips.forEach((c) => c.classList.toggle('on', c === chip));
+        let shown = 0;
+        rows.forEach((r) => {
+          const hit = f === 'all' || r.dataset.platform === f;
+          r.classList.toggle('gone', !hit);
+          if (hit) shown++;
+        });
+        paint(shown, chip.dataset.label ?? '', f === 'all');
+        pv.classList.remove('on');
+      });
+    });
+
+    const fine = window.matchMedia('(hover: hover) and (pointer: fine) and (min-width: 1024px)').matches;
+    if (fine) {
+      const img = pv.querySelector('img') as HTMLImageElement;
+      const url = pv.querySelector('.apurl') as HTMLElement;
+      rows.forEach((r) => {
+        r.addEventListener('mouseenter', () => {
+          const shot = r.dataset.shot;
+          if (!shot) { pv.classList.remove('on'); return; }
+          if (img.getAttribute('src') !== shot) img.setAttribute('src', shot);
+          url.textContent = r.dataset.host ?? '';
+          pv.classList.add('on');
+        });
+      });
+      wrap.addEventListener('mousemove', (e) => {
+        const y = Math.min(Math.max(e.clientY, 200), window.innerHeight - 200);
+        pv.classList.toggle('flip', e.clientX > window.innerWidth - 520);
+        pv.style.setProperty('--px', `${e.clientX}px`);
+        pv.style.setProperty('--py', `${y}px`);
+      });
+      wrap.addEventListener('mouseleave', () => pv.classList.remove('on'));
+    }
+  }
+</script>
