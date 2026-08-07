@@ -24,7 +24,7 @@ steps:
     img: '/assets/work/steps/qone-2.webp'
   - h: 'Made it answer, not just display'
     p: 'Dashboards that show everything tell you nothing. QOne leads with a ranked view of what matters — risk and money first — so the software makes a call and you correct it, rather than the other way round.'
-    img: '/assets/work/steps/qone-3.webp'
+    img: '/assets/work/steps/qone-t1.webp'
   - h: 'Architected it to outgrow us'
     p: 'It is multi-tenant and role-scoped from the foundation, because a tool built only for one company quietly becomes a tool you can never sell.'
   - h: 'Ran our own business on it'

@@ -23,7 +23,7 @@ steps:
     p: 'Cửa hàng dành cho hình ảnh khoảng không mà một sản phẩm thủ công cần, để khác biệt giữa một chậu sản xuất hàng loạt và một chậu vuốt tay hiện ra trước cả khi khách đọc chữ nào.'
   - h: 'Sắp xếp 277 sản phẩm để dải hàng vẫn dễ đi'
     p: 'Danh mục chia theo vật thể — bình và lọ, đài phun nước, đèn đá, nội thất — với điều hướng được dựng sao cho một danh mục rộng không bao giờ giống một bảng kê kho.'
-    img: '/assets/work/steps/pottery-and-decor-3.webp'
+    img: '/assets/work/steps/pottery-and-decor-t1.webp'
   - h: 'Viết câu chuyện của cửa hàng vào trong đó'
     p: 'Trang chủ, trang giới thiệu và các trang nội dung mang lập luận về nghề thủ công — truyền thống, thiên nhiên, bàn tay nghệ nhân — vì với loại sản phẩm này, câu chuyện là một phần của đặc tả.'
   - h: 'Xây sẵn chế độ trợ năng'

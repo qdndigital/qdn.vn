@@ -23,7 +23,7 @@ steps:
     p: 'The storefront gives imagery the room a craft product needs, so the difference between a mass-produced planter and a hand-thrown one is visible before the customer reads a word.'
   - h: 'Structured 277 products so the range stays walkable'
     p: 'Categories run by object — vases and vessels, fountains, stone lanterns, furniture — with product navigation built so a wide catalogue never feels like a warehouse listing.'
-    img: '/assets/work/steps/pottery-and-decor-3.webp'
+    img: '/assets/work/steps/pottery-and-decor-t1.webp'
   - h: 'Wrote the store’s story into it'
     p: 'Homepage, about and content pages carry the craft argument — tradition, nature, the artisan’s hand — because for this kind of product the story is part of the specification.'
   - h: 'Built in an accessibility mode'

@@ -19,7 +19,7 @@ challenge: 'Người mua bất động sản muốn những thứ rất khác nh
 steps:
   - h: 'Dựng trang theo danh sách câu hỏi của người mua'
     p: 'Tổng quan, vị trí, mặt bằng, tiện ích, chủ đầu tư, tin tức, liên hệ — theo đúng thứ tự người mua thật sự hỏi, mỗi phần đều có neo trên thanh điều hướng để không ai phải cuộn tìm.'
-    img: '/assets/work/steps/fours-tower-danang-1.webp'
+    img: '/assets/work/steps/fours-tower-danang-t1.webp'
   - h: 'Kể câu chuyện vị trí bằng hình ảnh'
     p: 'Với một toà tháp ở Đà Nẵng, vị trí chính là lời chào hàng. Phần vị trí được dựng để bản đồ tự thuyết phục, thay vì một đoạn văn nói về sự tiện lợi.'
   - h: 'Đặt mặt bằng đúng chỗ ra quyết định'

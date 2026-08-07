@@ -21,7 +21,7 @@ steps:
     p: 'The site was restructured before it was styled: programmes, mentors, results, materials and news each given a clear place, so the answer a parent needs is never more than one step away.'
   - h: 'Put the mentors and the results up front'
     p: 'Subject-specialist mentors and a collection of high scores are the school''s strongest evidence, so they are treated as primary content rather than as an afterthought below the fold.'
-    img: '/assets/work/steps/mads-digital-sat-2.webp'
+    img: '/assets/work/steps/mads-digital-sat-t1.webp'
   - h: 'Separated the programmes clearly'
     p: 'Group classes and one-to-one tuition are different products with different buyers. Splitting them cleanly lets a parent self-select instead of reading everything to work out which applies.'
   - h: 'Made the free material a front door'

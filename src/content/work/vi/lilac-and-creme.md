@@ -28,7 +28,7 @@ steps:
     img: '/assets/work/steps/lilac-and-creme-4.webp'
   - h: 'Rút gọn toàn bộ đường đi của một đơn hàng'
     p: 'Với thanh toán được tích hợp và luồng đơn nằm gọn một chỗ, quy trình xử lý ngắn lại — mà trong một tiệm bánh, ngắn lại nghĩa là ít lỗi hơn ở đúng chỗ lỗi đắt nhất.'
-    img: '/assets/work/steps/lilac-and-creme-5.webp'
+    img: '/assets/work/steps/lilac-and-creme-t1.webp'
 outcome: 'Tiệm bánh đang chạy trên Shopify tại lilacandcreme.com với một ứng dụng quản lý đơn riêng phía sau, phục vụ cả hàng bán lẻ, hộp in logo và cổng quà tặng doanh nghiệp.'
 lesson: 'Khi một doanh nghiệp thực chất là một guồng vận hành, cửa hàng mới là nửa dễ. Hãy xây cho người thực hiện đơn, rồi trải nghiệm khách hàng sẽ theo sau.'
 deliverables:

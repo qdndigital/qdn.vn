@@ -19,7 +19,7 @@ challenge: 'Nhà bán nào cũng biết hàng bán chạy phải nằm đầu b�
 steps:
   - h: 'Chọn đúng tín hiệu dự báo được một đơn hàng'
     p: 'Chỉ nhìn doanh số là nhìn vào quá khứ. Bộ máy cân nhắc doanh số, lượt xem, tỷ lệ nhấp, chiều xu hướng và hành vi mua cùng lúc, để một sản phẩm đang lên có thể vượt qua nhà vô địch cũ trước khi hết mùa.'
-    img: '/assets/work/steps/qsortby-1.webp'
+    img: '/assets/work/steps/qsortby-t1.webp'
   - h: 'Làm thứ tự mang tính cá nhân, không chỉ đúng'
     p: 'Sản phẩm đầu tiên phù hợp với khách quay lại khác với người vừa bấm từ quảng cáo. QSortBy có thể cá nhân hoá thứ tự hiển thị theo từng nhóm khách thay vì dùng một bảng xếp hạng chung.'
   - h: 'Xây đúng chuẩn một ứng dụng Shopify'

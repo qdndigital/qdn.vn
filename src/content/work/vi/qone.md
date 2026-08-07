@@ -24,7 +24,7 @@ steps:
     img: '/assets/work/steps/qone-2.webp'
   - h: 'Bắt hệ thống trả lời, không chỉ hiển thị'
     p: 'Dashboard hiện mọi thứ thì chẳng nói được gì. QOne mở đầu bằng danh sách được xếp hạng theo rủi ro và tiền, để phần mềm đưa ra phán đoán còn con người chỉnh lại — chứ không phải ngược lại.'
-    img: '/assets/work/steps/qone-3.webp'
+    img: '/assets/work/steps/qone-t1.webp'
   - h: 'Thiết kế kiến trúc để vượt khỏi chính mình'
     p: 'Hệ thống đa tổ chức (multi-tenant) và phân quyền theo vai trò ngay từ nền móng, vì một công cụ chỉ xây cho một công ty sẽ lặng lẽ trở thành công cụ không bao giờ bán được.'
   - h: 'Tự vận hành doanh nghiệp mình trên đó'

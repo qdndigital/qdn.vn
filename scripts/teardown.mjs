@@ -42,6 +42,105 @@ mkdirSync(outDir, { recursive: true });
  * of a tight ring.
  */
 const TEARDOWNS = {
+  'herman-miller-uk': [
+    { t: 1, step: 2, path: '/', title: 'A design institution, on Shopify',
+      anchors: [
+        { find: 'a[href*="/collections/seating"]', up: 2, bracket: true, lab: 'Category structure rebuilt',
+          sub: 'Seating, desks, lighting and accessories — shopping by problem, not alphabet' },
+        { text: ['Popular Categories'], up: 1, lab: 'Brand identity held',
+          sub: 'Storefront designed to Herman Miller\u2019s own published standards' },
+      ] },
+  ],
+  'mai-anh-home': [
+    { t: 1, step: 4, path: '/', title: '2,965 products, made navigable',
+      anchors: [
+        { text: ['Thiết Bị Phòng Tắm'], up: 2, bracket: true, lab: 'Navigation by room',
+          sub: 'Bathroom, tiles, kitchen and appliances — the way a renovation is planned' },
+        { text: ['GROHE'], up: 1, lab: 'Brand routes kept',
+          sub: 'GROHE, American Standard and INAX get their own way in' },
+      ] },
+  ],
+  'pottery-and-decor': [
+    { t: 1, step: 3, path: '/collections/all', title: 'A wide craft catalogue, kept walkable',
+      anchors: [
+        { text: ['277 products'], lab: '277 products structured',
+          sub: 'Grouped by object — vessels, fountains, lanterns, furniture' },
+        { text: ['Login', 'Subscribe'], up: 1, lab: 'Store built from scratch',
+          sub: 'Custom Shopify theme, accounts and content pages' },
+      ] },
+  ],
+  'meaningful-mantras': [
+    { t: 1, step: 2, path: '/', title: 'A catalogue with two axes',
+      anchors: [
+        { text: ['Browse Popular Collections'], up: 1, bracket: true, lab: 'Collections by size and range',
+          sub: '4oz to 16oz across named collections — both routes lead somewhere' },
+        { text: ['Non-Toxic Candles', 'A Healthier Home Starts Here'], lab: 'The brand argument, on the storefront',
+          sub: 'What is not in the product, said where products are sold' },
+      ] },
+  ],
+  'modest-resell': [
+    { t: 1, step: 3, path: '/', title: 'Two-sided, from the idea up',
+      anchors: [
+        { text: ['Turn Your Closet into Cash'], up: 1, bracket: true, lab: 'The seller journey',
+          sub: 'List it, share it, earn — supply side designed as its own product' },
+        { text: ['Give your closet a second chance'], lab: 'One catalogue for buyers',
+          sub: 'Women, men, kids and infants merged into a single shop' },
+      ] },
+  ],
+  'lilac-and-creme': [
+    { t: 1, step: 5, path: '/', title: 'Retail and corporate in one store',
+      anchors: [
+        { text: ['Corporate Gifting Portal'], up: 1, bracket: true, lab: 'Corporate gifting portal',
+          sub: 'Batch orders handled beside the retail range' },
+        { text: ['Custom Logo Box'], lab: 'Custom configurations',
+          sub: 'Logo boxes and variants wired into inventory' },
+      ] },
+  ],
+  'mads-digital-sat': [
+    { t: 1, step: 2, path: '/', title: 'Restructured around the evidence',
+      anchors: [
+        { text: ['MENTORS TẠI MADS', 'Giáo viên'], up: 1, bracket: true, lab: 'Mentors up front',
+          sub: 'Subject specialists treated as primary content, not an About page' },
+        { text: ['Tài liệu', 'SAT Test'], up: 1, lab: 'Free material as the front door',
+          sub: 'Practice tests, ebooks and past papers, structured for the team to publish' },
+      ] },
+  ],
+  'alpine-initiatives': [
+    { t: 1, step: 1, path: '/', title: 'The work does the fundraising',
+      anchors: [
+        { find: 'a[href*="programs"], a[href*="projects"]', up: 1, bracket: true, lab: 'Programmes at the centre',
+          sub: 'Content and navigation reorganised around the work itself' },
+        { find: 'a[href*="donate"]', lab: 'Donate always in reach',
+          sub: 'Reachable on every page without shouting over the programmes' },
+      ] },
+  ],
+  'fours-tower-danang': [
+    { t: 1, step: 1, path: '/', title: 'One page, in the buyer\u2019s order',
+      anchors: [
+        { text: ['Tiện ích'], up: 1, bracket: true, lab: 'The question list, in order',
+          sub: 'Overview, location, floor plans, amenities, developer' },
+        { text: ['Đăng ký tư vấn'], up: 1, lab: 'Lead capture on every section',
+          sub: 'Registration form and hotline never more than a scroll away' },
+      ] },
+  ],
+  'qone': [
+    { t: 1, step: 3, path: '/', title: 'Software that makes the call',
+      anchors: [
+        { text: ['Ranked by money'], up: 1, bracket: true, lab: 'Ranked, not displayed',
+          sub: 'Risk and money first, so the system proposes and you correct it' },
+        { text: ['Six health chapters'], up: 1, lab: 'One spine, six chapters',
+          sub: 'Projects, people, time and money reading the same records' },
+      ] },
+  ],
+  'qsortby': [
+    { t: 1, step: 1, path: '', title: 'Published, reviewed, maintained',
+      anchors: [
+        { text: ['Auto sort your collection'], up: 1, bracket: true, lab: 'Sorting on real signals',
+          sub: 'Behaviour, sales, CTR and top sellers, continuously' },
+        { text: ['$29'], up: 1, lab: 'Live on the App Store',
+          sub: 'Free tier plus paid plans, through Shopify review' },
+      ] },
+  ],
   'online-carpets': [
     { t: 1, step: 4, path: '/', title: 'A Magento store, re-implemented on Shopify',
       anchors: [
@@ -69,7 +168,20 @@ const TEARDOWNS = {
   ],
 };
 
-const URLS = { 'online-carpets': 'https://www.onlinecarpets.co.uk' };
+const URLS = {
+  'online-carpets': 'https://www.onlinecarpets.co.uk',
+  'herman-miller-uk': 'https://ukstore.hermanmiller.com',
+  'mai-anh-home': 'https://maianhhome.com',
+  'pottery-and-decor': 'https://potteryanddecor.com',
+  'meaningful-mantras': 'https://meaningfulmantras.com',
+  'modest-resell': 'https://modestresell.com',
+  'lilac-and-creme': 'https://lilacandcreme.com',
+  'mads-digital-sat': 'https://mads.edu.vn',
+  'alpine-initiatives': 'https://www.alpineinitiatives.org',
+  'fours-tower-danang': 'https://fours-towerdanang.com.vn',
+  'qone': 'https://qone.work',
+  'qsortby': 'https://apps.shopify.com/qsortby',
+};
 const SITE_GATES = { 'drink-tavlin': ['a.js-confirm-enter'] };
 
 /* ------------------------------------------------------------------ the slide */
@@ -200,6 +312,16 @@ async function locate(page, spec) {
       if (!best) return null;
       let n = best.node;
       for (let i = 0; i < (up || 0) && n.parentElement; i++) n = n.parentElement;
+      // Guard: never ring an element that renders no text, or one so large it is
+      // really the whole page — both read as a mistake rather than a highlight.
+      const rect = n.getBoundingClientRect();
+      const vis = (n.innerText || '').trim();
+      const area = rect.width * rect.height;
+      if (!vis || area > window.innerWidth * window.innerHeight * 0.55) {
+        n = best.node;
+        const r2 = n.getBoundingClientRect();
+        if (!(n.innerText || '').trim() || r2.width * r2.height > window.innerWidth * window.innerHeight * 0.55) return null;
+      }
       n.scrollIntoView({ block: 'center' });
       return n;
     }, { needle: phrase, up: spec.up || 0 });

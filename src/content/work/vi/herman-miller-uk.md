@@ -21,7 +21,7 @@ steps:
     p: 'Thay vì thiết kế xong mới đối chiếu với guideline, chúng tôi coi nhận diện là ràng buộc ngay từ bố cục đầu tiên. Với thương hiệu ở tầm này, "gần đúng" đồng nghĩa với bị từ chối.'
   - h: 'Dựng danh mục theo cách người ta thật sự mua'
     p: 'Không ai duyệt nội thất văn phòng theo bảng chữ cái — họ đến vì cần một chiếc ghế cho bàn, một chiếc bàn cho phòng, hay một góc chơi game. Cấu trúc danh mục và điều hướng được dựng quanh ghế ngồi, bàn, đèn và phụ kiện, để dải sản phẩm vẫn dễ đi dù lớn đến đâu.'
-    img: '/assets/work/steps/herman-miller-uk-2.webp'
+    img: '/assets/work/steps/herman-miller-uk-t1.webp'
   - h: 'Cấu hình sản phẩm, bộ sưu tập và biến thể cho chuẩn'
     p: 'Một chiếc Aeron là ma trận của kích cỡ, chất liệu, khung và tuỳ chọn. Làm đúng phần biến thể là khác biệt giữa một trang sản phẩm bán được và một trang sinh ra phiếu hỗ trợ.'
   - h: 'Một cửa hàng cho nhiều thị trường'
