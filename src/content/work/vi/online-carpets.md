@@ -21,7 +21,6 @@ steps:
     p: 'Chúng tôi tư vấn phương án và vẽ bản đồ di trú trước — cái gì chuyển nguyên, cái gì phải tái cấu trúc, cái gì lặng lẽ được sửa trên đường đi. Mọi cuộc chuyển nền tảng thất bại đều hỏng ngay ở bước này.'
   - h: 'Nắn lại danh mục theo cách người ta mua sàn nhà'
     p: 'Cửa hàng được tổ chức theo chất liệu — thảm, vinyl, laminate, LVT, sàn gỗ kỹ thuật, lót sàn và phụ kiện — và lọc được theo đúng thuộc tính quyết định việc mua, gồm màu sắc, chất liệu và khổ cuộn.'
-    img: '/assets/work/steps/online-carpets-t2.webp'
   - h: 'Mang cả khách hàng và nội dung sang, không chỉ sản phẩm'
     p: 'Sản phẩm, danh mục, khách hàng và nội dung đều được di chuyển. Một tài khoản ngừng hoạt động vào ngày lên sóng làm mất nhiều niềm tin hơn mức một giao diện mới có thể mua lại.'
     img: '/assets/work/steps/online-carpets-t3.webp'

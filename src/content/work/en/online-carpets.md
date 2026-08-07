@@ -21,7 +21,6 @@ steps:
     p: 'We consulted on the approach and mapped the migration first — what moves, what gets restructured, what quietly gets fixed on the way. Every replatform that goes wrong went wrong at this stage.'
   - h: 'Reshaped the catalogue for how flooring is bought'
     p: 'The store is organised by material — carpets, vinyl, laminate, luxury vinyl tiles, engineered wood, underlay and accessories — and filterable by the attributes that actually decide a purchase, including colour, material and roll width.'
-    img: '/assets/work/steps/online-carpets-t2.webp'
   - h: 'Carried customers and content across, not just products'
     p: 'Products, categories, customers and content were all migrated. An account that stops working on launch day costs more trust than a design refresh can buy back.'
     img: '/assets/work/steps/online-carpets-t3.webp'

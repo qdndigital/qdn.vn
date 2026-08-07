@@ -26,7 +26,7 @@ steps:
     p: 'Tiếng Do Thái không phải một file dịch. Điều hướng, bố cục sản phẩm và biểu mẫu đều phải lật chiều, và từng thành phần phải được kiểm tra theo chiều đó thay vì mặc định là chạy được.'
   - h: 'Nối thanh toán và tiền tệ theo đúng người mua'
     p: 'Cổng thanh toán được tích hợp cho thị trường Israel, và cửa hàng hiện hiển thị giá theo ILS cùng EUR, GBP, AUD, JPY và CAD cho khách quốc tế.'
-    img: '/assets/work/steps/drink-tavlin-4.webp'
+    img: '/assets/work/steps/drink-tavlin-t1.webp'
   - h: 'Tiếp tục cải tiến sau khi lên sóng'
     p: 'Trang chủ và cách hiển thị sản phẩm đã được làm lại kể từ khi cửa hàng chạy — hồ sơ dự án là điểm bắt đầu, không phải vạch đích.'
 outcome: 'Cửa hàng đang chạy tại drinktavlin.com: có cổng kiểm tra tuổi, sẵn sàng đa ngôn ngữ, hiển thị sáu loại tiền tệ, với dải sản phẩm theo mùa và câu chuyện thương hiệu ở cùng một nơi.'

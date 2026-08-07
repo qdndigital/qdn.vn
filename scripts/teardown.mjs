@@ -4,8 +4,7 @@
  * A teardown is a real screen, marked up hard enough that it becomes the
  * explanation. Annotation IS the diagram: numbered pins on the elements, callout
  * cards parked in a gutter and joined by elbow connectors, region brackets for a
- * whole zone, flow arrows for a journey, and a zoom inset when the detail is too
- * small to read. Method borrowed from ~/qdn/tools/user-guide; tokens are QDN's.
+ * whole zone, and flow arrows for a journey. Method borrowed from ~/qdn/tools/user-guide; tokens are QDN's.
  *
  * Playbook rules this obeys (annotate/CONTENT_PLAYBOOK.md):
  *  - show the DECISION, not the screen
@@ -38,7 +37,7 @@ mkdirSync(outDir, { recursive: true });
 /**
  * Each teardown: which page, which step of the case it illustrates, and the
  * anchors. `text`/`find` locate the element; `say` is the callout (problem → what
- * we did); `zoom` adds the magnifier; `bracket` outlines the whole zone instead
+ * we did); `bracket` outlines the whole zone instead
  * of a tight ring.
  */
 const TEARDOWNS = {
@@ -141,6 +140,16 @@ const TEARDOWNS = {
           sub: 'Free tier plus paid plans, through Shopify review' },
       ] },
   ],
+  'drink-tavlin': [
+    { t: 1, step: 4, path: '/', title: 'Built for the market it sells in',
+      click: ['localization-form button, .currency-selector, [aria-label*="currency" i]'],
+      anchors: [
+        { text: ['ILS'], up: 1, bracket: true, lab: 'Six currencies',
+          sub: 'ILS for home, EUR, GBP, AUD, JPY and CAD for everyone else' },
+        { text: ['Shop all'], lab: 'Seasonal range as a collection',
+          sub: 'A new gin every season, merchandised as an event' },
+      ] },
+  ],
   'online-carpets': [
     { t: 1, step: 4, path: '/', title: 'A Magento store, re-implemented on Shopify',
       anchors: [
@@ -169,6 +178,7 @@ const TEARDOWNS = {
 };
 
 const URLS = {
+  'drink-tavlin': 'https://www.drinktavlin.com',
   'online-carpets': 'https://www.onlinecarpets.co.uk',
   'herman-miller-uk': 'https://ukstore.hermanmiller.com',
   'mai-anh-home': 'https://maianhhome.com',
@@ -233,16 +243,6 @@ const slide = (dataUri, host, title, shot, marks) => {
     return `<span class="pin" style="left:${b.x - 24}px; top:${b.y - 24}px">${String(m.n).padStart(2, '0')}</span>`;
   }).join('');
 
-  const insets = cards.filter((m) => m.zoom && m.box.h * k < 34).map((m) => {
-    const cx = (m.box.x + m.box.w / 2) * k, cy = (m.box.y + m.box.h / 2) * k;
-    const IW = 260, IH = 120, Z = 2.4;
-    const left = PAD + Math.min(Math.max(cx - IW / 2, 12), SHOT_W - IW - 12);
-    const top = PAD + (cy < shotH / 2 ? Math.min(cy + 70, shotH - IH - 12) : Math.max(cy - IH - 70, 12));
-    return `<div class="inset" style="left:${left}px; top:${top}px; width:${IW}px; height:${IH}px;
-      background-size:${SHOT_W * Z}px ${shotH * Z}px;
-      background-position:${-(cx * Z - IW / 2)}px ${-(cy * Z - IH / 2)}px"></div>`;
-  }).join('');
-
   return `<!doctype html><html><head><meta charset="utf-8"><style>
   :root{ --paper:#e9e7e2; --surface:#f5f4f0; --ink:#1c1b18; --ink-2:#585550; --muted:#6b675e;
          --line:#d3cfc6; --accent:#e2622a; --mono:'JetBrains Mono','SF Mono',Menlo,ui-monospace,monospace; }
@@ -278,7 +278,7 @@ const slide = (dataUri, host, title, shot, marks) => {
          font-size:11px; letter-spacing:.1em; color:var(--muted); }
 </style></head><body>
   <div class="win"><img src="${dataUri}" /></div>
-  ${pins}${insets}
+  ${pins}
   <svg class="ov">${shapes}</svg>
   ${cardHtml}
   <div class="head"><div class="lab">// teardown</div><h2>${title}</h2></div>
@@ -312,6 +312,13 @@ async function locate(page, spec) {
       if (!best) return null;
       let n = best.node;
       for (let i = 0; i < (up || 0) && n.parentElement; i++) n = n.parentElement;
+      // An inline element that wraps returns a line-box rect covering empty space to
+      // the right of its text — that is why rings kept landing on blank paragraph.
+      // Use the densest client rect instead of the bounding box.
+      const rects = [...n.getClientRects()].filter((r) => r.width > 12 && r.height > 8);
+      window.__qdnRect = rects.length > 1
+        ? rects.reduce((a, b) => (a.width * a.height >= b.width * b.height ? a : b))
+        : (rects[0] || n.getBoundingClientRect());
       // Guard: never ring an element that renders no text, or one so large it is
       // really the whole page — both read as a mistake rather than a highlight.
       const rect = n.getBoundingClientRect();
@@ -326,7 +333,13 @@ async function locate(page, spec) {
       return n;
     }, { needle: phrase, up: spec.up || 0 });
     const el = h.asElement();
-    if (el) { await page.waitForTimeout(600); return el; }
+    if (el) {
+      await page.waitForTimeout(600);
+      el.__qdnRect = await page.evaluate(() => {
+        const r = window.__qdnRect; return r ? { x: r.x, y: r.y, width: r.width, height: r.height } : null;
+      });
+      return el;
+    }
   }
   return null;
 }
@@ -377,12 +390,22 @@ for (const [slug, sheets] of Object.entries(TEARDOWNS)) {
       await page.waitForTimeout(3400);
       await clearInterstitials(page, slug);
 
+      // Some evidence only exists after interaction — a currency menu, an
+      // accordion, a mega-nav. Open it before we look for the anchors.
+      for (const c of sheet.click ?? []) {
+        const t = c.startsWith('.') || c.startsWith('#') || c.startsWith('[') || c.includes('(')
+          ? page.locator(c).first()
+          : page.getByText(new RegExp(c.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i')).first();
+        await t.click({ timeout: 5000 }).catch(() => {});
+        await page.waitForTimeout(1200);
+      }
+
       // Resolve every anchor first; the frame must cover all of them.
       const found = [];
       for (const a of sheet.anchors) {
         const el = await locate(page, a);
         if (!el) { console.log(`  · ${name}: anchor not found — ${JSON.stringify(a.text ?? a.find)}`); continue; }
-        const box = await el.boundingBox();
+        const box = el.__qdnRect ?? (await el.boundingBox());
         if (box && box.width > 10 && box.height > 8) found.push({ ...a, box });
       }
       if (found.length < 2) { console.log(`✗ ${name} — only ${found.length} anchor(s), skipped`); await page.close(); continue; }

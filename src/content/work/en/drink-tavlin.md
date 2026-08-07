@@ -26,7 +26,7 @@ steps:
     p: 'Hebrew is not a translation file. Navigation, product layouts and forms all mirror, and every component had to be checked in that direction rather than assumed to work.'
   - h: 'Wired payment and currency for who actually buys'
     p: 'Payment gateways were integrated for the Israeli market, and the storefront now prices in ILS alongside EUR, GBP, AUD, JPY and CAD for the people who find them from abroad.'
-    img: '/assets/work/steps/drink-tavlin-4.webp'
+    img: '/assets/work/steps/drink-tavlin-t1.webp'
   - h: 'Kept improving after launch'
     p: 'The homepage and the way products are displayed have been reworked since the store went live — the archive record is a starting point, not the finish line.'
 outcome: 'The store is live at drinktavlin.com: age-gated, bilingual-capable, priced in six currencies, with the seasonal range and the distillery''s story in one place.'
