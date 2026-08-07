@@ -26,7 +26,6 @@ steps:
     p: 'Một chiếc Aeron là ma trận của kích cỡ, chất liệu, khung và tuỳ chọn. Làm đúng phần biến thể là khác biệt giữa một trang sản phẩm bán được và một trang sinh ra phiếu hỗ trợ.'
   - h: 'Một cửa hàng cho nhiều thị trường'
     p: 'Cửa hàng hiển thị theo bảng Anh cho thị trường Anh và chuyển sang euro, krona, yên và đô la Úc cho các thị trường khác — tổng cộng mười bốn — để người mua quốc tế thấy mức giá họ hiểu.'
-    img: '/assets/work/steps/herman-miller-uk-4.webp'
   - h: 'Giữ bản responsive ở cùng một chuẩn'
     p: 'Một thương hiệu thiết kế bị chấm trên điện thoại khắt khe không kém màn hình 27 inch. Bản responsive được hoàn thiện, không phải làm cho có.'
 outcome: 'Cửa hàng đang chạy tại ukstore.hermanmiller.com, phục vụ Anh và mười ba thị trường khác theo tiền tệ bản địa, với đầy đủ dải ghế ngồi, bàn, đèn và phụ kiện.'

@@ -26,7 +26,6 @@ steps:
     p: 'An Aeron is a matrix of size, finish, frame and options. Getting variant configuration right is the difference between a product page that sells and one that generates support tickets.'
   - h: 'Built one storefront for many markets'
     p: 'The store presents in pounds for the UK and switches to euros, kroner, yen and Australian dollars for the markets it also serves — fourteen in total — so international buyers see prices they understand.'
-    img: '/assets/work/steps/herman-miller-uk-4.webp'
   - h: 'Held the responsive build to the same standard'
     p: 'A design brand is judged on a phone as harshly as on a 27-inch display. The responsive build was finished, not approximated.'
 outcome: 'The store is live at ukstore.hermanmiller.com, serving the UK and thirteen further markets in local currency, with the full seating, desks, lighting and accessories range.'
