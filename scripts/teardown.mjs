@@ -43,28 +43,29 @@ mkdirSync(outDir, { recursive: true });
  */
 const TEARDOWNS = {
   'online-carpets': [
-    {
-      t: 1, step: 2, path: '/', band: 'top', title: 'The homepage does the qualifying',
+    { t: 1, step: 4, path: '/', title: 'A Magento store, re-implemented on Shopify',
       anchors: [
-        { text: ['Underlay & Accessories', 'Artificial Grass'], bracket: true,
-          say: 'A flooring range this deep drowns a normal menu — so the whole catalogue is grouped by material, the way a buyer already thinks about it.' },
-        { text: ['FREE Flooring Samples', 'Lowest Price Guaranteed'], bracket: true,
-          say: 'Nobody buys flooring they have not touched — so samples, the price promise and 40,000 reviews sit above the fold, not on an About page.' },
-        { text: ['0800 9705 705'], zoom: true,
-          say: 'Big-ticket flooring still closes on the phone — the number stays in the header on every page rather than behind a Contact link.' },
-      ],
-    },
-    {
-      t: 2, step: 2, path: '/collections/carpets', band: 'top', title: 'Filters built for how flooring is sold',
+        { find: 'ul:has(a[href*="/collections/lvt-flooring"]), nav:has(a[href*="/collections/lvt-flooring"])', bracket: true, lab: 'Store structure rebuilt',
+          sub: 'Six material ranges, navigation customised around the new catalogue' },
+        { text: ['Lowest Price Guaranteed'], up: 3, bracket: true, lab: 'Content carried across',
+          sub: 'Price promise, free samples and 40,000 reviews, kept in place' },
+        { find: 'a[href^="tel:"]', lab: 'Support kept visible',
+          sub: 'The sales line stays in the header on every page' },
+      ] },
+    { t: 2, step: 2, path: '/collections/carpets-by-colour', title: 'Merchandised three ways, not one',
       anchors: [
-        { text: ['Colour'], bracket: true,
-          say: 'People choose flooring by look before spec — so colour leads the filters, as swatches rather than a word list.' },
-        { text: ['Width', 'Material'], zoom: true,
-          say: 'Carpet is sold by roll width, not by dress size — a standard size filter would be useless here, so width is a first-class facet.' },
-        { text: ['Sort by', 'Newest to Oldest'],
-          say: 'A catalogue this long breaks a default theme — sorting and pagination were tuned so the range stays walkable to the last page.' },
-      ],
-    },
+        { find: 'a[href*="grey-carpets"]', up: 1, bracket: true, lab: 'Eleven colour collections',
+          sub: 'Shoppers who know the colour but not the brand get their own route in' },
+        { find: 'a[href*="carpets-by-room"], a[href*="bedroom-carpets"]', up: 1, bracket: true, lab: 'Material × colour × room',
+          sub: 'Three axes across one catalogue, each a real landing page' },
+      ] },
+    { t: 3, step: 3, path: '/collections/grey-carpets', title: 'The catalogue that had to survive the move',
+      anchors: [
+        { find: 'a[href*="grey-carpets"], form[action*="grey-carpets"]', up: 2, bracket: true, lab: 'Faceted browsing',
+          sub: 'Filtering on the attributes that decide a flooring purchase' },
+        { text: ['m²'], lab: 'Priced by area',
+          sub: 'Flooring sells per square metre — the product data was reshaped, not copied' },
+      ] },
   ],
 };
 
@@ -84,7 +85,7 @@ const slide = (dataUri, host, title, shot, marks) => {
   // Cards stack in the gutter, ordered by the vertical position of their element.
   const sorted = marks.map((m, i) => ({ ...m, n: i + 1, cy: (m.box.y + m.box.h / 2) * k }))
     .sort((a, b) => a.cy - b.cy);
-  const CARD_H = 132, GAP = 18;
+  const CARD_H = 124, GAP = 20;
   let cursor = PAD;
   const cards = sorted.map((m) => {
     const top = Math.max(cursor, Math.min(m.cy + PAD - CARD_H / 2, H - PAD - CARD_H - 96));
@@ -112,7 +113,7 @@ const slide = (dataUri, host, title, shot, marks) => {
   const cardHtml = cards.map((m) => `
     <div class="card" style="top:${m.top}px">
       <span class="n">${String(m.n).padStart(2, '0')}</span>
-      <p>${m.say}</p>
+      <div><h3>${m.lab}</h3><p>${m.sub}</p></div>
     </div>`).join('');
 
   const pins = cards.map((m) => {
@@ -156,7 +157,8 @@ const slide = (dataUri, host, title, shot, marks) => {
          display:flex; gap:13px; box-shadow:0 18px 36px -18px rgba(28,27,24,.5); }
   .card .n{ flex:none; width:28px; height:28px; border-radius:7px; background:var(--accent); color:#fff;
             display:grid; place-items:center; font-family:var(--mono); font-size:12px; font-weight:600; }
-  .card p{ font-size:15.5px; line-height:1.42; letter-spacing:-.005em; color:rgba(233,231,226,.94); }
+  .card h3{ font-size:21px; letter-spacing:-.022em; line-height:1.15; color:#fff; }
+  .card p{ font-size:14.5px; line-height:1.4; margin-top:7px; color:rgba(233,231,226,.72); }
   .head{ position:absolute; left:${PAD}px; bottom:34px; z-index:8; }
   .head .lab{ font-family:var(--mono); font-size:11px; letter-spacing:.13em; text-transform:uppercase; color:var(--muted); }
   .head h2{ font-size:26px; letter-spacing:-.025em; margin-top:7px; color:var(--ink); }
@@ -178,27 +180,31 @@ async function locate(page, spec) {
     const c = page.locator(spec.find).first();
     if (await c.isVisible().catch(() => false)) return c;
   }
+  // getByText resolves to the OUTERMOST match, which rings whole containers — so we
+  // sweep the DOM for the smallest rendered node carrying the phrase, then climb
+  // `up` levels when we want the surrounding zone instead of the element.
   const phrases = spec.text ? (Array.isArray(spec.text) ? spec.text : [spec.text]) : [];
-  for (const p of phrases) {
-    const rx = new RegExp(p.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i');
-    const c = page.getByText(rx).first();
-    if (await c.isVisible().catch(() => false)) return c;
-  }
-  for (const p of phrases) {
-    const h = await page.evaluateHandle((needle) => {
+  for (const phrase of phrases) {
+    const h = await page.evaluateHandle(({ needle, up }) => {
       const want = needle.toLowerCase();
       let best = null;
       for (const node of document.querySelectorAll('body *')) {
+        if (node.children.length > 6) continue;
         const t = (node.textContent || '').replace(/\s+/g, ' ').trim().toLowerCase();
         if (!t.includes(want)) continue;
         const r = node.getBoundingClientRect();
-        if (r.width < 12 || r.height < 10) continue;
-        if (!best || r.width * r.height < best.area) best = { node, area: r.width * r.height };
+        if (r.width < 14 || r.height < 10 || r.top > window.innerHeight) continue;
+        const area = r.width * r.height;
+        if (!best || area < best.area) best = { node, area };
       }
-      return best ? best.node : null;
-    }, p);
+      if (!best) return null;
+      let n = best.node;
+      for (let i = 0; i < (up || 0) && n.parentElement; i++) n = n.parentElement;
+      n.scrollIntoView({ block: 'center' });
+      return n;
+    }, { needle: phrase, up: spec.up || 0 });
     const el = h.asElement();
-    if (el) return el;
+    if (el) { await page.waitForTimeout(600); return el; }
   }
   return null;
 }
