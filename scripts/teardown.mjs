@@ -153,9 +153,9 @@ const TEARDOWNS = {
   'online-carpets': [
     { t: 1, step: 4, path: '/', title: 'A Magento store, re-implemented on Shopify',
       anchors: [
-        { find: 'ul:has(a[href*="/collections/lvt-flooring"]), nav:has(a[href*="/collections/lvt-flooring"])', bracket: true, lab: 'Store structure rebuilt',
-          sub: 'Six material ranges, navigation customised around the new catalogue' },
-        { text: ['Lowest Price Guaranteed'], up: 3, bracket: true, lab: 'Content carried across',
+        { find: 'a[href*="/collections/accessories"]', up: 2, bracket: true, lab: 'A route in per range',
+          sub: 'Carpets, vinyl, laminate, LVT, wood and underlay each get their own entry point' },
+        { text: ['Lowest Price Guaranteed'], up: 2, bracket: true, lab: 'Content carried across',
           sub: 'Price promise, free samples and 40,000 reviews, kept in place' },
         { find: 'a[href^="tel:"]', lab: 'Support kept visible',
           sub: 'The sales line stays in the header on every page' },
@@ -219,11 +219,16 @@ const slide = (dataUri, host, title, shot, marks) => {
   const shapes = cards.map((m) => {
     const b = { x: PAD + m.box.x * k, y: PAD + m.box.y * k, w: m.box.w * k, h: m.box.h * k };
     const pad = m.bracket ? 10 : 6;
-    const ring = `<rect x="${b.x - pad}" y="${b.y - pad}" width="${b.w + pad * 2}" height="${b.h + pad * 2}"
+    // Clamp to the captured frame — a ring that runs off the screenshot reads as a bug.
+    const rx0 = Math.max(PAD + 3, b.x - pad);
+    const ry0 = Math.max(PAD + 3, b.y - pad);
+    const rx1 = Math.min(PAD + SHOT_W - 3, b.x + b.w + pad);
+    const ry1 = Math.min(PAD + shotH - 3, b.y + b.h + pad);
+    const ring = `<rect x="${rx0}" y="${ry0}" width="${Math.max(rx1 - rx0, 24)}" height="${Math.max(ry1 - ry0, 18)}"
         rx="${m.bracket ? 12 : 8}" fill="none" stroke="#e2622a" stroke-width="2.5"
         ${m.bracket ? 'stroke-dasharray="10 7"' : ''} />`;
     // elbow: out of the element's right edge, across, into the card
-    const sx = b.x + b.w + pad, sy = b.y + b.h / 2;
+    const sx = rx1, sy = (ry0 + ry1) / 2;
     const ty = m.top + CARD_H / 2, tx = gx + 26;
     const midX = Math.max(Math.min(sx + 34, gx - 20), PAD + 12);
     const elbow = `<path d="M ${Math.min(sx, midX)} ${sy} H ${midX} V ${ty} H ${tx}" fill="none" stroke="#e2622a"
@@ -239,8 +244,20 @@ const slide = (dataUri, host, title, shot, marks) => {
     </div>`).join('');
 
   const pins = cards.map((m) => {
-    const b = { x: PAD + m.box.x * k, y: PAD + m.box.y * k };
-    return `<span class="pin" style="left:${b.x - 24}px; top:${b.y - 24}px">${String(m.n).padStart(2, '0')}</span>`;
+    const bx = Math.max(PAD + 3, PAD + m.box.x * k);
+    const by = Math.max(PAD + 3, PAD + m.box.y * k);
+    // Park the pin in the margin left of the ring when there is room, else above it,
+    // so it never lands on the evidence it is pointing at.
+    const left = bx - PAD >= 44 ? bx - 42 : bx - 6;
+    const top = by - PAD >= 40 ? by - 40 : by + 4;
+    return { left: Math.max(6, left), top: Math.max(6, top), n: m.n };
+  });
+  const placed = [];
+  const pinHtml = pins.map((p) => {
+    // Nudge downward until this pin clears the ones already placed.
+    while (placed.some((q) => Math.abs(q.left - p.left) < 40 && Math.abs(q.top - p.top) < 40)) p.top += 40;
+    placed.push(p);
+    return `<span class="pin" style="left:${p.left}px; top:${p.top}px">${String(p.n).padStart(2, '0')}</span>`;
   }).join('');
 
   return `<!doctype html><html><head><meta charset="utf-8"><style>
@@ -278,7 +295,7 @@ const slide = (dataUri, host, title, shot, marks) => {
          font-size:11px; letter-spacing:.1em; color:var(--muted); }
 </style></head><body>
   <div class="win"><img src="${dataUri}" /></div>
-  ${pins}
+  ${pinHtml}
   <svg class="ov">${shapes}</svg>
   ${cardHtml}
   <div class="head"><div class="lab">// teardown</div><h2>${title}</h2></div>
@@ -289,8 +306,33 @@ const slide = (dataUri, host, title, shot, marks) => {
 /* ------------------------------------------------------------- locate helper */
 async function locate(page, spec) {
   if (spec.find) {
-    const c = page.locator(spec.find).first();
-    if (await c.isVisible().catch(() => false)) return c;
+    // .first() often resolves to a hidden mega-menu copy sitting at the top-left.
+    // Take the largest match that is actually visible in the viewport, and apply
+    // `up` here too — CSS anchors used to bypass it entirely.
+    const h = await page.evaluateHandle(({ sel, up }) => {
+      let best = null;
+      for (const n of document.querySelectorAll(sel)) {
+        const r = n.getBoundingClientRect();
+        if (r.width < 12 || r.height < 8) continue;
+        if (r.bottom < 0 || r.top > window.innerHeight) continue;
+        const area = r.width * r.height;
+        if (!best || area > best.area) best = { node: n, area };
+      }
+      if (!best) return null;
+      let n = best.node;
+      for (let i = 0; i < (up || 0) && n.parentElement; i++) n = n.parentElement;
+      const rect = n.getBoundingClientRect();
+      if (rect.width * rect.height > window.innerWidth * window.innerHeight * 0.55) return null;
+      window.__qdnRect = { x: rect.x, y: rect.y, width: rect.width, height: rect.height };
+      n.scrollIntoView({ block: 'center' });
+      return n;
+    }, { sel: spec.find, up: spec.up || 0 });
+    const el = h.asElement();
+    if (el) {
+      await page.waitForTimeout(600);
+      el.__qdnRect = await page.evaluate(() => window.__qdnRect ?? null);
+      return el;
+    }
   }
   // getByText resolves to the OUTERMOST match, which rings whole containers — so we
   // sweep the DOM for the smallest rendered node carrying the phrase, then climb
