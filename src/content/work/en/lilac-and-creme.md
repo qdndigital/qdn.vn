@@ -25,8 +25,10 @@ steps:
     p: 'Real-time order status tracking so the team, and the customer, are looking at the same truth at the same moment rather than at a printout from an hour ago.'
   - h: 'Tied inventory to variants that actually vary'
     p: 'Sizes, flavours and box configurations were brought into inventory and variant management, so what the site sells and what the kitchen can make stay in agreement.'
+    img: '/assets/work/steps/lilac-and-creme-4.webp'
   - h: 'Streamlined the whole processing path'
     p: 'With payment integrated and the order pipeline in one place, the order-processing workflow got shorter — which in a bakery means fewer mistakes at the point where they cost the most.'
+    img: '/assets/work/steps/lilac-and-creme-5.webp'
 outcome: 'The bakery runs on Shopify at lilacandcreme.com with a custom order-management app behind it, covering the retail range, custom logo boxes and the corporate gifting portal.'
 lesson: 'When a business is really an operation, the storefront is the easy half. Build for the people fulfilling the order and the customer experience follows.'
 deliverables:

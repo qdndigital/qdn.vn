@@ -19,6 +19,7 @@ challenge: 'Nhà bán nào cũng biết hàng bán chạy phải nằm đầu b�
 steps:
   - h: 'Chọn đúng tín hiệu dự báo được một đơn hàng'
     p: 'Chỉ nhìn doanh số là nhìn vào quá khứ. Bộ máy cân nhắc doanh số, lượt xem, tỷ lệ nhấp, chiều xu hướng và hành vi mua cùng lúc, để một sản phẩm đang lên có thể vượt qua nhà vô địch cũ trước khi hết mùa.'
+    img: '/assets/work/steps/qsortby-1.webp'
   - h: 'Làm thứ tự mang tính cá nhân, không chỉ đúng'
     p: 'Sản phẩm đầu tiên phù hợp với khách quay lại khác với người vừa bấm từ quảng cáo. QSortBy có thể cá nhân hoá thứ tự hiển thị theo từng nhóm khách thay vì dùng một bảng xếp hạng chung.'
   - h: 'Xây đúng chuẩn một ứng dụng Shopify'
@@ -27,6 +28,7 @@ steps:
     p: 'Listing, checklist Built-for-Shopify và quy trình duyệt là một nghề riêng. Chúng tôi đã đi trọn con đường đó — cũng chính là con đường chúng tôi dẫn khách hàng đi.'
   - h: 'Giữ sản phẩm sống trong thị trường'
     p: 'App chạy với gói miễn phí và các gói trả phí, được duy trì liên tục, kèm A/B testing và phân tích để nhà bán thấy việc sắp xếp có thật sự thay đổi điều gì không.'
+    img: '/assets/work/steps/qsortby-5.webp'
 outcome: 'QSortBy đang chạy trên Shopify App Store với gói miễn phí và các gói trả phí, sắp xếp bộ sưu tập thật cho nhà bán thật.'
 lesson: 'Tự phát hành app dạy cho ta những phần của nền tảng mà dự án khách hàng không bao giờ chạm tới — duyệt, thanh toán, phiên bản và hỗ trợ. Đó là lý do mảng Shopify của chúng tôi không phải phỏng đoán.'
 deliverables:

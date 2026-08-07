@@ -19,10 +19,12 @@ challenge: 'Property buyers want completely different things in a fixed order: w
 steps:
   - h: 'Structured the page as the buyer’s question list'
     p: 'Overview, location, floor plans, amenities, developer, news, contact — in the sequence a real buyer asks them, each section anchored in the navigation so nobody has to scroll hunting.'
+    img: '/assets/work/steps/fours-tower-danang-1.webp'
   - h: 'Made the location argument visually'
     p: 'For a Da Nang tower, position is the pitch. The location section is built to make the map do the persuading rather than a paragraph about convenience.'
   - h: 'Put the floor plans where the decision is made'
     p: 'Layouts and unit types are presented as their own section, because that is the point where interest turns into a specific enquiry about a specific apartment.'
+    img: '/assets/work/steps/fours-tower-danang-3.webp'
   - h: 'Designed for the phone first'
     p: 'Property links are shared in messaging apps and opened on phones. The registration form and the hotline sit within thumb reach the whole way down.'
 outcome: 'The landing page runs at fours-towerdanang.com.vn with the full sales story — overview, location, amenities, floor plans and developer — and a registration form on every section.'

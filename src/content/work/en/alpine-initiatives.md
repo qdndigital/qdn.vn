@@ -19,10 +19,12 @@ challenge: 'A non-profit site carries an unusual load: it has to explain program
 steps:
   - h: 'Reorganised around programmes and stories'
     p: 'Content structure and navigation were rebuilt so programmes and projects sit at the centre, with the journal running alongside as live evidence that the work is ongoing rather than historical.'
+    img: '/assets/work/steps/alpine-initiatives-1.webp'
   - h: 'Redesigned the interface around the imagery'
     p: 'For an outdoor organisation the photography is the argument. The redesign gives it room instead of cropping it into a template.'
   - h: 'Made the donate and shop paths reachable, not loud'
     p: 'Donate and shop are always within reach in the navigation, so a convinced visitor never has to hunt — but the work stays the first thing anyone meets.'
+    img: '/assets/work/steps/alpine-initiatives-3.webp'
   - h: 'Optimised performance and page-load speed'
     p: 'An image-led site on a slow connection is an empty site. Performance and load speed were part of the delivery, not a later fix.'
   - h: 'Upgraded the CMS so the team can publish'

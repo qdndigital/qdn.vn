@@ -29,7 +29,9 @@ const work = defineCollection({
     summary: z.string(),                // one line for the archive row
     headline: z.string(),               // the case-study H1 — what actually happened
     challenge: z.string(),              // the tension, 2–3 sentences
-    steps: z.array(z.object({ h: z.string(), p: z.string() })),  // how we did it
+    // How we did it. `img` is an optional Guide Studio frame (scripts/guide-studio.mjs)
+    // showing the part of the shipped site that demonstrates the step.
+    steps: z.array(z.object({ h: z.string(), p: z.string(), img: z.string().nullable().default(null) })),
     outcome: z.string(),                // what runs today
     lesson: z.string(),                 // the expertise takeaway
     deliverables: z.array(z.string()),

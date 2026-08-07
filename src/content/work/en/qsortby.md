@@ -19,6 +19,7 @@ challenge: 'Every merchant knows their best sellers should be at the top of a co
 steps:
   - h: 'Picked the signals that actually predict a sale'
     p: 'Sales volume alone is a lagging indicator. The engine weighs sales, views, click-through rate, trend direction and buying behaviour together, so a rising product can overtake a historical winner before the season ends.'
+    img: '/assets/work/steps/qsortby-1.webp'
   - h: 'Made the order personal, not just correct'
     p: 'The right first product is different for a returning customer than for someone arriving from an ad. QSortBy can personalise display order per customer segment rather than serving one global ranking.'
   - h: 'Built it as a proper Shopify app'
@@ -27,6 +28,7 @@ steps:
     p: 'Listing, the Built-for-Shopify checklist and the review process are their own discipline. We took the app through all of it — which is the same path we take clients through.'
   - h: 'Kept it in the market'
     p: 'It runs on a free tier plus paid plans and is maintained continuously, with A/B testing and analytics so merchants can see whether the sorting actually moved anything.'
+    img: '/assets/work/steps/qsortby-5.webp'
 outcome: 'QSortBy is live on the Shopify App Store with a free tier and paid plans, sorting real collections for real merchants.'
 lesson: 'Publishing your own app teaches you the parts of the platform a client project never reaches — review, billing, versioning and support. That is why our Shopify work is not guesswork.'
 deliverables:

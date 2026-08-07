@@ -23,10 +23,12 @@ steps:
     p: 'The storefront gives imagery the room a craft product needs, so the difference between a mass-produced planter and a hand-thrown one is visible before the customer reads a word.'
   - h: 'Structured 277 products so the range stays walkable'
     p: 'Categories run by object — vases and vessels, fountains, stone lanterns, furniture — with product navigation built so a wide catalogue never feels like a warehouse listing.'
+    img: '/assets/work/steps/pottery-and-decor-3.webp'
   - h: 'Wrote the store’s story into it'
     p: 'Homepage, about and content pages carry the craft argument — tradition, nature, the artisan’s hand — because for this kind of product the story is part of the specification.'
   - h: 'Built in an accessibility mode'
     p: 'The store ships an accessibility toggle with keyboard shortcuts for navigation, search, content and footer. Most storefronts treat this as optional; it costs little at build time and a great deal to retrofit.'
+    img: '/assets/work/steps/pottery-and-decor-5.webp'
 outcome: 'The store runs at potteryanddecor.com with 277 products, a custom theme, an accessibility mode and the full garden range from vessels to furniture.'
 lesson: 'For craft products, the storefront is part of the product. Space, photography and sequence are what carry a handmade price online — and accessibility is cheapest when it is designed in, not added later.'
 deliverables:
