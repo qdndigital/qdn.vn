@@ -4,7 +4,6 @@ import Base from '../../layouts/Base.astro';
 import Cta from '../Cta.astro';
 import WorkArchive from '../WorkArchive.astro';
 import WorkCards from '../WorkCards.astro';
-import StatBand from '../StatBand.astro';
 import { getLangFromUrl, useTranslations, localizePath } from '../../i18n/utils';
 import { workStats } from '../../i18n/work';
 const lang = getLangFromUrl(Astro.url);
@@ -13,17 +12,10 @@ const w = t.work;
 const L = (p: string) => localizePath(p, lang);
 
 const st = workStats(await getCollection('work'));
-const stats = [
-  { n: String(st.records), k: w.statRecords },
-  { n: String(st.countries), k: w.statCountries },
-  { n: String(st.platforms), k: w.statPlatforms },
-  { n: `${st.from}–${st.to}`, k: w.statYears },
-];
 ---
 <Base title={w.metaTitle} description={w.metaDesc}>
 <section class="phero"><div class="wrap"><div class="crumb"><a href={L('/')}>~</a> / {w.crumb}</div><h1 set:html={w.pheroH1}></h1><p>{w.pheroP}</p></div></section>
 
-<StatBand items={stats} sectionClass="sec pb-0 pt-9 md:pt-12" />
 
 <section class="sec pb-0"><div class="wrap"><div class="shead rv"><div class="spec-lab"><span class="b">—</span> {w.featLab}</div><h2 set:html={w.featH2}></h2><p>{w.featP}</p></div>
 <WorkCards featuredOnly={true} limit={4} size="lg" />
