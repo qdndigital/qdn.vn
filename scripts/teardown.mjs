@@ -72,7 +72,7 @@ const TEARDOWNS = {
       ] },
   ],
   'herman-miller-uk': [
-    { t: 1, step: 2, path: '/', title: 'A design institution, on Shopify',
+    { t: 1, step: 2, path: '/', title: 'A design institution, on Shopify', auto: true,
       anchors: [
         { find: NAV, bracket: true, lab: 'Category structure rebuilt',
           sub: 'Seating, desks, lighting and accessories — shopping by problem, not alphabet' },
@@ -81,7 +81,7 @@ const TEARDOWNS = {
       ] },
   ],
   'mai-anh-home': [
-    { t: 1, step: 4, path: '/', title: '2,965 products, made navigable',
+    { t: 1, step: 4, path: '/', title: '2,965 products, made navigable', auto: true,
       anchors: [
         { find: NAV, bracket: true, lab: 'Navigation by room',
           sub: 'Bathroom, tiles, kitchen and appliances — the way a renovation is planned' },
@@ -99,7 +99,7 @@ const TEARDOWNS = {
       ] },
   ],
   'meaningful-mantras': [
-    { t: 1, step: 2, path: '/', title: 'A catalogue with two axes',
+    { t: 1, step: 2, path: '/', title: 'A catalogue with two axes', auto: true,
       anchors: [
         { find: NAV, bracket: true, lab: 'Collections by size and range',
           sub: '4oz to 16oz across named collections — both routes lead somewhere' },
@@ -108,7 +108,7 @@ const TEARDOWNS = {
       ] },
   ],
   'modest-resell': [
-    { t: 1, step: 3, path: '/', title: 'Two-sided, from the idea up',
+    { t: 1, step: 3, path: '/', title: 'Two-sided, from the idea up', auto: true,
       anchors: [
         { find: NAV, bracket: true, lab: 'Two journeys, one shop',
           sub: 'Selling and buying separated in the navigation from the start' },
@@ -117,7 +117,7 @@ const TEARDOWNS = {
       ] },
   ],
   'lilac-and-creme': [
-    { t: 1, step: 5, path: '/', title: 'Retail and corporate in one store',
+    { t: 1, step: 5, path: '/', title: 'Retail and corporate in one store', auto: true,
       anchors: [
         { find: NAV, bracket: true, lab: 'Ranges and gifting together',
           sub: 'Cakes, babkas and minis beside the corporate gifting portal' },
@@ -126,7 +126,7 @@ const TEARDOWNS = {
       ] },
   ],
   'mads-digital-sat': [
-    { t: 1, step: 2, path: '/', title: 'Restructured around the evidence',
+    { t: 1, step: 2, path: '/', title: 'Restructured around the evidence', auto: true,
       anchors: [
         { find: NAV, bracket: true, lab: 'Structure before styling',
           sub: 'Programmes, mentors, results and materials each given a clear place' },
@@ -135,7 +135,7 @@ const TEARDOWNS = {
       ] },
   ],
   'alpine-initiatives': [
-    { t: 1, step: 1, path: '/', title: 'The work does the fundraising',
+    { t: 1, step: 1, path: '/', title: 'The work does the fundraising', auto: true,
       anchors: [
         { find: NAV, bracket: true, lab: 'Programmes at the centre',
           sub: 'Content and navigation reorganised around the work itself' },
@@ -144,7 +144,7 @@ const TEARDOWNS = {
       ] },
   ],
   'fours-tower-danang': [
-    { t: 1, step: 1, path: '/', title: 'One page, in the buyer\u2019s order',
+    { t: 1, step: 1, path: '/', title: 'One page, in the buyer\u2019s order', auto: true,
       anchors: [
         { find: '[class*="menu"] ul, ul[class*="menu"], header ul', bracket: true, lab: 'The question list, in order',
           sub: 'Overview, location, floor plans, amenities, developer' },
@@ -153,7 +153,7 @@ const TEARDOWNS = {
       ] },
   ],
   'drink-tavlin': [
-    { t: 1, step: 4, path: '/', title: 'Built for the market it sells in',
+    { t: 1, step: 4, path: '/', title: 'Built for the market it sells in', auto: true,
       click: ['localization-form button, .currency-selector, [aria-label*="currency" i]'],
       anchors: [
         { find: NAV, bracket: true, lab: 'A seasonal range, merchandised',
@@ -163,7 +163,7 @@ const TEARDOWNS = {
       ] },
   ],
   'qone': [
-    { t: 1, step: 3, path: '/', title: 'Software that makes the call',
+    { t: 1, step: 3, path: '/', title: 'Software that makes the call', auto: true,
       anchors: [
         { find: NAV, bracket: true, lab: 'One system, many chapters',
           sub: 'Projects, people, time and money reading the same records' },
@@ -172,7 +172,7 @@ const TEARDOWNS = {
       ] },
   ],
   'qsortby': [
-    { t: 1, step: 5, path: '', title: 'Published, reviewed, maintained',
+    { t: 1, step: 5, path: '', title: 'Published, reviewed, maintained', auto: true,
       anchors: [
         { text: ['$29'], up: 1, bracket: true, lab: 'Live on the App Store',
           sub: 'Free tier plus paid plans, through Shopify review' },
@@ -309,6 +309,45 @@ const slide = (dataUri, host, title, shot, marks) => {
 };
 
 /* ------------------------------------------------------------- locate helper */
+/**
+ * Discover the page's real structural blocks: visible, in-viewport, carrying
+ * either several links or a heading plus text, big enough to read and small
+ * enough to be a component rather than the page. Writing selectors from memory
+ * is what kept producing rings on nothing; this asks the DOM instead.
+ */
+async function discoverBlocks(page, want) {
+  return page.evaluate((want) => {
+    const vw = window.innerWidth, vh = window.innerHeight;
+    const out = [];
+    for (const n of document.querySelectorAll('nav, header, section, ul, ol, form, aside, div')) {
+      const r = n.getBoundingClientRect();
+      if (r.top < -20 || r.top > vh * 0.55) continue;   // keep blocks close enough to share one frame
+      if (r.width < vw * 0.25 || r.height < 46) continue;
+      const area = r.width * r.height;
+      if (area > vw * vh * 0.35 || area < vw * vh * 0.025) continue;
+      const links = n.querySelectorAll('a').length;
+      const text = (n.innerText || '').replace(/\s+/g, ' ').trim();
+      if (text.length < 12) continue;
+      if (links < 3 && !n.querySelector('h1,h2,h3')) continue;
+      out.push({ x: r.x, y: r.y, width: r.width, height: r.height, area, links,
+                 text: text.slice(0, 70), tag: n.tagName.toLowerCase() });
+    }
+    // Biggest first, then drop anything overlapping something already chosen.
+    out.sort((a, b) => b.area - a.area);
+    const picked = [];
+    for (const c of out) {
+      const clash = picked.some((q) => {
+        const ox = Math.max(0, Math.min(q.x + q.width, c.x + c.width) - Math.max(q.x, c.x));
+        const oy = Math.max(0, Math.min(q.y + q.height, c.y + c.height) - Math.max(q.y, c.y));
+        return ox * oy > 0.25 * Math.min(q.area, c.area);
+      });
+      if (!clash) picked.push(c);
+      if (picked.length >= want) break;
+    }
+    return picked;
+  }, want);
+}
+
 async function locate(page, spec) {
   if (spec.find) {
     // .first() often resolves to a hidden mega-menu copy sitting at the top-left.
@@ -449,7 +488,15 @@ for (const [slug, sheets] of Object.entries(TEARDOWNS)) {
 
       // Resolve every anchor first; the frame must cover all of them.
       const found = [];
-      for (const a of sheet.anchors) {
+      if (sheet.auto) {
+        const blocks = await discoverBlocks(page, sheet.anchors.length);
+        blocks.forEach((b, i) => {
+          const a = sheet.anchors[i];
+          if (a) found.push({ ...a, box: { x: b.x, y: b.y, width: b.width, height: b.height } });
+        });
+        if (blocks.length) console.log(`  ${name}: discovered ${blocks.map((b) => `${b.tag}(${b.links} links)`).join(', ')}`);
+      }
+      if (!sheet.auto) for (const a of sheet.anchors) {
         const el = await locate(page, a);
         if (!el) { console.log(`  · ${name}: anchor not found — ${JSON.stringify(a.text ?? a.find)}`); continue; }
         const box = el.__qdnRect ?? (await el.boundingBox());
