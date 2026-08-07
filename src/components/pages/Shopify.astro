@@ -3,7 +3,6 @@ import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Cta from '../Cta.astro';
 import WorkCards from '../WorkCards.astro';
-import StatBand from '../StatBand.astro';
 import { getLangFromUrl, useTranslations, localizePath } from '../../i18n/utils';
 import { workEntries, workSlug } from '../../i18n/work';
 const lang = getLangFromUrl(Astro.url);
@@ -15,13 +14,6 @@ const L = (p: string) => localizePath(p, lang);
 const all = workEntries(await getCollection('work'), lang);
 const shopify = all.filter((e) => e.data.platform === 'shopify');
 const qsortby = all.find((e) => workSlug(e) === 'qsortby');
-const countries = new Set(shopify.map((e) => e.data.country));
-const stats = [
-  { n: String(shopify.length), k: s.statStores },
-  { n: String(countries.size), k: s.statCountries },
-  { n: '3', k: s.statMigrations },
-  { n: '1', k: s.statApp },
-];
 
 // The three replatforms, each pointing at the record that proves it.
 const migrations = [
@@ -33,7 +25,6 @@ const migrations = [
 <Base title={s.metaTitle} description={s.metaDesc}>
 <section class="phero"><div class="wrap"><div class="crumb"><a href={L('/')}>~</a> / {s.crumb}</div><h1 set:html={s.pheroH1}></h1><p>{s.pheroP}</p></div></section>
 
-<StatBand items={stats} sectionClass="sec pb-0 pt-9 md:pt-12" />
 
 <section class="sec"><div class="wrap"><div class="steps">
 {s.rows.map((r) => (
