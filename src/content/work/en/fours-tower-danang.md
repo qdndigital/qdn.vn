@@ -19,7 +19,6 @@ challenge: 'Property buyers want completely different things in a fixed order: w
 steps:
   - h: 'Structured the page as the buyer’s question list'
     p: 'Overview, location, floor plans, amenities, developer, news, contact — in the sequence a real buyer asks them, each section anchored in the navigation so nobody has to scroll hunting.'
-    img: '/assets/work/steps/fours-tower-danang-t1.webp'
   - h: 'Made the location argument visually'
     p: 'For a Da Nang tower, position is the pitch. The location section is built to make the map do the persuading rather than a paragraph about convenience.'
   - h: 'Put the floor plans where the decision is made'

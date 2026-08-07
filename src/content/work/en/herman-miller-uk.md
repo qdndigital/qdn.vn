@@ -21,7 +21,6 @@ steps:
     p: 'Instead of designing and then checking against the guidelines, we treated the identity as the constraint from the first layout. For a brand at this level, "close enough" is a rejection.'
   - h: 'Structured a catalogue people shop by problem'
     p: 'Nobody browses office furniture alphabetically — they arrive needing a chair for a desk, a desk for a room, or a gaming setup. The category structure and product navigation are built around seating, desks and tables, lighting and accessories, so the range stays navigable at scale.'
-    img: '/assets/work/steps/herman-miller-uk-t1.webp'
   - h: 'Configured products, collections and variants properly'
     p: 'An Aeron is a matrix of size, finish, frame and options. Getting variant configuration right is the difference between a product page that sells and one that generates support tickets.'
   - h: 'Built one storefront for many markets'

@@ -19,7 +19,6 @@ challenge: 'Every merchant knows their best sellers should be at the top of a co
 steps:
   - h: 'Picked the signals that actually predict a sale'
     p: 'Sales volume alone is a lagging indicator. The engine weighs sales, views, click-through rate, trend direction and buying behaviour together, so a rising product can overtake a historical winner before the season ends.'
-    img: '/assets/work/steps/qsortby-t1.webp'
   - h: 'Made the order personal, not just correct'
     p: 'The right first product is different for a returning customer than for someone arriving from an ad. QSortBy can personalise display order per customer segment rather than serving one global ranking.'
   - h: 'Built it as a proper Shopify app'

@@ -452,6 +452,34 @@ for (const [slug, sheets] of Object.entries(TEARDOWNS)) {
       }
       if (found.length < 2) { console.log(`✗ ${name} — only ${found.length} anchor(s), skipped`); await page.close(); continue; }
 
+      // Pre-flight. Every one of these was a defect shipped in an earlier pass, so
+      // each is now an assertion rather than something to notice later.
+      const vpNow = page.viewportSize();
+      const problems = [];
+      for (const f of found) {
+        const a = f.box.width * f.box.height;
+        const frameA = vpNow.width * vpNow.height;
+        if (a / frameA > 0.42) problems.push(`${f.lab}: ring covers ${Math.round(a / frameA * 100)}% of the frame`);
+        if (a / frameA < 0.0006) problems.push(`${f.lab}: ring is too small to read`);
+        if (f.box.x < -2 || f.box.x + f.box.width > vpNow.width + 2) problems.push(`${f.lab}: ring runs off the frame horizontally`);
+      }
+      for (let i = 0; i < found.length; i++) {
+        for (let j = i + 1; j < found.length; j++) {
+          const A = found[i].box, B = found[j].box;
+          const ox = Math.max(0, Math.min(A.x + A.width, B.x + B.width) - Math.max(A.x, B.x));
+          const oy = Math.max(0, Math.min(A.y + A.height, B.y + B.height) - Math.max(A.y, B.y));
+          const inter = ox * oy;
+          if (inter > 0.5 * Math.min(A.width * A.height, B.width * B.height)) {
+            problems.push(`${found[i].lab} and ${found[j].lab} ring the same thing`);
+          }
+        }
+      }
+      if (problems.length) {
+        console.log(`✗ ${name} — FAILED PRE-FLIGHT:`);
+        problems.forEach((x) => console.log(`    · ${x}`));
+        await page.close(); continue;
+      }
+
       // Clip a band that contains every anchor, with breathing room.
       const vp = page.viewportSize();
       const minY = Math.max(0, Math.min(...found.map((f) => f.box.y)) - 40);
