@@ -40,116 +40,19 @@ mkdirSync(outDir, { recursive: true });
  * we did); `bracket` outlines the whole zone instead
  * of a tight ring.
  */
+/**
+ * Anchors are STRUCTURAL — a nav, a category grid, a filter panel, a pricing
+ * table — because a ring around a block reads as a decision and a ring around a
+ * stray phrase reads as a highlighter accident. Labels name delivered work.
+ */
+const NAV = 'header nav ul, nav ul, header nav, nav';
+const GRID = '[class*="collection-list"], [class*="category"] ul, ul[class*="product"], [class*="grid"]';
+const MAIN = 'main, [role="main"], #MainContent, .main-content';
+const inMain = (sel) => MAIN.split(',').flatMap((m) =>
+  sel.split(',').filter((x) => x.trim()).map((x) => `${m.trim()} ${x.trim()}`)).join(', ');
+const FILTER = 'aside, [class*="facet"], [class*="filter"], form[class*="filter"]';
+
 const TEARDOWNS = {
-  'herman-miller-uk': [
-    { t: 1, step: 2, path: '/', title: 'A design institution, on Shopify',
-      anchors: [
-        { find: 'a[href*="/collections/seating"]', up: 2, bracket: true, lab: 'Category structure rebuilt',
-          sub: 'Seating, desks, lighting and accessories — shopping by problem, not alphabet' },
-        { text: ['Popular Categories'], up: 1, lab: 'Brand identity held',
-          sub: 'Storefront designed to Herman Miller\u2019s own published standards' },
-      ] },
-  ],
-  'mai-anh-home': [
-    { t: 1, step: 4, path: '/', title: '2,965 products, made navigable',
-      anchors: [
-        { text: ['Thiết Bị Phòng Tắm'], up: 2, bracket: true, lab: 'Navigation by room',
-          sub: 'Bathroom, tiles, kitchen and appliances — the way a renovation is planned' },
-        { text: ['GROHE'], up: 1, lab: 'Brand routes kept',
-          sub: 'GROHE, American Standard and INAX get their own way in' },
-      ] },
-  ],
-  'pottery-and-decor': [
-    { t: 1, step: 3, path: '/collections/all', title: 'A wide craft catalogue, kept walkable',
-      anchors: [
-        { text: ['277 products'], lab: '277 products structured',
-          sub: 'Grouped by object — vessels, fountains, lanterns, furniture' },
-        { text: ['Login', 'Subscribe'], up: 1, lab: 'Store built from scratch',
-          sub: 'Custom Shopify theme, accounts and content pages' },
-      ] },
-  ],
-  'meaningful-mantras': [
-    { t: 1, step: 2, path: '/', title: 'A catalogue with two axes',
-      anchors: [
-        { text: ['Browse Popular Collections'], up: 1, bracket: true, lab: 'Collections by size and range',
-          sub: '4oz to 16oz across named collections — both routes lead somewhere' },
-        { text: ['Non-Toxic Candles', 'A Healthier Home Starts Here'], lab: 'The brand argument, on the storefront',
-          sub: 'What is not in the product, said where products are sold' },
-      ] },
-  ],
-  'modest-resell': [
-    { t: 1, step: 3, path: '/', title: 'Two-sided, from the idea up',
-      anchors: [
-        { text: ['Turn Your Closet into Cash'], up: 1, bracket: true, lab: 'The seller journey',
-          sub: 'List it, share it, earn — supply side designed as its own product' },
-        { text: ['Give your closet a second chance'], lab: 'One catalogue for buyers',
-          sub: 'Women, men, kids and infants merged into a single shop' },
-      ] },
-  ],
-  'lilac-and-creme': [
-    { t: 1, step: 5, path: '/', title: 'Retail and corporate in one store',
-      anchors: [
-        { text: ['Corporate Gifting Portal'], up: 1, bracket: true, lab: 'Corporate gifting portal',
-          sub: 'Batch orders handled beside the retail range' },
-        { text: ['Custom Logo Box'], lab: 'Custom configurations',
-          sub: 'Logo boxes and variants wired into inventory' },
-      ] },
-  ],
-  'mads-digital-sat': [
-    { t: 1, step: 2, path: '/', title: 'Restructured around the evidence',
-      anchors: [
-        { text: ['MENTORS TẠI MADS', 'Giáo viên'], up: 1, bracket: true, lab: 'Mentors up front',
-          sub: 'Subject specialists treated as primary content, not an About page' },
-        { text: ['Tài liệu', 'SAT Test'], up: 1, lab: 'Free material as the front door',
-          sub: 'Practice tests, ebooks and past papers, structured for the team to publish' },
-      ] },
-  ],
-  'alpine-initiatives': [
-    { t: 1, step: 1, path: '/', title: 'The work does the fundraising',
-      anchors: [
-        { find: 'a[href*="programs"], a[href*="projects"]', up: 1, bracket: true, lab: 'Programmes at the centre',
-          sub: 'Content and navigation reorganised around the work itself' },
-        { find: 'a[href*="donate"]', lab: 'Donate always in reach',
-          sub: 'Reachable on every page without shouting over the programmes' },
-      ] },
-  ],
-  'fours-tower-danang': [
-    { t: 1, step: 1, path: '/', title: 'One page, in the buyer\u2019s order',
-      anchors: [
-        { text: ['Tiện ích'], up: 1, bracket: true, lab: 'The question list, in order',
-          sub: 'Overview, location, floor plans, amenities, developer' },
-        { text: ['Đăng ký tư vấn'], up: 1, lab: 'Lead capture on every section',
-          sub: 'Registration form and hotline never more than a scroll away' },
-      ] },
-  ],
-  'qone': [
-    { t: 1, step: 3, path: '/', title: 'Software that makes the call',
-      anchors: [
-        { text: ['Ranked by money'], up: 1, bracket: true, lab: 'Ranked, not displayed',
-          sub: 'Risk and money first, so the system proposes and you correct it' },
-        { text: ['Six health chapters'], up: 1, lab: 'One spine, six chapters',
-          sub: 'Projects, people, time and money reading the same records' },
-      ] },
-  ],
-  'qsortby': [
-    { t: 1, step: 1, path: '', title: 'Published, reviewed, maintained',
-      anchors: [
-        { text: ['Auto sort your collection'], up: 1, bracket: true, lab: 'Sorting on real signals',
-          sub: 'Behaviour, sales, CTR and top sellers, continuously' },
-        { text: ['$29'], up: 1, lab: 'Live on the App Store',
-          sub: 'Free tier plus paid plans, through Shopify review' },
-      ] },
-  ],
-  'drink-tavlin': [
-    { t: 1, step: 4, path: '/', title: 'Built for the market it sells in',
-      click: ['localization-form button, .currency-selector, [aria-label*="currency" i]'],
-      anchors: [
-        { text: ['ILS'], up: 1, bracket: true, lab: 'Six currencies',
-          sub: 'ILS for home, EUR, GBP, AUD, JPY and CAD for everyone else' },
-        { text: ['Shop all'], lab: 'Seasonal range as a collection',
-          sub: 'A new gin every season, merchandised as an event' },
-      ] },
-  ],
   'online-carpets': [
     { t: 1, step: 4, path: '/', title: 'A Magento store, re-implemented on Shopify',
       anchors: [
@@ -160,19 +63,121 @@ const TEARDOWNS = {
         { find: 'a[href^="tel:"]', lab: 'Support kept visible',
           sub: 'The sales line stays in the header on every page' },
       ] },
-    { t: 2, step: 2, path: '/collections/carpets-by-colour', title: 'Merchandised three ways, not one',
-      anchors: [
-        { find: 'a[href*="grey-carpets"]', up: 1, bracket: true, lab: 'Eleven colour collections',
-          sub: 'Shoppers who know the colour but not the brand get their own route in' },
-        { find: 'a[href*="carpets-by-room"], a[href*="bedroom-carpets"]', up: 1, bracket: true, lab: 'Material × colour × room',
-          sub: 'Three axes across one catalogue, each a real landing page' },
-      ] },
     { t: 3, step: 3, path: '/collections/grey-carpets', title: 'The catalogue that had to survive the move',
       anchors: [
-        { find: 'a[href*="grey-carpets"], form[action*="grey-carpets"]', up: 2, bracket: true, lab: 'Faceted browsing',
+        { find: FILTER, bracket: true, lab: 'Faceted browsing',
           sub: 'Filtering on the attributes that decide a flooring purchase' },
         { text: ['m²'], lab: 'Priced by area',
           sub: 'Flooring sells per square metre — the product data was reshaped, not copied' },
+      ] },
+  ],
+  'herman-miller-uk': [
+    { t: 1, step: 2, path: '/', title: 'A design institution, on Shopify',
+      anchors: [
+        { find: NAV, bracket: true, lab: 'Category structure rebuilt',
+          sub: 'Seating, desks, lighting and accessories — shopping by problem, not alphabet' },
+        { text: ['Popular Categories'], up: 1, bracket: true, lab: 'Brand identity held',
+          sub: 'Storefront designed to Herman Miller\u2019s own published standards' },
+      ] },
+  ],
+  'mai-anh-home': [
+    { t: 1, step: 4, path: '/', title: '2,965 products, made navigable',
+      anchors: [
+        { find: NAV, bracket: true, lab: 'Navigation by room',
+          sub: 'Bathroom, tiles, kitchen and appliances — the way a renovation is planned' },
+        { find: inMain('[class*="collection"], img'), lab: 'Brand routes kept',
+          sub: 'GROHE, American Standard and INAX get their own way in' },
+      ] },
+  ],
+  'pottery-and-decor': [
+    { t: 1, step: 3, path: '/collections/all', title: 'A wide craft catalogue, kept walkable',
+      anchors: [
+        { find: GRID, bracket: true, lab: '277 products structured',
+          sub: 'Grouped by object — vessels, fountains, lanterns, furniture' },
+        { text: ['277 products'], lab: 'Catalogue built from scratch',
+          sub: 'Custom Shopify theme, accounts and content pages' },
+      ] },
+  ],
+  'meaningful-mantras': [
+    { t: 1, step: 2, path: '/', title: 'A catalogue with two axes',
+      anchors: [
+        { find: NAV, bracket: true, lab: 'Collections by size and range',
+          sub: '4oz to 16oz across named collections — both routes lead somewhere' },
+        { find: inMain('[class*="collection"], [class*="grid"]'), bracket: true, lab: 'Merchandised, not listed',
+          sub: 'Popular collections surfaced on the storefront' },
+      ] },
+  ],
+  'modest-resell': [
+    { t: 1, step: 3, path: '/', title: 'Two-sided, from the idea up',
+      anchors: [
+        { find: NAV, bracket: true, lab: 'Two journeys, one shop',
+          sub: 'Selling and buying separated in the navigation from the start' },
+        { find: inMain('[class*="section"], img'), lab: 'The seller journey',
+          sub: 'List it, share it, earn — the supply side designed as its own product' },
+      ] },
+  ],
+  'lilac-and-creme': [
+    { t: 1, step: 5, path: '/', title: 'Retail and corporate in one store',
+      anchors: [
+        { find: NAV, bracket: true, lab: 'Ranges and gifting together',
+          sub: 'Cakes, babkas and minis beside the corporate gifting portal' },
+        { find: inMain('[class*="collection"], img'), lab: 'Ranges built out',
+          sub: 'Batch orders handled beside the retail range' },
+      ] },
+  ],
+  'mads-digital-sat': [
+    { t: 1, step: 2, path: '/', title: 'Restructured around the evidence',
+      anchors: [
+        { find: NAV, bracket: true, lab: 'Structure before styling',
+          sub: 'Programmes, mentors, results and materials each given a clear place' },
+        { find: inMain('section, [class*="section"]'), lab: 'Rebuilt on WordPress',
+          sub: 'Custom theme plus a CMS the school runs itself' },
+      ] },
+  ],
+  'alpine-initiatives': [
+    { t: 1, step: 1, path: '/', title: 'The work does the fundraising',
+      anchors: [
+        { find: NAV, bracket: true, lab: 'Programmes at the centre',
+          sub: 'Content and navigation reorganised around the work itself' },
+        { find: inMain('section, article'), lab: 'Programmes given the room',
+          sub: 'Reachable on every page without shouting over the programmes' },
+      ] },
+  ],
+  'fours-tower-danang': [
+    { t: 1, step: 1, path: '/', title: 'One page, in the buyer\u2019s order',
+      anchors: [
+        { find: '[class*="menu"] ul, ul[class*="menu"], header ul', bracket: true, lab: 'The question list, in order',
+          sub: 'Overview, location, floor plans, amenities, developer' },
+        { find: 'a[href^="tel:"]', lab: 'Lead capture always in reach',
+          sub: 'Hotline and registration form never more than a scroll away' },
+      ] },
+  ],
+  'drink-tavlin': [
+    { t: 1, step: 4, path: '/', title: 'Built for the market it sells in',
+      click: ['localization-form button, .currency-selector, [aria-label*="currency" i]'],
+      anchors: [
+        { find: NAV, bracket: true, lab: 'A seasonal range, merchandised',
+          sub: 'A new gin every season, treated as an event rather than a thin shelf' },
+        { text: ['ILS'], up: 1, lab: 'Six currencies',
+          sub: 'ILS for home, EUR, GBP, AUD, JPY and CAD for everyone else' },
+      ] },
+  ],
+  'qone': [
+    { t: 1, step: 3, path: '/', title: 'Software that makes the call',
+      anchors: [
+        { find: NAV, bracket: true, lab: 'One system, many chapters',
+          sub: 'Projects, people, time and money reading the same records' },
+        { text: ['Ranked by money'], lab: 'Ranked, not displayed',
+          sub: 'Risk and money first, so the system proposes and you correct it' },
+      ] },
+  ],
+  'qsortby': [
+    { t: 1, step: 5, path: '', title: 'Published, reviewed, maintained',
+      anchors: [
+        { text: ['$29'], up: 1, bracket: true, lab: 'Live on the App Store',
+          sub: 'Free tier plus paid plans, through Shopify review' },
+        { text: ['Auto sort your collection'], lab: 'Sorting on real signals',
+          sub: 'Behaviour, sales, CTR and top sellers, continuously' },
       ] },
   ],
 };
@@ -482,10 +487,15 @@ for (const [slug, sheets] of Object.entries(TEARDOWNS)) {
 
       // Clip a band that contains every anchor, with breathing room.
       const vp = page.viewportSize();
+      const MIN_BAND = 620;   // below this a frame reads as a random crop of a photo
       const minY = Math.max(0, Math.min(...found.map((f) => f.box.y)) - 40);
       const maxY = Math.min(vp.height, Math.max(...found.map((f) => f.box.y + f.box.height)) + 40);
-      const top = Math.max(0, Math.min(minY, vp.height - 260));
-      const height = Math.max(260, Math.min(maxY - top, vp.height - top));
+      // If the evidence sits near the top, start at the page top so the header and
+      // nav give the frame its identity instead of a floating slice of hero imagery.
+      let top = minY < 260 ? 0 : Math.max(0, Math.min(minY, vp.height - MIN_BAND));
+      let height = Math.max(MIN_BAND, maxY - top);
+      if (top + height > vp.height) { height = vp.height - top; }
+      if (height < MIN_BAND) { top = Math.max(0, vp.height - MIN_BAND); height = Math.min(MIN_BAND, vp.height); }
       // Drop any anchor the band cannot fully contain — a half-cropped ring reads as a bug.
       const fits = found.filter((f) => f.box.y >= top - 2 && f.box.y + f.box.height <= top + height + 2);
       if (fits.length < 2) { console.log(`✗ ${name} — anchors do not share a frame, skipped`); await page.close(); continue; }

@@ -21,7 +21,6 @@ steps:
     p: 'Website được tái cấu trúc trước khi được tạo kiểu: chương trình học, mentor, thành tích, tài liệu và tin tức mỗi thứ có một chỗ rõ ràng, để câu trả lời phụ huynh cần không bao giờ cách quá một bước.'
   - h: 'Đưa mentor và thành tích lên trước'
     p: 'Mentor chuyên biệt từng môn và bộ sưu tập điểm cao là bằng chứng mạnh nhất của trung tâm, nên chúng được coi là nội dung chính chứ không phải phần phụ nằm dưới màn hình đầu.'
-    img: '/assets/work/steps/mads-digital-sat-t1.webp'
   - h: 'Tách bạch các chương trình học'
     p: 'Lớp nhóm và lớp 1-1 là hai sản phẩm khác nhau, cho hai nhóm khách khác nhau. Tách rõ để phụ huynh tự chọn thay vì phải đọc hết mới biết phần nào dành cho mình.'
   - h: 'Biến tài liệu miễn phí thành cửa vào'
