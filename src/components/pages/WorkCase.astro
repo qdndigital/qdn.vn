@@ -1,0 +1,188 @@
+---
+/**
+ * A case study. The shape follows the way a good agency tells a project: what
+ * happened (headline), where the client actually was (context), what made it
+ * hard (the brief), how we did it (named steps, with the real screens), what
+ * runs today, and what we took from it.
+ */
+import type { CollectionEntry } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Cta from '../Cta.astro';
+import { getLangFromUrl, useTranslations, localizePath } from '../../i18n/utils';
+
+interface Props {
+  entry: CollectionEntry<'work'>;
+  prev: { slug: string; brand: string } | null;
+  next: { slug: string; brand: string } | null;
+}
+const { entry, prev, next } = Astro.props;
+const d = entry.data;
+const { Content } = await entry.render();
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const w = t.work;
+const c = t.case;
+const L = (p: string) => localizePath(p, lang);
+
+const host = d.url ? d.url.replace(/^https?:\/\//, '').replace(/\/$/, '') : c.internal;
+const specs: [string, string][] = [
+  [c.specClient, d.client],
+  [c.specCountry, d.country],
+  [c.specYear, d.year],
+  [c.specIndustry, d.industry],
+  [c.specPlatform, d.platformLabel],
+  [c.specKind, d.kind],
+  [c.specRole, d.role],
+  [c.specStatus, d.statusLabel],
+];
+---
+
+<Base title={`${d.brand} — ${c.metaSuffix}`} description={d.headline}>
+  <!-- HERO -->
+  <section class="case-hero">
+    <div class="wrap">
+      <div class="crumb">
+        <a href={L('/')}>~</a> / <a href={L('/work')}>{w.crumb}</a> / {d.rec}
+      </div>
+      <div class="case-tags">
+        <span class="ct accent">{d.platformLabel}</span>
+        <span class="ct">{d.country}</span>
+        <span class="ct">{d.year}</span>
+        <span class="ct">{d.role}</span>
+      </div>
+      <h1>{d.headline}</h1>
+      <p class="case-lead">{d.summary}</p>
+      <div class="case-actions">
+        {d.url && (
+          <a href={d.url} class="btn btn-ink" target="_blank" rel="noopener noreferrer">
+            {c.visit} <svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8" /></svg>
+          </a>
+        )}
+        {d.ownProduct && <a href={L('/products')} class="btn btn-line">{c.ourProduct}</a>}
+      </div>
+    </div>
+  </section>
+
+  <!-- THE SHIPPED THING -->
+  {d.shot && (
+    <section class="sec pt-0 pb-0">
+      <div class="wrap">
+        <figure class="apwin static rv">
+          <div class="apbar"><i></i><i></i><i></i><b class="apurl">{host}</b></div>
+          <img src={d.shot} alt={`${d.brand} — ${d.kind}`} width="1280" height="800" loading="eager" decoding="async" />
+        </figure>
+      </div>
+    </section>
+  )}
+
+  <!-- SPEC SHEET -->
+  <section class="sec pb-0">
+    <div class="wrap">
+      <div class="case-spec rv">
+        <div class="spec-lab"><span class="b">//</span> {c.record}</div>
+        <dl>
+          {specs.map(([k, v]) => (
+            <div class="sr"><dt>{k}</dt><dd>{v}</dd></div>
+          ))}
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTEXT + THE BRIEF -->
+  <section class="sec pb-0">
+    <div class="wrap case-split">
+      <div class="rv">
+        <div class="spec-lab"><span class="b">—</span> {c.context}</div>
+        <div class="case-prose"><Content /></div>
+        <div class="spec-lab mt-10"><span class="b">—</span> {c.challenge}</div>
+        <p class="case-prose">{d.challenge}</p>
+      </div>
+      {d.shotMobile ? (
+        <figure class="case-phone rv">
+          <div class="phone"><img src={d.shotMobile} alt={`${d.brand} on mobile`} width="640" height="1386" loading="lazy" decoding="async" /></div>
+          {d.capMobile && <figcaption>{d.capMobile}</figcaption>}
+        </figure>
+      ) : null}
+    </div>
+  </section>
+
+  <!-- HOW WE DID IT -->
+  <section class="sec pb-0">
+    <div class="wrap">
+      <div class="shead rv"><div class="spec-lab"><span class="b">—</span> {c.approach}</div><h2 set:html={c.approachH2}></h2></div>
+      <ol class="case-steps">
+        {d.steps.map((s, i) => (
+          <li class="rv">
+            <span class="sn">{String(i + 1).padStart(2, '0')}</span>
+            <div>
+              <h3>{s.h}</h3>
+              <p>{s.p}</p>
+              {s.img && (
+                <figure class="step-shot">
+                  <img src={s.img} alt={s.h} width="1440" height="1000" loading="lazy" decoding="async" />
+                </figure>
+              )}
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- AN INNER SCREEN -->
+  {d.shotInner && (
+    <section class="sec pb-0">
+      <div class="wrap">
+        <figure class="apwin static rv">
+          <div class="apbar"><i></i><i></i><i></i><b class="apurl">{host}</b></div>
+          <img src={d.shotInner} alt={`${d.brand} — ${d.capInner || d.kind}`} width="1280" height="800" loading="lazy" decoding="async" />
+        </figure>
+        {d.capInner && <p class="case-cap rv">{d.capInner}</p>}
+      </div>
+    </section>
+  )}
+
+  <!-- WHAT SHIPPED -->
+  <section class="sec pb-0">
+    <div class="wrap rv">
+      <div class="spec-lab"><span class="b">—</span> {c.whatWeDid}</div>
+      <ul class="case-did">
+        {d.deliverables.map((item) => <li>{item}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <!-- OUTCOME + LESSON -->
+  <section class="sec">
+    <div class="wrap">
+      <div class="case-close rv">
+        <div>
+          <div class="spec-lab"><span class="b">→</span> {c.outcome}</div>
+          <p class="ct-out">{d.outcome}</p>
+        </div>
+        <blockquote>
+          <span class="spec-lab"><span class="b">—</span> {c.lesson}</span>
+          <p>{d.lesson}</p>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec pt-0">
+    <div class="wrap">
+      <nav class="case-nav rv">
+        {prev ? (
+          <a href={L(`/work/${prev.slug}`)} class="cn prev"><span class="k">← {c.prev}</span><span class="v">{prev.brand}</span></a>
+        ) : <span></span>}
+        <a href={L('/work')} class="cn mid"><span class="k">{c.backLabel}</span><span class="v">{c.back}</span></a>
+        {next ? (
+          <a href={L(`/work/${next.slug}`)} class="cn next"><span class="k">{c.next} →</span><span class="v">{next.brand}</span></a>
+        ) : <span></span>}
+      </nav>
+    </div>
+  </section>
+
+  <Cta h2={w.ctaH2} p={w.ctaP} sectionClass="sec pt-0" />
+</Base>

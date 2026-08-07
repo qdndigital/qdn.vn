@@ -1,0 +1,30 @@
+---
+/**
+ * The client wall. We have no logo assets, so the brands are set as wordmarks in
+ * the site's own type — honest, on-brand, and every name links to its record.
+ */
+import { getCollection } from 'astro:content';
+import { getLangFromUrl, useTranslations, localizePath } from '../i18n/utils';
+import { workEntries, workSlug } from '../i18n/work';
+
+interface Props { label: string; sectionClass?: string }
+const { label, sectionClass = 'sec pt-0' } = Astro.props;
+
+const lang = getLangFromUrl(Astro.url);
+const L = (p: string) => localizePath(p, lang);
+
+// Clients only — our own products have their own section.
+const clients = workEntries(await getCollection('work'), lang).filter((e) => !e.data.ownProduct);
+---
+<section class={sectionClass}>
+  <div class="wrap">
+    <div class="brandwall rv">
+      <div class="spec-lab"><span class="b">//</span> {label}</div>
+      <div class="bw-names">
+        {clients.map((e) => (
+          <a href={L(`/work/${workSlug(e)}`)}>{e.data.client}</a>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

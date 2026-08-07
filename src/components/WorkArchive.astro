@@ -1,0 +1,88 @@
+---
+/**
+ * The full archive — an editorial card grid, filterable by platform. Every record
+ * leads with the real screenshot, so the page reads as work rather than as a table.
+ */
+import { getCollection } from 'astro:content';
+import { getLangFromUrl, useTranslations, localizePath } from '../i18n/utils';
+import { workEntries, workSlug } from '../i18n/work';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const w = t.work;
+const L = (p: string) => localizePath(p, lang);
+
+const entries = workEntries(await getCollection('work'), lang);
+
+// Platform chips, in archive order, each carrying its own count.
+const platforms = ['shopify', 'wordpress', 'webapp', 'shopify-app'] as const;
+const chips = platforms
+  .map((p) => ({
+    key: p,
+    label: entries.find((e) => e.data.platform === p)?.data.platformLabel ?? p,
+    n: entries.filter((e) => e.data.platform === p).length,
+  }))
+  .filter((c) => c.n > 0);
+---
+
+<section class="sec pt-9 md:pt-12">
+  <div class="wrap">
+    <div class="afilter rv">
+      <div class="spec-lab"><span class="b">//</span> {w.filterLab}</div>
+      <div class="achips">
+        <button class="achip on" data-f="all" data-label={w.filterAll}>{w.filterAll} <i>{entries.length}</i></button>
+        {chips.map((c) => (
+          <button class="achip" data-f={c.key} data-label={c.label}>{c.label} <i>{c.n}</i></button>
+        ))}
+      </div>
+      <span class="acount" id="acount" data-noun={w.records}>{entries.length} / {entries.length} {w.records}</span>
+    </div>
+
+    <div class="agrid" id="archive">
+      {entries.map((e) => {
+        const d = e.data;
+        return (
+          <a class="acard rv" href={L(`/work/${workSlug(e)}`)} data-platform={d.platform}>
+            <span class="ashot">
+              {d.shot
+                ? <img src={d.shot} alt={d.brand} width="1280" height="800" loading="lazy" decoding="async" />
+                : <span class="ashot-none">{d.platformLabel}</span>}
+            </span>
+            <span class="ameta"><i class="id">{d.rec}</i><i>{d.year}</i></span>
+            <h3>{d.brand}</h3>
+            <span class="arole">{d.role}</span>
+            <p>{d.summary}</p>
+            <span class="afoot">{d.platformLabel} · {d.country}</span>
+          </a>
+        );
+      })}
+    </div>
+  </div>
+</section>
+
+<script>
+  const wrap = document.getElementById('archive');
+  if (wrap) {
+    const cards = Array.from(wrap.querySelectorAll('.acard')) as HTMLElement[];
+    const chips = Array.from(document.querySelectorAll('.achip')) as HTMLElement[];
+    const countEl = document.getElementById('acount');
+    const noun = countEl?.dataset.noun ?? '';
+
+    chips.forEach((chip) => {
+      chip.addEventListener('click', () => {
+        const f = chip.dataset.f ?? 'all';
+        chips.forEach((c) => c.classList.toggle('on', c === chip));
+        let shown = 0;
+        cards.forEach((card) => {
+          const hit = f === 'all' || card.dataset.platform === f;
+          card.classList.toggle('gone', !hit);
+          if (hit) shown++;
+        });
+        if (countEl) {
+          const label = chip.dataset.label ?? '';
+          countEl.textContent = `${shown} / ${cards.length} ${noun}${f === 'all' ? '' : ` · ${label}`}`;
+        }
+      });
+    });
+  }
+</script>

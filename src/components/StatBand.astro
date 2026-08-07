@@ -1,0 +1,20 @@
+---
+/**
+ * A bordered band of hard numbers, in the mono/spec-sheet voice. Every figure is
+ * computed from the work collection upstream — nothing here is a claim.
+ */
+interface Props {
+  items: { n: string; k: string }[];
+  sectionClass?: string;
+}
+const { items, sectionClass = 'sec pt-0' } = Astro.props;
+---
+<section class={sectionClass}>
+  <div class="wrap">
+    <div class="statband rv">
+      {items.map((s) => (
+        <div class="stat"><div class="n">{s.n}</div><div class="k">{s.k}</div></div>
+      ))}
+    </div>
+  </div>
+</section>

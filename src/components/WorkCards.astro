@@ -1,0 +1,44 @@
+---
+/**
+ * A strip of work cards with real screenshots. Used on the home page, the
+ * Shopify page and the top of the archive. Pass `platform` to narrow it,
+ * `lead` to render the first card at double width.
+ */
+import { getCollection } from 'astro:content';
+import { getLangFromUrl, useTranslations, localizePath } from '../i18n/utils';
+import { workEntries, workSlug } from '../i18n/work';
+
+interface Props {
+  platform?: 'shopify' | 'wordpress' | 'webapp' | 'shopify-app';
+  slugs?: string[];
+  limit?: number;
+  /** 'sm' = a four-across strip; 'lg' = two-across feature cards with the summary. */
+  size?: 'sm' | 'lg';
+  featuredOnly?: boolean;
+}
+const { platform, slugs, limit = 4, size = 'sm', featuredOnly = false } = Astro.props;
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const L = (p: string) => localizePath(p, lang);
+
+let entries = workEntries(await getCollection('work'), lang).filter((e) => e.data.shot);
+if (platform) entries = entries.filter((e) => e.data.platform === platform);
+if (featuredOnly) entries = entries.filter((e) => e.data.featured);
+if (slugs) entries = slugs.map((s) => entries.find((e) => workSlug(e) === s)).filter(Boolean) as typeof entries;
+entries = entries.slice(0, limit);
+---
+
+<div class={size === 'lg' ? 'wstrip lg' : 'wstrip'}>
+  {entries.map((e) => (
+    <a class="wcard rv" href={L(`/work/${workSlug(e)}`)}>
+      <img class="ws" src={e.data.shot} alt={e.data.brand} width="1280" height="800" loading="lazy" decoding="async" />
+      <div class="wi">
+        <div class="wm"><span class="id">{e.data.rec}</span><span>{e.data.year}</span></div>
+        <h3>{e.data.brand}</h3>
+        {size === 'lg' ? <p class="wlead">{e.data.summary}</p> : null}
+        <p>{e.data.platformLabel} · {e.data.country} · {e.data.role}</p>
+      </div>
+    </a>
+  ))}
+</div>
