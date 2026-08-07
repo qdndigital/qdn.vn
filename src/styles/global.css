@@ -178,20 +178,20 @@
   .pd-spec p { @apply text-lg text-ink-2; }
   .pd-feat .f { @apply flex gap-2.5 text-base text-ink-2; }
 
-  /* ---- work: archive ---- */
-  .archive { @apply border-t border-line-2; }
-  .arow { @apply grid items-center gap-x-6 gap-y-3 py-5 md:py-6 border-b border-line transition; grid-template-columns:9rem 1.15fr 1.5fr auto; }
-  .arow:hover { @apply bg-surface; }
-  .arow .athumb { @apply block overflow-hidden rounded-lg border border-line bg-surface; aspect-ratio:16/10; }
-  .arow .athumb img { @apply block w-full h-full object-cover object-top; }
-  .arow .athumb-none { @apply grid place-items-center w-full h-full font-mono text-faint text-center px-1 bg-paper; font-size:.6rem; border:1px dashed var(--line-2); border-radius:.4rem; }
-  .arow .ttl { @apply text-xl font-bold tracking-tight2 leading-tight transition-colors; }
-  .arow .ttl .id { @apply block font-mono text-xs not-italic text-accent-ink font-normal mb-1.5; }
-  .arow .ttl em { @apply block font-mono text-label not-italic text-muted mt-1.5 font-normal; }
-  .arow .body { @apply text-base text-ink-2; }
-  .arow .tags { @apply font-mono text-label text-muted text-right whitespace-nowrap leading-relaxed; }
-  .arow:hover .ttl { @apply text-accent-ink; }
-  .arow:hover .athumb { @apply border-line-2; }
+  /* ---- work: the archive grid ---- */
+  .agrid { @apply grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3; }
+  .acard { @apply flex flex-col bg-surface border border-line rounded-2xl p-4 md:p-5 transition hover:-translate-y-1 hover:shadow-lift hover:border-line-2; }
+  .acard .ashot { @apply block overflow-hidden rounded-xl border border-line bg-paper mb-5; aspect-ratio:16/10; }
+  .acard .ashot img { @apply block w-full h-full object-cover object-top; }
+  .acard .ashot-none { @apply grid place-items-center w-full h-full font-mono text-label text-faint text-center px-3; }
+  .acard .ameta { @apply flex justify-between gap-3 font-mono text-label text-muted not-italic; }
+  .acard .ameta .id { @apply text-accent-ink not-italic; }
+  .acard .ameta i { @apply not-italic; }
+  .acard h3 { @apply text-h3 font-bold tracking-tight2 mt-2.5 transition-colors; }
+  .acard .arole { @apply block font-mono text-label text-muted mt-2; }
+  .acard p { @apply text-base text-ink-2 mt-3.5 flex-1; }
+  .acard .afoot { @apply block font-mono text-label text-muted mt-5 pt-4 border-t border-line; }
+  .acard:hover h3 { @apply text-accent-ink; }
 
   /* ---- work: filter bar ---- */
   .afilter { @apply flex flex-wrap items-center gap-x-5 gap-y-3 pb-5 mb-1 border-b border-line; }
@@ -201,7 +201,6 @@
   .achip.on { @apply bg-ink text-paper border-ink; }
   .achip i { @apply not-italic opacity-55; font-size:.65rem; }
   .acount { @apply font-mono text-label uppercase text-muted sm:ml-auto; }
-  .ahint { @apply hidden lg:block font-mono text-label text-muted mt-7; }
 
   /* ---- work: the floating specimen ---- */
   .apwin { @apply rounded-xl overflow-hidden bg-surface border border-line; box-shadow:0 30px 60px -30px rgba(28,27,24,.45); }
@@ -505,10 +504,6 @@
   .pd, .pd-feat { grid-template-columns:1fr; }
   .pd-spec { border-right:0; border-bottom:1px solid var(--line); }
   .pd.rev .pd-spec { order:-1; border-left:0; border-bottom:1px solid var(--line); }
-  .arow { grid-template-columns:6.5rem 1fr; }
-  .arow .body { grid-column:2; }
-  .arow .tags { grid-column:2; text-align:left; }
-  .arow .tags br { display:none; }
 }
 @media (max-width:820px) { .princ { grid-template-columns:1fr 1fr; } }
 @media (max-width:767px) { .srow { grid-template-columns:2.5rem 1fr; } }
@@ -544,19 +539,8 @@ body.nav-open .menu-btn .ic-close { display:block; }
 /* work archive — checklist marker + filtered-out rows */
 .case-did li { break-inside:avoid; }
 .case-did li::before { content:"✓"; color:var(--accent); font-family:var(--mono); }
-.arow.gone { display:none; }
+.acard.gone { display:none; }
 
-/* work archive — the cursor-tracked live preview (precise pointers only) */
-.apreview {
-  position:fixed; left:var(--px,50%); top:var(--py,50%); z-index:60; width:26rem;
-  pointer-events:none; opacity:0;
-  transform:translate(1.5rem,-50%) scale(.97);
-  transition:opacity .18s var(--ease), transform .18s var(--ease);
-}
-.apreview.on { opacity:1; transform:translate(1.5rem,-50%) scale(1); }
-.apreview.flip { transform:translate(calc(-100% - 1.5rem),-50%) scale(.97); }
-.apreview.flip.on { transform:translate(calc(-100% - 1.5rem),-50%) scale(1); }
-@media (max-width:1023px), (hover:none) { .apreview { display:none; } }
 
 /* accessibility */
 a:focus-visible, .btn:focus-visible { outline:2px solid var(--accent); outline-offset:3px; }
