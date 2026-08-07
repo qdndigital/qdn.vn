@@ -24,9 +24,10 @@ export default {
         mono: ['"JetBrains Mono"', "ui-monospace", "monospace"],
       },
       fontSize: {
-        label: ["0.6875rem", { lineHeight: "1", letterSpacing: "0.14em" }],
-        stat: ["1.375rem", { lineHeight: "1.1", letterSpacing: "-0.02em" }],
-        h3: ["1.3125rem", { lineHeight: "1.2", letterSpacing: "-0.02em" }],
+        label: ["0.75rem", { lineHeight: "1.1", letterSpacing: "0.12em" }],
+        body: ["1.0625rem", { lineHeight: "1.65" }],
+        stat: ["clamp(1.75rem, 2.6vw, 2.375rem)", { lineHeight: "1.05", letterSpacing: "-0.03em" }],
+        h3: ["1.4375rem", { lineHeight: "1.25", letterSpacing: "-0.02em" }],
         h2: [
           "clamp(1.875rem, 4vw, 3.125rem)",
           { lineHeight: "1.05", letterSpacing: "-0.035em" },

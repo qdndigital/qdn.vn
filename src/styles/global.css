@@ -18,7 +18,7 @@
     --mono:'JetBrains Mono',ui-monospace,monospace;
     --ease:cubic-bezier(.2,.7,.2,1);
   }
-  body { @apply bg-paper text-ink font-sans antialiased leading-relaxed; letter-spacing:-.01em; }
+  body { @apply bg-paper text-ink font-sans antialiased text-body; letter-spacing:-.01em; }
   body::before {
     content:""; @apply fixed inset-0 z-0 pointer-events-none;
     background-image:linear-gradient(rgba(28,27,24,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(28,27,24,.045) 1px,transparent 1px);
@@ -36,7 +36,7 @@
   .shead { @apply max-w-2xl mb-10 md:mb-16; }
   .shead.ctr { @apply mx-auto text-center; }
   .shead h2 { @apply text-h2 mt-3; }
-  .shead p { @apply text-lg text-ink-2 mt-4; }
+  .shead p { @apply text-xl text-ink-2 mt-4 leading-relaxed; }
 
   /* ---- labels & accents ---- */
   .spec-lab { @apply inline-flex items-center gap-2.5 font-mono text-label uppercase text-muted; }
@@ -44,7 +44,7 @@
   .it { @apply font-serif italic text-accent-ink; }
 
   /* ---- buttons ---- */
-  .btn { @apply inline-flex items-center gap-2 font-semibold text-sm px-5 py-3 rounded-lg border border-transparent transition cursor-pointer; }
+  .btn { @apply inline-flex items-center gap-2 font-semibold text-base px-5 py-3 rounded-lg border border-transparent transition cursor-pointer; }
   .btn svg { @apply w-4 h-4 fill-none; stroke:currentColor; stroke-width:2; }
   .btn-ink { @apply bg-ink text-paper hover:-translate-y-0.5 hover:shadow-lift; }
   .btn-line { @apply bg-surface text-ink border-line-2 hover:border-ink; }
@@ -74,7 +74,7 @@
   .hero-grid { @apply grid grid-cols-1 lg:grid-cols-2 gap-14 items-center; }
   .hero .spec-lab { @apply mb-6; }
   .hero h1 { @apply text-display; }
-  .hero .lead { @apply text-lg text-ink-2 mt-6 mb-8 max-w-md; }
+  .hero .lead { @apply text-xl text-ink-2 mt-6 mb-8 max-w-lg leading-relaxed; }
   .hero-cta { @apply flex flex-wrap gap-3; }
   .hero-meta { @apply flex gap-8 mt-10 pt-6 border-t border-line; }
   .hero-meta .mono { @apply font-mono text-label uppercase text-muted; }
@@ -85,7 +85,7 @@
   .pc { @apply bg-surface border border-line rounded-2xl p-5 md:p-7; }
   .pc .num { @apply font-mono text-label text-accent-ink; }
   .pc h3 { @apply text-xl font-bold tracking-tight2 mt-3 mb-2.5; }
-  .pc p { @apply text-sm text-ink-2; }
+  .pc p { @apply text-base text-ink-2; }
 
   /* ---- how we work ---- */
   .aiwrap { @apply grid grid-cols-1 lg:grid-cols-2 gap-12 items-center; }
@@ -95,7 +95,7 @@
   .ailist .ic { @apply grid place-items-center w-10 h-10 shrink-0 rounded-xl border border-line-2 bg-surface; }
   .ailist .ic svg { @apply w-5 h-5 fill-none; stroke:var(--accent); stroke-width:1.8; }
   .ailist h3 { @apply text-base font-bold; }
-  .ailist p { @apply text-sm text-ink-2 mt-1; }
+  .ailist p { @apply text-base text-ink-2 mt-1; }
 
   .ailog { @apply bg-ink rounded-2xl p-5 md:p-6 font-mono text-sm shadow-lift relative overflow-hidden; color:#cdd2dd; }
   .ailog .bar { @apply flex gap-1.5 mb-4; }
@@ -112,15 +112,15 @@
   .sp .top .id { @apply text-accent-ink; }
   .sp .in { @apply p-5 md:p-6; }
   .sp .pn { @apply text-xl font-bold tracking-tight2; }
-  .sp .pt { @apply text-sm text-muted mt-1.5 mb-4; }
+  .sp .pt { @apply text-base text-muted mt-1.5 mb-4; }
   .sp ul { @apply list-none flex flex-col gap-2.5; }
-  .sp li { @apply flex gap-2.5 text-sm text-ink-2; }
+  .sp li { @apply flex gap-2.5 text-base text-ink-2; }
 
   /* ---- testimonials ---- */
   .tst { @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5; }
   .tcard { @apply flex flex-col bg-surface border border-line rounded-2xl p-5 md:p-6 transition hover:-translate-y-1 hover:shadow-lift; }
   .tcard .stars { @apply text-accent-ink text-sm mb-3.5 tracking-widest; }
-  .tcard .q { @apply text-base flex-1; }
+  .tcard .q { @apply text-lg flex-1 leading-relaxed; }
   .tcard .who { @apply flex items-center gap-3 mt-5 pt-4 border-t border-line; }
   .tcard .av { @apply grid place-items-center w-10 h-10 shrink-0 rounded-xl bg-accent-soft border border-line-2 font-mono font-semibold text-accent-ink text-sm; }
   .tcard h3 { @apply text-sm font-bold; }
@@ -129,9 +129,9 @@
   /* ---- faq ---- */
   .faq { @apply max-w-3xl mx-auto; }
   .faq details { @apply border border-line rounded-xl bg-surface mb-3 overflow-hidden; }
-  .faq summary { @apply flex items-center justify-between gap-4 cursor-pointer px-5 py-4 md:px-6 md:py-5 font-bold text-base; list-style:none; }
+  .faq summary { @apply flex items-center justify-between gap-4 cursor-pointer px-5 py-4 md:px-6 md:py-5 font-bold text-lg; list-style:none; }
   .faq .pm { @apply relative w-5 h-5 shrink-0; }
-  .faq .ans { @apply px-5 pb-4 md:px-6 md:pb-5 text-base text-ink-2; }
+  .faq .ans { @apply px-5 pb-4 md:px-6 md:pb-5 text-lg text-ink-2 leading-relaxed; }
 
   /* ---- cta ---- */
   .cta { @apply relative overflow-hidden text-center bg-ink text-paper rounded-3xl px-6 py-12 md:px-10 md:py-20; }
@@ -144,8 +144,8 @@
   footer.site { @apply pt-12 pb-8 md:pt-16 md:pb-9 border-t border-line; }
   .foot { @apply grid grid-cols-2 md:grid-cols-4 gap-9; }
   .foot h2 { @apply font-mono text-label uppercase text-muted mb-4; }
-  .foot a:not(.logo) { @apply block text-sm text-ink-2 mb-2.5 hover:text-accent; }
-  .foot .fd { @apply text-sm text-ink-2 mt-3.5 max-w-xs; }
+  .foot a:not(.logo) { @apply block text-base text-ink-2 mb-2.5 hover:text-accent; }
+  .foot .fd { @apply text-base text-ink-2 mt-3.5 max-w-sm; }
   .fbar { @apply flex flex-wrap justify-between gap-3 mt-12 pt-6 border-t border-line font-mono text-xs text-muted; }
 
   /* ---- page hero (subpages) ---- */
@@ -153,7 +153,7 @@
   .phero .crumb { @apply font-mono text-xs text-muted mb-5; }
   .phero .crumb a:hover { @apply text-accent; }
   .phero h1 { @apply text-h1; }
-  .phero p { @apply text-lg text-ink-2 mt-5 max-w-xl; }
+  .phero p { @apply text-xl text-ink-2 mt-5 max-w-2xl leading-relaxed; }
 
   /* ---- services: steps ---- */
   .steps { @apply border-t border-line-2; }
@@ -161,7 +161,7 @@
   .srow:hover { @apply bg-surface pl-5; }
   .srow .sn { @apply font-mono text-sm text-accent-ink; }
   .srow h3 { @apply text-2xl font-bold tracking-tight2 leading-tight; }
-  .srow .sd { @apply hidden md:block text-sm text-ink-2; }
+  .srow .sd { @apply hidden md:block text-base text-ink-2; }
   .srow .ar { @apply hidden md:grid place-items-center w-10 h-10 rounded-full border border-line-2 justify-self-end transition; }
   .srow:hover .ar { @apply bg-accent border-accent; }
   .srow .ar svg { @apply w-4 h-4 fill-none; stroke:var(--ink); stroke-width:2; transition:.3s; }
@@ -175,8 +175,8 @@
   .pd-spec .id { @apply font-mono text-label text-accent-ink; }
   .pd-spec h3 { @apply text-2xl font-bold tracking-tight2 mt-2.5 mb-1; }
   .pd-spec .pt { @apply font-mono text-xs text-muted mb-4; }
-  .pd-spec p { @apply text-base text-ink-2; }
-  .pd-feat .f { @apply flex gap-2.5 text-sm text-ink-2; }
+  .pd-spec p { @apply text-lg text-ink-2; }
+  .pd-feat .f { @apply flex gap-2.5 text-base text-ink-2; }
 
   /* ---- work: archive ---- */
   .archive { @apply border-t border-line-2; }
@@ -188,7 +188,7 @@
   .arow .ttl { @apply text-xl font-bold tracking-tight2 leading-tight transition-colors; }
   .arow .ttl .id { @apply block font-mono text-xs not-italic text-accent-ink font-normal mb-1.5; }
   .arow .ttl em { @apply block font-mono text-label not-italic text-muted mt-1.5 font-normal; }
-  .arow .body { @apply text-sm text-ink-2; }
+  .arow .body { @apply text-base text-ink-2; }
   .arow .tags { @apply font-mono text-label text-muted text-right whitespace-nowrap leading-relaxed; }
   .arow:hover .ttl { @apply text-accent-ink; }
   .arow:hover .athumb { @apply border-line-2; }
@@ -196,12 +196,12 @@
   /* ---- work: filter bar ---- */
   .afilter { @apply flex flex-wrap items-center gap-x-5 gap-y-3 pb-5 mb-1 border-b border-line; }
   .achips { @apply flex flex-wrap gap-2; }
-  .achip { @apply inline-flex items-center gap-2 font-mono text-xs px-3 py-2 rounded-lg border border-line-2 bg-surface text-ink-2 cursor-pointer transition; }
+  .achip { @apply inline-flex items-center gap-2 font-mono text-label px-3.5 py-2.5 rounded-lg border border-line-2 bg-surface text-ink-2 cursor-pointer transition; }
   .achip:hover { @apply border-ink text-ink; }
   .achip.on { @apply bg-ink text-paper border-ink; }
   .achip i { @apply not-italic opacity-55; font-size:.65rem; }
   .acount { @apply font-mono text-label uppercase text-muted sm:ml-auto; }
-  .ahint { @apply hidden lg:block font-mono text-xs text-muted mt-7; }
+  .ahint { @apply hidden lg:block font-mono text-label text-muted mt-7; }
 
   /* ---- work: the floating specimen ---- */
   .apwin { @apply rounded-xl overflow-hidden bg-surface border border-line; box-shadow:0 30px 60px -30px rgba(28,27,24,.45); }
@@ -211,20 +211,51 @@
   .apwin img { @apply block w-full h-auto; }
 
   /* ---- work: case page ---- */
-  .case-head { @apply flex flex-wrap items-end justify-between gap-x-8 gap-y-5; }
-  .case-actions { @apply flex flex-wrap gap-3; }
+  .case-hero { @apply pt-10 pb-9 md:pt-16 md:pb-12; }
+  .case-hero .crumb { @apply font-mono text-xs text-muted mb-6; }
+  .case-hero .crumb a:hover { @apply text-accent; }
+  .case-hero h1 { @apply text-h1 max-w-5xl; }
+  .case-lead { @apply text-xl md:text-2xl text-ink-2 mt-6 max-w-3xl leading-relaxed; }
+  .case-tags { @apply flex flex-wrap gap-2 mb-6; }
+  .ct { @apply inline-flex items-center font-mono text-label uppercase text-muted border border-line-2 rounded-full px-3.5 py-1.5; }
+  .ct.accent { @apply text-accent-ink border-accent-ink/30 bg-accent-soft; }
+  .case-actions { @apply flex flex-wrap gap-3 mt-8; }
   .case-grid { @apply grid grid-cols-1 gap-9 items-start lg:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)] lg:gap-12; }
-  .case-spec dl { @apply mt-5 border-t border-line-2; }
-  .case-spec .sr { @apply flex items-baseline justify-between gap-6 py-3.5 border-b border-line; }
-  .case-spec dt { @apply font-mono text-label uppercase text-muted shrink-0; }
-  .case-spec dd { @apply text-sm font-semibold text-right; }
+  .case-split { @apply grid grid-cols-1 gap-10 items-start lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)] lg:gap-16; }
+  .case-spec { @apply border-t border-line-2 pt-8; }
+  .case-spec dl { @apply grid grid-cols-2 gap-x-8 mt-6 md:grid-cols-4; }
+  .case-spec .sr { @apply flex flex-col gap-1.5 py-3.5 border-b border-line; }
+  .case-spec dt { @apply font-mono text-label uppercase text-muted; }
+  .case-spec dd { @apply text-base font-semibold; }
+
+  /* case: the phone frame */
+  .case-phone { @apply mx-auto max-w-xs w-full; }
+  .case-phone .phone { @apply overflow-hidden rounded-[2rem] border-4 border-ink bg-ink shadow-lift; }
+  .case-phone img { @apply block w-full h-auto rounded-[1.6rem]; }
+  .case-phone figcaption { @apply font-mono text-label text-muted text-center mt-4; }
+
+  /* case: the numbered approach */
+  .case-steps { @apply list-none border-t border-line-2 mt-2; }
+  .case-steps li { @apply grid gap-x-6 gap-y-2 py-7 md:py-9 border-b border-line; grid-template-columns:3.5rem 1fr; }
+  .case-steps .sn { @apply font-mono text-label text-accent-ink pt-1.5; }
+  .case-steps h3 { @apply text-h3 font-bold tracking-tight2; }
+  .case-steps p { @apply text-lg text-ink-2 mt-3 max-w-3xl leading-relaxed; }
+  .case-cap { @apply font-mono text-label text-muted mt-4; }
+
+  /* case: outcome + the lesson */
+  .case-close { @apply grid grid-cols-1 gap-8 items-start lg:grid-cols-2 lg:gap-12 border-t border-line-2 pt-10; }
+  .ct-out { @apply text-xl md:text-2xl mt-4 leading-relaxed max-w-xl; }
+  .case-close blockquote { @apply bg-ink text-paper rounded-2xl p-7 md:p-9; }
+  .case-close blockquote .spec-lab { color:rgba(233,231,226,.5); }
+  .case-close blockquote .spec-lab .b { @apply text-accent; }
+  .case-close blockquote p { @apply text-lg md:text-xl mt-4 leading-relaxed; color:rgba(233,231,226,.9); }
   .case-noshot { @apply text-center bg-surface border border-line rounded-2xl px-6 py-14; }
   .case-noshot .spec-lab { @apply justify-center; }
-  .case-noshot p { @apply text-sm text-ink-2 mt-3; }
+  .case-noshot p { @apply text-base text-ink-2 mt-3; }
   .case-brief { @apply mt-8; }
-  .case-prose { @apply text-lg text-ink-2 mt-4 max-w-xl; }
+  .case-prose { @apply text-xl text-ink-2 mt-4 max-w-2xl leading-relaxed; }
   .case-did { @apply list-none mt-4 border-t border-line lg:columns-2 lg:gap-x-12; }
-  .case-did li { @apply flex gap-3 text-sm text-ink-2 py-3.5 border-b border-line; }
+  .case-did li { @apply flex gap-3 text-base text-ink-2 py-4 border-b border-line; }
   .case-nav { @apply grid grid-cols-1 gap-3 pt-8 border-t border-line-2 sm:grid-cols-3; }
   .cn { @apply flex flex-col gap-1.5 p-4 rounded-xl border border-line bg-surface transition hover:border-ink hover:-translate-y-0.5; }
   .cn .k { @apply font-mono text-label uppercase text-muted; }
@@ -240,7 +271,7 @@
   .wcard .wm { @apply flex justify-between gap-3 font-mono text-label text-muted; }
   .wcard .wm .id { @apply text-accent-ink; }
   .wcard h3 { @apply text-lg font-bold tracking-tight2 mt-2.5; }
-  .wcard p { @apply text-sm text-ink-2 mt-1.5; }
+  .wcard p { @apply text-base text-ink-2 mt-1.5; }
   .wstrip.lg { @apply sm:grid-cols-2 lg:grid-cols-2 gap-5 md:gap-6; }
   .wstrip.lg .wi { @apply p-6 md:p-8; }
   .wstrip.lg h3 { @apply text-2xl md:text-3xl mt-3; }
@@ -263,7 +294,7 @@
   .mig .from { @apply font-mono text-label uppercase text-muted; }
   .mig .to { @apply flex items-center gap-2.5 text-xl font-bold tracking-tight2 mt-2; }
   .mig .to svg { @apply w-4 h-4 fill-none shrink-0; stroke:var(--accent); stroke-width:2; }
-  .mig p { @apply text-sm text-ink-2 mt-3; }
+  .mig p { @apply text-base text-ink-2 mt-3; }
   .mig .who { @apply font-mono text-label text-accent-ink mt-4 pt-3.5 border-t border-line; }
 
   /* ---- about: principles ---- */
@@ -271,7 +302,7 @@
   .princ .pr { @apply pt-6 pb-6 pr-6 md:pt-8 md:pb-8 border-t; border-color:var(--ink); }
   .princ .pr .num { @apply font-mono text-label text-accent-ink; }
   .princ .pr h3 { @apply text-lg font-bold mt-3.5 mb-2 tracking-tight2; }
-  .princ .pr p { @apply text-sm text-ink-2; }
+  .princ .pr p { @apply text-base text-ink-2; }
 
   /* ---- about: team ---- */
   .team { @apply grid grid-cols-2 md:grid-cols-4 gap-4; }
@@ -282,7 +313,7 @@
 
   /* ---- about: industries ---- */
   .ind { @apply flex flex-wrap gap-2.5; }
-  .ind span { @apply text-sm font-medium px-4 py-2.5 rounded-lg border border-line-2 bg-surface transition hover:border-accent hover:text-accent; }
+  .ind span { @apply text-base font-medium px-4 py-2.5 rounded-lg border border-line-2 bg-surface transition hover:border-accent hover:text-accent; }
 
   /* ---- journal: posts ---- */
   .posts { @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5; }
@@ -290,7 +321,7 @@
   .post .meta { @apply flex gap-2.5 font-mono text-label text-muted mb-3; }
   .post .meta .cat { @apply text-accent-ink; }
   .post h3 { @apply text-lg font-bold leading-snug tracking-tight2 mb-2.5; }
-  .post p { @apply text-sm text-ink-2 flex-1; }
+  .post p { @apply text-base text-ink-2 flex-1; }
   .post .more { @apply font-mono text-xs text-accent-ink mt-3.5; }
 
   /* ---- contact ---- */

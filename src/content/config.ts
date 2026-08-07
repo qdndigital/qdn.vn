@@ -27,8 +27,17 @@ const work = defineCollection({
     kind: z.string(),                   // project type
     role: z.string(),                   // what QDN actually did — build / migration / consulting
     summary: z.string(),                // one line for the archive row
+    headline: z.string(),               // the case-study H1 — what actually happened
+    challenge: z.string(),              // the tension, 2–3 sentences
+    steps: z.array(z.object({ h: z.string(), p: z.string() })),  // how we did it
+    outcome: z.string(),                // what runs today
+    lesson: z.string(),                 // the expertise takeaway
     deliverables: z.array(z.string()),
-    shot: z.string().nullable(),        // /assets/work/<slug>.webp
+    shot: z.string().nullable(),        // /assets/work/<slug>.webp — the hero frame
+    shotInner: z.string().nullable(),   // an inner page (collection / product / about)
+    shotMobile: z.string().nullable(),  // the same storefront on a phone
+    capInner: z.string().default(''),   // captions for the two secondary frames
+    capMobile: z.string().default(''),
     featured: z.boolean().default(false),
     ownProduct: z.boolean().default(false),
   }),

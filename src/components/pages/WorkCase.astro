@@ -1,7 +1,9 @@
 ---
 /**
- * A single archive record. Spec sheet on the left, the live site framed on the
- * right, then what we actually did — and the next record.
+ * A case study. The shape follows the way a good agency tells a project: what
+ * happened (headline), where the client actually was (context), what made it
+ * hard (the brief), how we did it (named steps, with the real screens), what
+ * runs today, and what we took from it.
  */
 import type { CollectionEntry } from 'astro:content';
 import Base from '../../layouts/Base.astro';
@@ -36,31 +38,47 @@ const specs: [string, string][] = [
 ];
 ---
 
-<Base title={`${d.brand} — ${c.metaSuffix}`} description={d.summary}>
-  <section class="phero">
+<Base title={`${d.brand} — ${c.metaSuffix}`} description={d.headline}>
+  <!-- HERO -->
+  <section class="case-hero">
     <div class="wrap">
       <div class="crumb">
         <a href={L('/')}>~</a> / <a href={L('/work')}>{w.crumb}</a> / {d.rec}
       </div>
-      <div class="case-head">
-        <div>
-          <h1>{d.brand}</h1>
-          <p>{d.summary}</p>
-        </div>
-        <div class="case-actions">
-          {d.url && (
-            <a href={d.url} class="btn btn-ink" target="_blank" rel="noopener noreferrer">
-              {c.visit} <svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8" /></svg>
-            </a>
-          )}
-          {d.ownProduct && <a href={L('/products')} class="btn btn-line">{c.ourProduct}</a>}
-        </div>
+      <div class="case-tags">
+        <span class="ct accent">{d.platformLabel}</span>
+        <span class="ct">{d.country}</span>
+        <span class="ct">{d.year}</span>
+        <span class="ct">{d.role}</span>
+      </div>
+      <h1>{d.headline}</h1>
+      <p class="case-lead">{d.summary}</p>
+      <div class="case-actions">
+        {d.url && (
+          <a href={d.url} class="btn btn-ink" target="_blank" rel="noopener noreferrer">
+            {c.visit} <svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8" /></svg>
+          </a>
+        )}
+        {d.ownProduct && <a href={L('/products')} class="btn btn-line">{c.ourProduct}</a>}
       </div>
     </div>
   </section>
 
-  <section class="sec">
-    <div class="wrap case-grid">
+  <!-- THE SHIPPED THING -->
+  {d.shot && (
+    <section class="sec pt-0 pb-0">
+      <div class="wrap">
+        <figure class="apwin static rv">
+          <div class="apbar"><i></i><i></i><i></i><b class="apurl">{host}</b></div>
+          <img src={d.shot} alt={`${d.brand} — ${d.kind}`} width="1280" height="800" loading="eager" decoding="async" />
+        </figure>
+      </div>
+    </section>
+  )}
+
+  <!-- SPEC SHEET -->
+  <section class="sec pb-0">
+    <div class="wrap">
       <div class="case-spec rv">
         <div class="spec-lab"><span class="b">//</span> {c.record}</div>
         <dl>
@@ -68,31 +86,79 @@ const specs: [string, string][] = [
             <div class="sr"><dt>{k}</dt><dd>{v}</dd></div>
           ))}
         </dl>
-        <div class="case-brief">
-          <div class="spec-lab"><span class="b">—</span> {c.challenge}</div>
-          <div class="case-prose"><Content /></div>
-        </div>
-      </div>
-
-      <div class="case-shot rv">
-        {d.shot ? (
-          <figure class="apwin static">
-            <div class="apbar"><i></i><i></i><i></i><b class="apurl">{host}</b></div>
-            <img src={d.shot} alt={`${d.brand} — ${d.kind}`} width="1280" height="800" loading="eager" decoding="async" />
-          </figure>
-        ) : (
-          <div class="case-noshot"><span class="spec-lab"><span class="b">—</span> {c.internal}</span><p>{c.noShot}</p></div>
-        )}
       </div>
     </div>
   </section>
 
-  <section class="sec pt-0">
+  <!-- CONTEXT + THE BRIEF -->
+  <section class="sec pb-0">
+    <div class="wrap case-split">
+      <div class="rv">
+        <div class="spec-lab"><span class="b">—</span> {c.context}</div>
+        <div class="case-prose"><Content /></div>
+        <div class="spec-lab mt-10"><span class="b">—</span> {c.challenge}</div>
+        <p class="case-prose">{d.challenge}</p>
+      </div>
+      {d.shotMobile ? (
+        <figure class="case-phone rv">
+          <div class="phone"><img src={d.shotMobile} alt={`${d.brand} on mobile`} width="640" height="1386" loading="lazy" decoding="async" /></div>
+          {d.capMobile && <figcaption>{d.capMobile}</figcaption>}
+        </figure>
+      ) : null}
+    </div>
+  </section>
+
+  <!-- HOW WE DID IT -->
+  <section class="sec pb-0">
+    <div class="wrap">
+      <div class="shead rv"><div class="spec-lab"><span class="b">—</span> {c.approach}</div><h2 set:html={c.approachH2}></h2></div>
+      <ol class="case-steps">
+        {d.steps.map((s, i) => (
+          <li class="rv">
+            <span class="sn">{String(i + 1).padStart(2, '0')}</span>
+            <div><h3>{s.h}</h3><p>{s.p}</p></div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- AN INNER SCREEN -->
+  {d.shotInner && (
+    <section class="sec pb-0">
+      <div class="wrap">
+        <figure class="apwin static rv">
+          <div class="apbar"><i></i><i></i><i></i><b class="apurl">{host}</b></div>
+          <img src={d.shotInner} alt={`${d.brand} — ${d.capInner || d.kind}`} width="1280" height="800" loading="lazy" decoding="async" />
+        </figure>
+        {d.capInner && <p class="case-cap rv">{d.capInner}</p>}
+      </div>
+    </section>
+  )}
+
+  <!-- WHAT SHIPPED -->
+  <section class="sec pb-0">
     <div class="wrap rv">
       <div class="spec-lab"><span class="b">—</span> {c.whatWeDid}</div>
       <ul class="case-did">
         {d.deliverables.map((item) => <li>{item}</li>)}
       </ul>
+    </div>
+  </section>
+
+  <!-- OUTCOME + LESSON -->
+  <section class="sec">
+    <div class="wrap">
+      <div class="case-close rv">
+        <div>
+          <div class="spec-lab"><span class="b">→</span> {c.outcome}</div>
+          <p class="ct-out">{d.outcome}</p>
+        </div>
+        <blockquote>
+          <span class="spec-lab"><span class="b">—</span> {c.lesson}</span>
+          <p>{d.lesson}</p>
+        </blockquote>
+      </div>
     </div>
   </section>
 
