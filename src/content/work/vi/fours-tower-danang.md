@@ -24,7 +24,6 @@ steps:
     p: 'Với một toà tháp ở Đà Nẵng, vị trí chính là lời chào hàng. Phần vị trí được dựng để bản đồ tự thuyết phục, thay vì một đoạn văn nói về sự tiện lợi.'
   - h: 'Đặt mặt bằng đúng chỗ ra quyết định'
     p: 'Mặt bằng và loại hình căn hộ là một khu vực riêng, vì đó là điểm mà sự quan tâm chung chuyển thành câu hỏi cụ thể về một căn cụ thể.'
-    img: '/assets/work/steps/fours-tower-danang-3.webp'
   - h: 'Thiết kế cho điện thoại trước'
     p: 'Link bất động sản được chia sẻ trong ứng dụng nhắn tin và mở trên điện thoại. Biểu mẫu đăng ký và hotline luôn nằm trong tầm ngón tay suốt cả trang.'
 outcome: 'Landing page đang chạy tại fours-towerdanang.com.vn với trọn câu chuyện bán hàng — tổng quan, vị trí, tiện ích, mặt bằng và chủ đầu tư — cùng biểu mẫu đăng ký ở mọi phần.'

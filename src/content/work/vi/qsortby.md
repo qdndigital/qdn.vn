@@ -28,7 +28,6 @@ steps:
     p: 'Listing, checklist Built-for-Shopify và quy trình duyệt là một nghề riêng. Chúng tôi đã đi trọn con đường đó — cũng chính là con đường chúng tôi dẫn khách hàng đi.'
   - h: 'Giữ sản phẩm sống trong thị trường'
     p: 'App chạy với gói miễn phí và các gói trả phí, được duy trì liên tục, kèm A/B testing và phân tích để nhà bán thấy việc sắp xếp có thật sự thay đổi điều gì không.'
-    img: '/assets/work/steps/qsortby-5.webp'
 outcome: 'QSortBy đang chạy trên Shopify App Store với gói miễn phí và các gói trả phí, sắp xếp bộ sưu tập thật cho nhà bán thật.'
 lesson: 'Tự phát hành app dạy cho ta những phần của nền tảng mà dự án khách hàng không bao giờ chạm tới — duyệt, thanh toán, phiên bản và hỗ trợ. Đó là lý do mảng Shopify của chúng tôi không phải phỏng đoán.'
 deliverables:

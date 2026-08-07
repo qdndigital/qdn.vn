@@ -19,7 +19,6 @@ challenge: 'Selling alcohol online is not selling candles online. Every visitor 
 steps:
   - h: 'We started with the constraints, not the homepage'
     p: 'Age verification, Hebrew and local payment were treated as architecture, not as a plugin bolted on at the end. Deciding those first is what stops a store being rebuilt twice.'
-    img: '/assets/work/steps/drink-tavlin-1.webp'
   - h: 'Built the storefront around a seasonal catalogue'
     p: 'Tavlin releases a new gin every season, so the store had to make a small, rotating range feel like an event rather than a thin shelf. The structure carries the story — the distillery, the process, the people — alongside the bottles.'
   - h: 'Made it work right-to-left, properly'

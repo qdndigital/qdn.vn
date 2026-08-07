@@ -29,7 +29,6 @@ steps:
     img: '/assets/work/steps/online-carpets-t1.webp'
   - h: 'Giữ nguyên những mốc quen thuộc khi mua hàng'
     p: 'Hàng thanh lý và hàng ngừng sản xuất, thông tin giao hàng và mẫu thử, số điện thoại và trang tài khoản — những thứ khách quen dùng để định vị — vẫn nằm đúng chỗ họ mong đợi.'
-    img: '/assets/work/steps/online-carpets-5.webp'
 outcome: 'Online Carpets đang kinh doanh trên Shopify tại onlinecarpets.co.uk, với đầy đủ danh mục sàn nhà, bộ lọc đa thuộc tính, tài khoản khách hàng và dải hàng thanh lý còn nguyên.'
 lesson: 'Một cuộc di trú được chấm bằng những thứ *không* vỡ. Thiết kế là nửa nhìn thấy được; mô hình dữ liệu, chuyển hướng URL và tài khoản khách hàng là nửa quyết định doanh nghiệp có kịp nhận ra mình vừa chuyển nhà hay không.'
 deliverables:

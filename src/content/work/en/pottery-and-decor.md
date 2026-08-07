@@ -28,7 +28,6 @@ steps:
     p: 'Homepage, about and content pages carry the craft argument — tradition, nature, the artisan’s hand — because for this kind of product the story is part of the specification.'
   - h: 'Built in an accessibility mode'
     p: 'The store ships an accessibility toggle with keyboard shortcuts for navigation, search, content and footer. Most storefronts treat this as optional; it costs little at build time and a great deal to retrofit.'
-    img: '/assets/work/steps/pottery-and-decor-5.webp'
 outcome: 'The store runs at potteryanddecor.com with 277 products, a custom theme, an accessibility mode and the full garden range from vessels to furniture.'
 lesson: 'For craft products, the storefront is part of the product. Space, photography and sequence are what carry a handmade price online — and accessibility is cheapest when it is designed in, not added later.'
 deliverables:

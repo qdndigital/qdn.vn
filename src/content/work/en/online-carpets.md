@@ -29,7 +29,6 @@ steps:
     img: '/assets/work/steps/online-carpets-t1.webp'
   - h: 'Kept the trading furniture in place'
     p: 'Clearance and discontinued lines, delivery and sample messaging, the phone number and the account dashboard — the things a returning customer navigates by — stayed where they were expected.'
-    img: '/assets/work/steps/online-carpets-5.webp'
 outcome: 'Online Carpets trades on Shopify at onlinecarpets.co.uk, with the full flooring catalogue, faceted filtering, customer accounts and the clearance range intact.'
 lesson: 'A migration is judged on what did not break. The design is the visible half; the data model, the redirects and the customer accounts are the half that decides whether the business notices the move at all.'
 deliverables:

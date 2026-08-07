@@ -21,7 +21,6 @@ steps:
     p: 'Chúng tôi bắt đầu từ cách một studio thật sự kiếm tiền — một dự án, những người tham gia, số giờ họ ghi nhận, hoá đơn đi kèm — và dựng mô hình dữ liệu quanh chuỗi đó thay vì quanh một danh sách module.'
   - h: 'Xây một hệ thống cho trọn vòng đời'
     p: 'Dự án và công việc, nhân sự và chấm công, tài chính và hoá đơn, báo cáo — tất cả đọc chung một tập dữ liệu. Giá trị không nằm ở từng module, mà ở chỗ chúng chung một xương sống.'
-    img: '/assets/work/steps/qone-2.webp'
   - h: 'Bắt hệ thống trả lời, không chỉ hiển thị'
     p: 'Dashboard hiện mọi thứ thì chẳng nói được gì. QOne mở đầu bằng danh sách được xếp hạng theo rủi ro và tiền, để phần mềm đưa ra phán đoán còn con người chỉnh lại — chứ không phải ngược lại.'
     img: '/assets/work/steps/qone-t1.webp'

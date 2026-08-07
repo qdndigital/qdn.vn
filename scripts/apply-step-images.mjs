@@ -15,8 +15,9 @@ for (const lang of ['en', 'vi']) {
   const dir = resolve(root, 'src/content/work', lang);
   for (const file of readdirSync(dir).filter((f) => f.endsWith('.md'))) {
     const slug = file.replace(/\.md$/, '');
-    const steps = manifest[slug];
-    if (!steps) continue;
+    // Process EVERY case, not just ones in the manifest — otherwise a project
+    // whose frames were withdrawn keeps a stale img: pointing at a deleted file.
+    const steps = manifest[slug] ?? {};
     const path = resolve(dir, file);
     const lines = readFileSync(path, 'utf8').split('\n');
 

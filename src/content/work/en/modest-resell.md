@@ -23,12 +23,10 @@ steps:
     p: 'Registration, login and account permissions came first, because on a marketplace identity is not a convenience feature — it decides what each person is allowed to see and do.'
   - h: 'Gave sellers a real dashboard'
     p: 'Members manage their own products and orders. If listing an item is harder than posting it on social media, the supply side never starts, and without supply a marketplace has nothing to sell.'
-    img: '/assets/work/steps/modest-resell-3.webp'
   - h: 'Put an approval step in the middle'
     p: 'A listing submission and approval workflow keeps quality and category discipline in a catalogue nobody centrally curates — the difference between a marketplace and a jumble.'
   - h: 'Kept the buyer’s side conventional'
     p: 'Buyers browse one catalogue across women, men, kids and infants and check out normally. The complexity belongs backstage; a buyer should never be able to tell how unusual the plumbing is.'
-    img: '/assets/work/steps/modest-resell-5.webp'
 outcome: 'Modest Resell runs at modestresell.com as a working two-sided marketplace — members list and manage their own inventory, buyers shop a single merged catalogue.'
 lesson: 'A marketplace lives or dies on the supply side. Build the seller experience with the same care as the storefront, because an empty marketplace is just an expensive website.'
 deliverables:

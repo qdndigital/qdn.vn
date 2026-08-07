@@ -28,7 +28,6 @@ steps:
     p: 'Trang chủ, trang giới thiệu và các trang nội dung mang lập luận về nghề thủ công — truyền thống, thiên nhiên, bàn tay nghệ nhân — vì với loại sản phẩm này, câu chuyện là một phần của đặc tả.'
   - h: 'Xây sẵn chế độ trợ năng'
     p: 'Cửa hàng có công tắc trợ năng kèm phím tắt cho điều hướng, tìm kiếm, nội dung và chân trang. Phần lớn cửa hàng coi đây là tuỳ chọn; nó rẻ khi làm từ đầu và rất đắt khi phải gắn thêm sau.'
-    img: '/assets/work/steps/pottery-and-decor-5.webp'
 outcome: 'Cửa hàng đang chạy tại potteryanddecor.com với 277 sản phẩm, giao diện riêng, chế độ trợ năng và trọn dải hàng sân vườn từ bình gốm đến nội thất.'
 lesson: 'Với hàng thủ công, cửa hàng là một phần của sản phẩm. Khoảng trống, hình ảnh và trình tự mới là thứ gánh được mức giá thủ công trên mạng — và trợ năng rẻ nhất khi được thiết kế sẵn, không phải thêm vào sau.'
 deliverables:

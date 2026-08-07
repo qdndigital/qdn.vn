@@ -23,12 +23,10 @@ steps:
     p: 'Đăng ký, đăng nhập và phân quyền được làm trước, vì trên marketplace danh tính không phải tiện ích — nó quyết định mỗi người được thấy gì và làm gì.'
   - h: 'Cho người bán một bảng điều khiển thực thụ'
     p: 'Thành viên tự quản lý sản phẩm và đơn hàng của mình. Nếu đăng bán một món khó hơn đăng lên mạng xã hội thì nguồn cung không bao giờ khởi động, mà không có nguồn cung thì marketplace chẳng có gì để bán.'
-    img: '/assets/work/steps/modest-resell-3.webp'
   - h: 'Đặt một bước kiểm duyệt ở giữa'
     p: 'Quy trình đăng bán và duyệt giữ được chất lượng và kỷ luật danh mục trong một kho hàng không ai biên tập tập trung — đó là khác biệt giữa một marketplace và một mớ hỗn độn.'
   - h: 'Giữ phía người mua thật quy ước'
     p: 'Người mua duyệt một danh mục chung cho nữ, nam, trẻ em và sơ sinh rồi thanh toán như bình thường. Sự phức tạp thuộc về hậu trường; người mua không nên nhận ra hệ thống bên dưới bất thường đến mức nào.'
-    img: '/assets/work/steps/modest-resell-5.webp'
 outcome: 'Modest Resell đang chạy tại modestresell.com như một marketplace hai chiều thực thụ — thành viên tự đăng và quản lý hàng, người mua duyệt một danh mục gộp duy nhất.'
 lesson: 'Marketplace sống chết nhờ phía nguồn cung. Hãy xây trải nghiệm người bán cẩn thận ngang cửa hàng, vì một marketplace trống rỗng chỉ là một website đắt tiền.'
 deliverables:

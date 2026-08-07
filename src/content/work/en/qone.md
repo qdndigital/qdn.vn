@@ -21,7 +21,6 @@ steps:
     p: 'We started from how a studio actually earns — a project, the people on it, the hours they log, the invoice that follows — and built the data model around that chain rather than around a list of modules.'
   - h: 'Built one system across the whole cycle'
     p: 'Projects and tasks, HR and attendance, finance and invoicing, reporting — all reading the same records. The value is not any single module; it is that they share a spine.'
-    img: '/assets/work/steps/qone-2.webp'
   - h: 'Made it answer, not just display'
     p: 'Dashboards that show everything tell you nothing. QOne leads with a ranked view of what matters — risk and money first — so the software makes a call and you correct it, rather than the other way round.'
     img: '/assets/work/steps/qone-t1.webp'

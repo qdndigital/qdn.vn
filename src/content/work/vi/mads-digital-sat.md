@@ -26,7 +26,6 @@ steps:
     p: 'Lớp nhóm và lớp 1-1 là hai sản phẩm khác nhau, cho hai nhóm khách khác nhau. Tách rõ để phụ huynh tự chọn thay vì phải đọc hết mới biết phần nào dành cho mình.'
   - h: 'Biến tài liệu miễn phí thành cửa vào'
     p: 'Đề thi thử SAT, ebook và đề cũ được tổ chức thành khu vực riêng — với một trung tâm luyện thi, tài liệu miễn phí hữu ích chính là đầu phễu, không phải quà khuyến mãi.'
-    img: '/assets/work/steps/mads-digital-sat-4.webp'
   - h: 'Chuyển sang WordPress với giao diện riêng'
     p: 'Giao diện tuỳ chỉnh theo thương hiệu, cộng một hệ quản trị mà đội ngũ của trường tự vận hành được — mentor mới, thành tích mới, tài liệu mới đều lên được mà không cần gọi agency.'
 outcome: 'MADS đang chạy tại mads.edu.vn với mentor, thành tích, chương trình lớp nhóm và 1-1, đề thi thử và thư viện tài liệu — tất cả do trường tự biên tập.'

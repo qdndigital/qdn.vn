@@ -19,7 +19,6 @@ challenge: 'Bán rượu online khác hoàn toàn bán nến online. Mỗi khác
 steps:
   - h: 'Bắt đầu từ ràng buộc, không phải từ trang chủ'
     p: 'Xác minh độ tuổi, tiếng Do Thái và thanh toán bản địa được coi là kiến trúc, không phải plugin gắn thêm vào phút cuối. Quyết định những thứ đó trước là cách để không phải dựng lại cửa hàng hai lần.'
-    img: '/assets/work/steps/drink-tavlin-1.webp'
   - h: 'Dựng cửa hàng quanh một danh mục theo mùa'
     p: 'Tavlin ra mắt gin mới mỗi mùa, nên cửa hàng phải khiến một dải sản phẩm nhỏ và luân phiên trở thành sự kiện, chứ không phải một kệ hàng trống. Cấu trúc mang cả câu chuyện — xưởng, quy trình, con người — song song với sản phẩm.'
   - h: 'Làm phải-sang-trái cho đúng'

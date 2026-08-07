@@ -19,12 +19,10 @@ challenge: 'Website phi lợi nhuận gánh một tải trọng bất thường:
 steps:
   - h: 'Sắp xếp lại quanh chương trình và câu chuyện'
     p: 'Cấu trúc nội dung và điều hướng được dựng lại để chương trình và dự án nằm ở trung tâm, với mục nhật ký chạy song song như bằng chứng sống rằng công việc vẫn đang diễn ra, không phải chuyện quá khứ.'
-    img: '/assets/work/steps/alpine-initiatives-1.webp'
   - h: 'Thiết kế lại giao diện quanh hình ảnh'
     p: 'Với một tổ chức hoạt động ngoài trời, ảnh chụp chính là lập luận. Bản thiết kế mới dành chỗ cho ảnh thay vì cắt chúng cho vừa một khuôn mẫu.'
   - h: 'Làm đường quyên góp và cửa hàng dễ tới, không ồn ào'
     p: 'Quyên góp và cửa hàng luôn nằm trong tầm với trên thanh điều hướng, để người đã bị thuyết phục không phải đi tìm — nhưng công việc vẫn là thứ đầu tiên ai cũng gặp.'
-    img: '/assets/work/steps/alpine-initiatives-3.webp'
   - h: 'Tối ưu hiệu suất và tốc độ tải trang'
     p: 'Một website nặng hình ảnh trên đường truyền chậm là một website trống. Hiệu suất và tốc độ tải là một phần của bàn giao, không phải phần sửa sau.'
   - h: 'Nâng cấp CMS để đội ngũ tự đăng bài'

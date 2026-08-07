@@ -25,7 +25,6 @@ steps:
     p: 'Theo dõi trạng thái đơn theo thời gian thực, để đội ngũ và khách hàng cùng nhìn vào một sự thật tại cùng một thời điểm, thay vì nhìn vào bản in từ một tiếng trước.'
   - h: 'Gắn tồn kho với những biến thể thật sự biến thiên'
     p: 'Kích cỡ, hương vị và cách đóng hộp được đưa vào quản lý tồn kho và biến thể, để thứ website bán và thứ bếp làm được luôn khớp nhau.'
-    img: '/assets/work/steps/lilac-and-creme-4.webp'
   - h: 'Rút gọn toàn bộ đường đi của một đơn hàng'
     p: 'Với thanh toán được tích hợp và luồng đơn nằm gọn một chỗ, quy trình xử lý ngắn lại — mà trong một tiệm bánh, ngắn lại nghĩa là ít lỗi hơn ở đúng chỗ lỗi đắt nhất.'
     img: '/assets/work/steps/lilac-and-creme-t1.webp'
