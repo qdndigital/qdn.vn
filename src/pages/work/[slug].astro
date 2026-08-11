@@ -1,0 +1,12 @@
+---
+import { getCollection } from 'astro:content';
+import WorkCase from '../../components/pages/WorkCase.astro';
+import { workPaths } from '../../i18n/work';
+
+export async function getStaticPaths() {
+  return workPaths(await getCollection('work'), 'en');
+}
+
+const { entry, prev, next } = Astro.props;
+---
+<WorkCase entry={entry} prev={prev} next={next} />
