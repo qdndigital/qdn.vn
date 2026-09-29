@@ -46,7 +46,7 @@ const en = {
     metaTitle: 'QDN — Idea to market, faster | qdn.vn',
     metaDesc: 'QDN is a product & AI studio that takes your idea to market faster — a clickable AI mockup in a day, then a premium web, mobile or SaaS product shipped in weeks.',
     heroLab: 'PRODUCT & AI STUDIO',
-    heroH1: 'Idea to market,<br><span class="it">faster</span>.',
+    heroH1: 'Idea to market,<br>faster<span class="tdot">.</span>',
     heroLead: 'QDN builds web, mobile and SaaS products. We use AI to turn your idea into a working mockup in a day — then ship fast to market.',
     metaMockup: 'Mockup', metaMockupN: 'in a day',
     metaFaster: 'Faster delivery', metaFasterN: '2×',
@@ -286,10 +286,11 @@ const vi: typeof en = {
     fbarRight: 'Mockup trong 1 ngày · bàn giao nhanh',
   },
   home: {
-    metaTitle: 'QDN — Từ ý tưởng ra thị trường, nhanh hơn | qdn.vn',
+    metaTitle: 'QDN — Idea to market, faster | qdn.vn',
     metaDesc: 'QDN là studio sản phẩm & AI đưa ý tưởng của bạn ra thị trường nhanh hơn — mockup AI bấm được trong 1 ngày, rồi sản phẩm web, mobile hoặc SaaS cao cấp bàn giao trong vài tuần.',
     heroLab: 'STUDIO SẢN PHẨM & AI',
-    heroH1: 'Từ ý tưởng ra thị trường,<br><span class="it">nhanh hơn</span>.',
+    // brand tagline — never translated (brand guide v2.8)
+    heroH1: 'Idea to market,<br>faster<span class="tdot">.</span>',
     heroLead: 'QDN xây dựng sản phẩm web, mobile và SaaS. Chúng tôi dùng AI biến ý tưởng của bạn thành bản mockup chạy được trong 1 ngày — rồi đưa ra thị trường thật nhanh.',
     metaMockup: 'Mockup', metaMockupN: 'trong 1 ngày',
     metaFaster: 'Giao nhanh hơn', metaFasterN: '2×',

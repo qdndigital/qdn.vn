@@ -6,8 +6,8 @@ import { getLangFromUrl, alternates } from '../i18n/utils';
 
 const { title, description, noindex = false } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
-const ogImage = new URL('/assets/og.png?v=2', Astro.site).href;
-const ogAlt = lang === 'vi' ? 'QDN — Từ ý tưởng ra thị trường, nhanh hơn' : 'QDN — Idea to market, faster';
+const ogImage = new URL('/assets/og.png?v=3', Astro.site).href;
+const ogAlt = 'QDN — Idea to market, faster.'; // brand tagline, never translated
 
 // hreflang alternates (and the matching og:locale tags)
 const alt = alternates(Astro.url.pathname);
@@ -29,7 +29,7 @@ const jsonld = {
       email: 'quang.dinh@qdn.vn',
       description:
         'A product & AI studio building premium web, mobile and SaaS products. We use AI to turn an idea into a clickable mockup fast, then ship to market quickly.',
-      logo: 'https://qdn.vn/favicon.svg',
+      logo: 'https://qdn.vn/icon-512.png',
       areaServed: 'Worldwide',
       knowsAbout: ['Web development', 'Mobile apps', 'AI solutions', 'SaaS', 'Automation', 'E-commerce'],
     },
@@ -50,10 +50,10 @@ const jsonld = {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     {/* Self-hosted fonts (see src/styles/fonts.css) — no third-party origin.
-        Preload only the two faces visible above the fold; the rest load on demand. */}
-    <link rel="preload" href="/fonts/inter-vf-latin.woff2" as="font" type="font/woff2" crossorigin />
+        Preload only the faces visible above the fold; the rest load on demand. */}
+    <link rel="preload" href="/fonts/bevietnampro-400-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/bevietnampro-600-latin.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/jetbrainsmono-vf-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/fonts/instrumentserif-400i-latin.woff2" as="font" type="font/woff2" crossorigin />
     <title>{title}</title>
     <meta name="description" content={description} />
     {noindex && <meta name="robots" content="noindex,follow" />}
@@ -61,8 +61,14 @@ const jsonld = {
     <link rel="alternate" hreflang="en" href={enHref} />
     <link rel="alternate" hreflang="vi" href={viHref} />
     <link rel="alternate" hreflang="x-default" href={enHref} />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <meta name="theme-color" content="#e9e7e2" />
+    {/* Icons from brand guide v2.8: the ink app icon (symbol on #1E1E1A) everywhere — reads on light and dark tabs.
+        Bump ?v= whenever the icon changes so browsers drop their cached copy. */}
+    <link rel="icon" href="/favicon.ico?v=5" sizes="48x48" />
+    <link rel="icon" href="/favicon.svg?v=5" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png?v=5" type="image/png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=5" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#f4f1ea" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="QDN" />
     <meta property="og:locale" content={ogLocale} />

@@ -1,4 +1,5 @@
 ---
+import Logo from './Logo.astro';
 import { getLangFromUrl, useTranslations, localizePath } from '../i18n/utils';
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -9,8 +10,7 @@ const L = (p: string) => localizePath(p, lang);
     <div class="foot">
       <div>
         <a href={L('/')} class="logo">
-          <svg class="logomark" viewBox="0 0 32 32" aria-hidden="true"><rect x="2.5" y="2.5" width="27" height="27" rx="7" fill="none" stroke="#1c1b18" stroke-width="2"/><rect x="11" y="11" width="10" height="10" rx="2.5" fill="#e2622a"/></svg>
-          <span>QDN</span>
+          <Logo class="logofull" tagline />
         </a>
         <p class="fd">{t.footer.tagline}</p>
       </div>
