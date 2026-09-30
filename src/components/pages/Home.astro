@@ -7,6 +7,9 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const h = t.home;
 const L = (p: string) => localizePath(p, lang);
+// hero example app: 'sales' (shop revenue dashboard) or 'support' (AI support chatbot)
+const theme = 'sales' as 'sales' | 'support';
+const ex = h.spec[theme];
 ---
 <Base title={h.metaTitle} description={h.metaDesc}>
 <!-- HERO -->
@@ -17,7 +20,36 @@ const L = (p: string) => localizePath(p, lang);
 <div class="hero-cta"><a href={L('/contact')} class="btn btn-ink">{t.common.startProject} <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a href="#how" class="btn btn-line">{t.common.howWeWork}</a></div>
 <div class="hero-meta"><div><div class="mono">{h.metaMockup}</div><div class="n">{h.metaMockupN}</div></div><div><div class="mono">{h.metaFaster}</div><div class="n">{h.metaFasterN}</div></div><div><div class="mono">{h.metaShipped}</div><div class="n">{h.metaShippedN}</div></div></div>
 </div>
-<div class="specimen" id="specimen"><div class="flow"><span class="stp s-idea"><i class="d"></i>{h.flowIdea}</span><span class="seg"><i></i></span><span class="stp s-mockup"><i class="d"></i>{h.flowMockup}</span><span class="seg"><i></i></span><span class="stp s-live"><i class="d"></i>{h.flowLive}</span><span class="flow-day">{h.flowDay}</span></div><div class="card"><span class="sheen"></span><div class="bar"><i></i><i></i><i></i><span class="u">app.qdn.vn / <b class="u-state">mockup</b></span><span class="live-dot"></span><div class="spec-toggle"><button class="on" data-m="mockup">{h.flowMockup}</button><button data-m="live">{h.flowLive}</button></div></div><div class="prompt"><span class="pc">&rsaquo;</span> <span class="pt">{h.prompt}</span><span class="caret"></span></div><div class="app"><aside class="side"><span class="brandmk"></span><span class="nav on"></span><span class="nav"></span><span class="nav"></span><span class="nav"></span></aside><div class="main"><div class="apptop"><span class="ln"></span><span class="cta-btn">{h.newTrip}</span></div><div class="chat"><div class="msg in"><span class="ava"></span><span class="bub"><span class="ln l"></span><span class="ln s"></span></span></div><div class="msg out"><span class="bub bot"><span class="ln l"></span></span><span class="ava bot"></span></div><div class="typing"><span></span><span></span><span></span></div></div><div class="rows"><div class="rw"><span class="av"></span><span class="ln l"></span><span class="pill"></span></div><div class="rw"><span class="av"></span><span class="ln l"></span><span class="pill"></span></div><div class="rw"><span class="av"></span><span class="ln l"></span><span class="pill"></span></div></div></div></div></div></div></div></section>
+<div class="specimen" id="specimen">
+<div class="sp-steps" role="tablist">
+{h.spec.steps.map((st, i) => (<>
+{i > 0 && <span class="seg" aria-hidden="true"><i></i></span>}
+<button type="button" role="tab" class={i === 0 ? 'stp on' : 'stp'} data-k={st.k} data-cap={st.cap} aria-selected={i === 0 ? 'true' : 'false'}><span class="d"></span><span class="nm">{st.name}</span><span class="when">{st.time}</span></button>
+</>))}
+</div>
+<div class="card"><div class="bar"><i></i><i></i><i></i><span class="u">{ex.url}</span><span class="live-b"><span class="live-dot"></span>{h.spec.live}</span></div>
+<div class="stage">
+<div class="pane p-idea"><div class="brief"><div class="you">{h.spec.you}</div><p class="bt"><span class="tx" data-text={ex.prompt}>{ex.prompt}</span><span class="caret"></span></p><div class="gen"><span class="spin"></span>{h.spec.gen}</div></div></div>
+<div class="pane p-screen" aria-hidden="true">
+{theme === 'support' && (<div class="scr sup">
+<div class="s-head"><span class="s-ava">AI</span><div><div class="s-ttl">{h.spec.support.bot}</div><div class="s-kick">{h.spec.support.status}</div></div></div>
+<div class="s-chat">
+<div class="m m-q"><span class="bb">{h.spec.support.q}</span></div>
+<div class="typing"><span></span><span></span><span></span></div>
+<div class="m m-a"><span class="s-ava sm">AI</span><div class="bb"><p>{h.spec.support.a}</p><div class="ord"><span>{h.spec.support.order}</span><span class="pl">{h.spec.support.ship}</span></div></div></div>
+<div class="chips">{h.spec.support.chips.map((c) => <span>{c}</span>)}</div>
+</div>
+<div class="s-in"><span>{h.spec.support.input}</span><span class="snd"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+</div>)}
+{theme === 'sales' && (<div class="scr sal">
+<div class="kpi"><div><div class="s-kick">{h.spec.sales.kick}</div><div class="num"><span class="roll"><span class="r0">{h.spec.sales.num}</span><span class="r1">{h.spec.sales.num2}</span></span> <span class="dl">{h.spec.sales.delta}</span></div></div><div class="bars">{[38, 52, 44, 61, 55, 72, 80].map((v) => <i style={`--h:${v}%`}></i>)}</div></div>
+<div class="s-kick lh">{h.spec.sales.listH} <span class="lh-r"><span class="day">{h.spec.sales.day}</span><span class="rt"><span class="live-dot"></span>{h.spec.sales.rt}</span></span></div>
+<ul class="ords"><li class="nw"><span class="oid">{h.spec.sales.fresh.id}</span><span class="who">{h.spec.sales.fresh.who}</span><span class="ago">{h.spec.sales.fresh.ago}</span><span class="amt">{h.spec.sales.fresh.amt}</span><span class={`pl ${h.spec.sales.fresh.k}`}>{h.spec.sales.fresh.st}</span></li>{h.spec.sales.orders.map((o) => <li><span class="oid">{o.id}</span><span class="who">{o.who}</span><span class="amt">{o.amt}</span><span class={`pl ${o.k}`}>{o.st}</span></li>)}</ul>
+</div>)}
+</div>
+</div></div>
+<p class="cap" aria-live="polite">{h.spec.steps[0].cap}</p>
+</div></div></section>
 
 <!-- PROMISE -->
 <section class="sec pb-0"><div class="wrap"><div class="shead ctr rv"><div class="spec-lab justify-center"><span class="b">—</span> {h.promiseLab}</div><h2 class="max-w-2xl mx-auto mt-3.5" set:html={h.promiseH2}></h2></div></div></section>

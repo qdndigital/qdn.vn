@@ -49,10 +49,38 @@ const en = {
     heroH1: 'Idea to market,<br>faster<span class="tdot">.</span>',
     heroLead: 'QDN builds web, mobile and SaaS products. We use AI to turn your idea into a working mockup in a day — then ship fast to market.',
     metaMockup: 'Mockup', metaMockupN: 'in a day',
-    metaFaster: 'Faster delivery', metaFasterN: '2×',
+    metaFaster: 'MVP live', metaFasterN: '2–6 wks',
     metaShipped: 'Shipped', metaShippedN: '50+',
-    flowIdea: 'Idea', flowMockup: 'AI mockup', flowLive: 'Live', flowDay: 'idea → live',
-    prompt: 'build an AI travel planner', newTrip: 'New trip',
+    // hero specimen: idea -> mockup -> live, told with one concrete example app
+    spec: {
+      steps: [
+        { k: 'idea', name: 'Your idea', time: 'Day 0', cap: 'You describe the idea — in plain words, no specs needed.' },
+        { k: 'mockup', name: 'AI mockup', time: 'Day 1', cap: 'Next day: a clickable mockup you can try and comment on.' },
+        { k: 'live', name: 'Live product', time: 'Week 2–6', cap: 'The real, finished product — live for your users.' },
+      ],
+      you: 'Your brief', gen: 'QDN is generating your mockup…', live: 'Live',
+      // theme 'support' — AI customer-support chatbot
+      support: {
+        prompt: 'I want an AI chatbot that answers customers on my website, 24/7.', url: 'yourshop.com/help',
+        bot: 'AI assistant', status: 'Online · replies instantly',
+        q: 'Has my order #1024 shipped yet?',
+        a: 'Yes — #1024 is on its way and should arrive today by 3 PM.',
+        order: '#1024 · 2 items', ship: 'Shipping',
+        chips: ['Change address', 'Talk to a human'], input: 'Type a message…',
+      },
+      // theme 'sales' — shop orders & revenue dashboard
+      sales: {
+        prompt: 'I want an app to see my shop’s orders and revenue every day.', url: 'admin.yourshop.com',
+        kick: 'Revenue today', num: '$4,860', num2: '$5,380', delta: '↑ 18%', day: 'Today', rt: 'Real-time', listH: 'New orders',
+        // arrives live, a moment after the Live step opens
+        fresh: { id: '#1027', who: 'Hoang Nam', amt: '$520', st: 'New', k: 'new', ago: 'just now' },
+        orders: [
+          { id: '#1026', who: 'Minh Anh', amt: '$86', st: 'New', k: 'new' },
+          { id: '#1025', who: 'Tuan Le', amt: '$142', st: 'Shipping', k: 'ship' },
+          { id: '#1024', who: 'Lan Pham', amt: '$64', st: 'Delivered', k: 'done' },
+        ],
+      },
+    },
     promiseLab: 'the idea',
     promiseH2: 'See your product as a real mockup <span class="it">in a day</span> — and live, in weeks.',
     buildLab: 'what we build',
@@ -293,10 +321,34 @@ const vi: typeof en = {
     heroH1: 'Idea to market,<br>faster<span class="tdot">.</span>',
     heroLead: 'QDN xây dựng sản phẩm web, mobile và SaaS. Chúng tôi dùng AI biến ý tưởng của bạn thành bản mockup chạy được trong 1 ngày — rồi đưa ra thị trường thật nhanh.',
     metaMockup: 'Mockup', metaMockupN: 'trong 1 ngày',
-    metaFaster: 'Giao nhanh hơn', metaFasterN: '2×',
+    metaFaster: 'MVP lên sóng', metaFasterN: '2–6 tuần',
     metaShipped: 'Đã bàn giao', metaShippedN: '50+',
-    flowIdea: 'Ý tưởng', flowMockup: 'Mockup AI', flowLive: 'Live', flowDay: 'ý tưởng → live',
-    prompt: 'tạo app lên kế hoạch du lịch bằng AI', newTrip: 'Chuyến mới',
+    spec: {
+      steps: [
+        { k: 'idea', name: 'Ý tưởng', time: 'Ngày 0', cap: 'Bạn kể ý tưởng — bằng lời thường, không cần tài liệu kỹ thuật.' },
+        { k: 'mockup', name: 'Mockup AI', time: 'Ngày 1', cap: 'Hôm sau: bản mockup bấm thử được để bạn xem và góp ý.' },
+        { k: 'live', name: 'Sản phẩm thật', time: 'Tuần 2–6', cap: 'Sản phẩm hoàn thiện — lên sóng cho người dùng của bạn.' },
+      ],
+      you: 'Brief của bạn', gen: 'QDN đang tạo mockup cho bạn…', live: 'Live',
+      support: {
+        prompt: 'Tôi muốn chatbot AI tự trả lời khách trên website của shop, 24/7.', url: 'yourshop.vn/help',
+        bot: 'Trợ lý AI', status: 'Online · trả lời ngay',
+        q: 'Đơn #1024 của mình giao chưa ạ?',
+        a: 'Dạ, đơn #1024 đang được giao — dự kiến tới trước 15:00 hôm nay ạ.',
+        order: '#1024 · 2 sản phẩm', ship: 'Đang giao',
+        chips: ['Đổi địa chỉ', 'Gặp nhân viên'], input: 'Nhập tin nhắn…',
+      },
+      sales: {
+        prompt: 'Tôi muốn app xem đơn hàng và doanh thu của shop mỗi ngày.', url: 'admin.yourshop.vn',
+        kick: 'Doanh thu hôm nay', num: '12,4 tr₫', num2: '12,9 tr₫', delta: '↑ 18%', day: 'Hôm nay', rt: 'Trực tiếp', listH: 'Đơn mới',
+        fresh: { id: '#1027', who: 'Hoàng Nam', amt: '520k', st: 'Mới', k: 'new', ago: 'vừa xong' },
+        orders: [
+          { id: '#1026', who: 'Minh Anh', amt: '450k', st: 'Mới', k: 'new' },
+          { id: '#1025', who: 'Tuấn Lê', amt: '1,2 tr', st: 'Đang giao', k: 'ship' },
+          { id: '#1024', who: 'Lan Phạm', amt: '380k', st: 'Đã giao', k: 'done' },
+        ],
+      },
+    },
     promiseLab: 'ý tưởng',
     promiseH2: 'Thấy sản phẩm của bạn thành mockup thật <span class="it">trong 1 ngày</span> — và lên sóng sau vài tuần.',
     buildLab: 'chúng tôi xây gì',

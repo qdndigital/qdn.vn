@@ -32,33 +32,59 @@
     (mq.addEventListener?mq.addEventListener.bind(mq,'change'):mq.addListener.bind(mq))(function(e){if(e.matches)setMenu(false);});
   }
 
-  /* specimen — Idea -> AI mockup -> Live pipeline, auto-looping (home) */
+  /* specimen — Idea (typed) -> AI mockup (wireframe) -> Live (finished + live activity), auto-looping (home).
+     The rail segment after the current step fills over that step's duration and its end advances the step;
+     hover or a click pauses it. */
   var sp=document.getElementById('specimen');
   if(sp){
-    var seq=['idea','mockup','live'], si=0, hover=false, started=false, timer=null;
-    var dwell={idea:1500,mockup:1500,live:2400};
-    var stp={idea:sp.querySelector('.s-idea'),mockup:sp.querySelector('.s-mockup'),live:sp.querySelector('.s-live')};
-    var segs=sp.querySelectorAll('.seg');
-    var setStage=function(k){
-      si=seq.indexOf(k);
-      var live=(k==='live');
-      sp.classList.toggle('is-live',live);
-      sp.classList.toggle('is-mockup',!live);
-      sp.classList.toggle('is-gen',k==='idea');
-      var u=sp.querySelector('.u-state'); if(u){u.textContent=(k==='idea'?'brief':k);}
-      seq.forEach(function(name,i){var el=stp[name]; if(el){el.classList.toggle('on',i===si);el.classList.toggle('done',i<si);}});
-      if(segs[0]){segs[0].classList.toggle('fill',si>=1);}
-      if(segs[1]){segs[1].classList.toggle('fill',si>=2);}
-      sp.querySelectorAll('.spec-toggle button').forEach(function(b){b.classList.toggle('on',b.getAttribute('data-m')===(live?'live':'mockup'));});
+    var seq=['idea','mockup','live'], si=0, hover=false, held=false, started=false, timer=null, typer=null, ticker=null, holdT=null;
+    var DUR={mockup:3400,live:5600}, TYPE=32;
+    var btns=sp.querySelectorAll('.sp-steps .stp'), segs=sp.querySelectorAll('.sp-steps .seg');
+    var cap=sp.querySelector('.cap'), tx=sp.querySelector('.tx'), full=tx?tx.getAttribute('data-text'):'';
+    var setPaused=function(){sp.classList.toggle('paused',hover||held);};
+    var advance=function(){setStage(seq[(si+1)%seq.length],true);};
+    segs.forEach(function(s){s.addEventListener('animationend',function(){if(s.classList.contains('run')&&segs[si]===s)advance();});});
+    var run=function(ms){
+      var s=segs[si];
+      if(s){s.style.setProperty('--dur',ms+'ms');void s.offsetWidth;s.classList.add('run');return;}
+      /* last step has no segment after it: plain timer that waits while paused */
+      var left=ms, step=200;
+      timer=setInterval(function(){if(hover||held)return;left-=step;if(left<=0){clearInterval(timer);advance();}},step);
     };
-    var loop=function(){ if(!hover){ si=(si+1)%seq.length; setStage(seq[si]); } timer=setTimeout(loop,dwell[seq[si]]); };
-    setStage('idea');
-    sp.addEventListener('mouseenter',function(){hover=true;});
-    sp.addEventListener('mouseleave',function(){hover=false;});
-    sp.querySelectorAll('.spec-toggle button').forEach(function(b){b.addEventListener('click',function(){setStage(b.getAttribute('data-m'));});});
+    var setStage=function(k,auto){
+      si=seq.indexOf(k);
+      clearInterval(typer); clearInterval(timer); clearTimeout(ticker);
+      sp.classList.remove('tick','is-gen');
+      sp.classList.toggle('is-idea',k==='idea');
+      sp.classList.toggle('is-mockup',k==='mockup');
+      sp.classList.toggle('is-live',k==='live');
+      btns.forEach(function(b,i){b.classList.toggle('on',i===si);b.classList.toggle('done',i<si);b.setAttribute('aria-selected',i===si?'true':'false');});
+      segs.forEach(function(s,i){s.classList.remove('run');s.classList.toggle('fill',i<si);});
+      var c=btns[si]&&btns[si].getAttribute('data-cap');
+      if(cap&&c&&cap.textContent!==c){cap.classList.add('fade');setTimeout(function(){cap.textContent=c;cap.classList.remove('fade');},200);}
+      /* Live: a beat later the app does something on its own (new order / AI reply) */
+      if(k==='live'){ticker=setTimeout(function(){sp.classList.add('tick');},reduce?0:1300);}
+      if(reduce){if(tx)tx.textContent=full;return;}
+      if(k==='idea'&&tx){
+        if(auto){
+          /* type the brief, then show "generating…" */
+          var n=0; tx.textContent='';
+          typer=setInterval(function(){n++;tx.textContent=full.slice(0,n);if(n>=full.length){clearInterval(typer);sp.classList.add('is-gen');}},TYPE);
+          run(full.length*TYPE+1500);
+        } else {tx.textContent=full;sp.classList.add('is-gen');run(2600);}
+      } else {run(DUR[k]);}
+    };
+    sp.classList.add('is-idea');
+    sp.addEventListener('mouseenter',function(){hover=true;setPaused();});
+    sp.addEventListener('mouseleave',function(){hover=false;setPaused();});
+    /* clicking a step jumps there and holds it for a while before auto-play resumes */
+    btns.forEach(function(b){b.addEventListener('click',function(){
+      held=true; setPaused(); clearTimeout(holdT); holdT=setTimeout(function(){held=false;setPaused();},8000);
+      setStage(b.getAttribute('data-k'),false);
+    });});
     var spo=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting&&!started){started=true;sp.classList.add('in');
       if(reduce){setStage('live');}
-      else{timer=setTimeout(loop,1200);}
+      else{setTimeout(function(){setStage('idea',true);},500);}
       spo.unobserve(sp);}});},{threshold:.3});
     spo.observe(sp);
   }

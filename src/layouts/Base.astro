@@ -6,7 +6,7 @@ import { getLangFromUrl, alternates } from '../i18n/utils';
 
 const { title, description, noindex = false } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
-const ogImage = new URL('/assets/og.png?v=3', Astro.site).href;
+const ogImage = new URL('/assets/og.png?v=4', Astro.site).href;
 const ogAlt = 'QDN — Idea to market, faster.'; // brand tagline, never translated
 
 // hreflang alternates (and the matching og:locale tags)
